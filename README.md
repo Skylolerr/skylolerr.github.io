@@ -1,7 +1,9 @@
-# skylolerr.github.io
+# skylolerr.com
 
 The project website of [Skylolerr](https://github.com/Skylolerr): Home Assistant
-integrations installed with HACS. English at `/`, German at `/de/`.
+integrations installed with HACS. English at <https://skylolerr.com/>, German at
+<https://skylolerr.com/de/>. Served by GitHub Pages from the repository
+`Skylolerr/skylolerr.github.io` with the custom domain in `CNAME`.
 
 Plain static HTML and one stylesheet – no build step, no JavaScript, no external
 requests, no cookies or tracking. GitHub Pages serves the files as they are
@@ -45,8 +47,23 @@ link to the latest release instead. Update the minimum Home Assistant version an
 
 ## Publishing on GitHub Pages
 
-1. Create the **public** repository `Skylolerr/skylolerr.github.io` (no README, no
-   license – the files come from here):
+The canonical URL of every page is `https://skylolerr.com/…`, and `CNAME` contains
+`skylolerr.com`. As soon as this repository is pushed, GitHub Pages uses that custom
+domain and redirects `skylolerr.github.io` to it – so **set the DNS records first**,
+otherwise the site cannot be reached until DNS works.
+
+1. **DNS at the registrar** (Hostpoint) for `skylolerr.com`:
+   - Remove any existing `A`/`AAAA` records of the domain itself (`@`) and of `www`
+     (for example a parking page of the registrar).
+   - Four `A` records for `@`: `185.199.108.153`, `185.199.109.153`,
+     `185.199.110.153`, `185.199.111.153`.
+   - Optional, four `AAAA` records for `@`: `2606:50c0:8000::153`,
+     `2606:50c0:8001::153`, `2606:50c0:8002::153`, `2606:50c0:8003::153`.
+   - A `CNAME` record for `www` pointing to `skylolerr.github.io`.
+   - Recommended: verify the domain for the account first (GitHub → profile
+     **Settings → Pages → Add a domain**), which asks for a `TXT` record
+     `_github-pages-challenge-Skylolerr`. It stops other accounts from using the domain.
+2. **Create the repository and push:**
 
    ```bash
    gh repo create Skylolerr/skylolerr.github.io --public --description "Project website of Skylolerr: Home Assistant integrations"
@@ -54,50 +71,31 @@ link to the latest release instead. Update the minimum Home Assistant version an
    git push -u origin main
    ```
 
-2. On GitHub: **Settings → Pages → Build and deployment → Source: Deploy from a
-   branch**, branch **main**, folder **/ (root)**, then **Save**. A user site
-   (`<user>.github.io`) is usually switched on automatically after the first push.
-3. After a minute or two the site is online at <https://skylolerr.github.io/>.
-4. Optional, for search engines: add the site to
-   [Google Search Console](https://search.google.com/search-console) and
-   [Bing Webmaster Tools](https://www.bing.com/webmasters) and submit
-   `https://skylolerr.github.io/sitemap.xml`. Link the site from the project READMEs and
-   the GitHub profile (website field) as well.
+3. **Pages settings** of the repository (**Settings → Pages**):
+   - **Build and deployment → Source: Deploy from a branch**, branch **main**, folder
+     **/ (root)**, **Save**.
+   - **Custom domain** shows `skylolerr.com` (from `CNAME`); if not, enter it and
+     **Save**. Wait until the DNS check is green.
+   - Tick **Enforce HTTPS** once it can be ticked – GitHub needs a few minutes up to
+     about a day to issue the certificate.
+4. Check <https://skylolerr.com/>, <https://www.skylolerr.com/> and
+   <https://skylolerr.github.io/> (both redirect to the first).
+5. For search engines: add `skylolerr.com` to
+   [Google Search Console](https://search.google.com/search-console) (domain property,
+   verified with a `TXT` record) and [Bing Webmaster Tools](https://www.bing.com/webmasters)
+   and submit `https://skylolerr.com/sitemap.xml`. Link the site from the project
+   READMEs and the GitHub profile (website field).
 
-## Adding a custom domain later
+## Changing the domain
 
 All absolute URLs (canonical, hreflang, Open Graph, JSON-LD, sitemap, robots.txt) use
-`https://skylolerr.github.io/`. Links between pages are root-relative (`/de/…`), so they
-work on any domain.
+the origin in `CNAME`. Links between pages are root-relative (`/de/…`), so they work on
+any domain. To move to another domain, or back to `skylolerr.github.io`:
 
-1. Buy the domain (for example `skylolerr.dev`; `.dev` always requires HTTPS, which
-   GitHub Pages provides).
-2. Recommended: verify the domain for the account first (GitHub → **Settings → Pages →
-   Add a domain**) so nobody else can use it on GitHub Pages.
-3. Set the DNS records at the registrar:
-   - Apex domain `skylolerr.dev`: four `A` records to `185.199.108.153`,
-     `185.199.109.153`, `185.199.110.153`, `185.199.111.153` (and optionally the `AAAA`
-     records `2606:50c0:8000::153`, `2606:50c0:8001::153`, `2606:50c0:8002::153`,
-     `2606:50c0:8003::153`).
-   - `www.skylolerr.dev`: a `CNAME` record to `skylolerr.github.io`.
-4. Switch the site and commit:
-
-   ```bash
-   python scripts/set_domain.py skylolerr.dev
-   python scripts/check_site.py
-   git add -A
-   git commit -m "Move the site to skylolerr.dev"
-   git push
-   ```
-
-   The script replaces the origin in every file and writes `CNAME`, which GitHub Pages
-   reads as the custom domain.
-5. On GitHub: **Settings → Pages → Custom domain** shows the domain from `CNAME`. Wait
-   for the DNS check, then tick **Enforce HTTPS**.
-6. `skylolerr.github.io` then redirects to the new domain. Add the new domain as a
-   property in the Search Console and submit the sitemap again.
-
-To go back, run `python scripts/set_domain.py skylolerr.github.io`; it removes `CNAME`.
+```bash
+python scripts/set_domain.py skylolerr.github.io   # removes CNAME
+python scripts/check_site.py
+```
 
 ## License
 
