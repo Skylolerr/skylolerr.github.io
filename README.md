@@ -19,6 +19,7 @@ requests, no cookies or tracking. GitHub Pages serves the files as they are
 | `404.html` | Bilingual "page not found" |
 | `assets/css/site.css` | The only stylesheet; light and dark theme follow the system |
 | `assets/img/` | WebP screenshots and animations, icons, Open Graph images |
+| `assets/logo/` | The Skylolerr logo: SVG source and 1024 px PNG; `favicon.svg` is the same with rounded corners |
 | `sitemap.xml`, `robots.txt` | For search engines, with hreflang alternates |
 | `scripts/prepare_images.py` | Builds `assets/img/` from the projects' `docs/images` |
 | `scripts/check_site.py` | Checks links, images, SEO tags, hreflang, JSON-LD and the sitemap |

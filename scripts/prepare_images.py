@@ -83,39 +83,36 @@ def og_project(banner: Path, dst: Path, bg: tuple[int, int, int]) -> None:
     print(f"{dst.relative_to(ROOT)}  {dst.stat().st_size // 1024} KB")
 
 
-def og_home(icons: list[Image.Image], dst: Path) -> None:
+def og_home(logo: Path, icons: list[Image.Image], dst: Path) -> None:
+    """The logo, the name and the project icons."""
     canvas = Image.new("RGB", (1200, 630), (246, 248, 251))
     draw = ImageDraw.Draw(canvas)
+    mark = Image.open(logo).convert("RGB").resize((560, 560), Image.Resampling.LANCZOS)
+    mark = rounded(mark, 123).resize((280, 280), Image.Resampling.LANCZOS)
+    canvas.paste(mark, (90, 175), mark)
+    draw.text((430, 170), "Skylolerr", font=font(True, 104), fill=(13, 27, 42))
+    draw.text((434, 315), "Home Assistant integrations,", font=font(False, 40), fill=(70, 84, 102))
+    draw.text((434, 365), "installed with HACS", font=font(False, 40), fill=(70, 84, 102))
     for i, ic in enumerate(icons):
-        tile = ic.resize((150, 150), Image.Resampling.LANCZOS)
-        canvas.paste(tile, (90 + i * 175, 110), tile)
-    draw.text((90, 330), "Skylolerr", font=font(True, 96), fill=(13, 27, 42))
-    draw.text(
-        (90, 470),
-        "Home Assistant integrations, installed with HACS",
-        font=font(False, 40),
-        fill=(70, 84, 102),
-    )
+        tile = ic.resize((72, 72), Image.Resampling.LANCZOS)
+        canvas.paste(tile, (434 + i * 88, 443), tile)
     canvas.save(dst, "PNG", optimize=True)
     print(f"{dst.relative_to(ROOT)}  {dst.stat().st_size // 1024} KB")
 
 
-def touch_icon(dst: Path, size: int = 180) -> None:
-    """The site mark (same as favicon.svg) as PNG for iOS home screens."""
-    big = size * 4
-    grad = Image.new("RGB", (big, big))
-    top, bottom = (0, 180, 216), (12, 99, 184)
-    for y in range(big):
-        t = y / (big - 1)
-        colour = tuple(round(a + (b - a) * t) for a, b in zip(top, bottom))
-        ImageDraw.Draw(grad).line([(0, y), (big, y)], fill=colour)
-    draw = ImageDraw.Draw(grad)
-    draw.text((big / 2, big / 2 + big * 0.02), "S", font=font(True, round(big * 0.7)),
-              fill="white", anchor="mm")
-    icon = grad.resize((size, size), Image.Resampling.LANCZOS)
-    icon.save(dst, "PNG", optimize=True)
-    icon.save(dst.with_name("favicon.ico"), sizes=[(16, 16), (32, 32), (48, 48)])
-    print(f"{dst.relative_to(ROOT)}  {dst.stat().st_size // 1024} KB, favicon.ico")
+def site_icons(logo: Path) -> None:
+    """Touch icon and favicon.ico from the 1024 px render of the logo.
+
+    favicon.svg is the logo SVG with rounded corners; Pillow cannot render SVG, so
+    the raster sizes come from the PNG export of the same design.
+    """
+    im = Image.open(logo).convert("RGB")
+    touch = im.resize((180, 180), Image.Resampling.LANCZOS)  # iOS rounds it itself
+    touch.save(ROOT / "apple-touch-icon.png", "PNG", optimize=True)
+    rounded(im, round(im.width * 0.22)).resize((48, 48), Image.Resampling.LANCZOS).save(
+        ROOT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)]
+    )
+    print("apple-touch-icon.png, favicon.ico")
 
 
 def main() -> None:
@@ -161,8 +158,9 @@ def main() -> None:
     # Open Graph images
     og_project(efm / "banner-light.png", IMG / "og-energy-flow-mapper.png", (238, 245, 250))
     og_project(dc / "banner-light.png", IMG / "og-daily-challenge.png", (253, 241, 233))
-    og_home([efm_icon, dc_light], IMG / "og-home.png")
-    touch_icon(ROOT / "apple-touch-icon.png")
+    logo = ROOT / "assets" / "logo" / "skylolerr-logo-1024.png"
+    og_home(logo, [efm_icon, dc_light], IMG / "og-home.png")
+    site_icons(logo)
 
 
 if __name__ == "__main__":
