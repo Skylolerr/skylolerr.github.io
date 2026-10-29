@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://skylolerr.github.io/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skylolerr.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/"/>
+  </url>
+  <url>
+    <loc>https://skylolerr.github.io/de/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skylolerr.github.io/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/"/>
+  </url>
+  <url>
+    <loc>https://skylolerr.github.io/energy-flow-mapper/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skylolerr.github.io/energy-flow-mapper/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/energy-flow-mapper/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/energy-flow-mapper/"/>
+  </url>
+  <url>
+    <loc>https://skylolerr.github.io/de/energy-flow-mapper/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skylolerr.github.io/energy-flow-mapper/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/energy-flow-mapper/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/energy-flow-mapper/"/>
+  </url>
+  <url>
+    <loc>https://skylolerr.github.io/daily-challenge/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skylolerr.github.io/daily-challenge/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/daily-challenge/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/daily-challenge/"/>
+  </url>
+  <url>
+    <loc>https://skylolerr.github.io/de/daily-challenge/</loc>
+    <lastmod>2026-10-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skylolerr.github.io/daily-challenge/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/daily-challenge/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/daily-challenge/"/>
+  </url>
+</urlset>

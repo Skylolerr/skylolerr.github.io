@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Energy Flow Mapper – Energie-Dashboard visuell bearbeiten</title>
+  <meta name="description" content="Das Energie-Dashboard von Home Assistant visuell bearbeiten: Geräte, Untergeräte, Netz, Solar, Batterie und Wasser per Drag and drop, mit Sicherung vor jedem Speichern.">
+  <link rel="canonical" href="https://skylolerr.github.io/de/energy-flow-mapper/">
+  <link rel="alternate" hreflang="en" href="https://skylolerr.github.io/energy-flow-mapper/">
+  <link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/energy-flow-mapper/">
+  <link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/energy-flow-mapper/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skylolerr">
+  <meta property="og:title" content="Energy Flow Mapper – ein visueller Editor für das Energie-Dashboard von Home Assistant">
+  <meta property="og:description" content="Netz, Solar, Batterie, Wasserzähler, Geräte und Untergeräte per Drag and drop zuordnen. Sicherung vor jedem Speichern, eine Dashboard-Karte für alle. Gratis via HACS.">
+  <meta property="og:url" content="https://skylolerr.github.io/de/energy-flow-mapper/">
+  <meta property="og:image" content="https://skylolerr.github.io/assets/img/og-energy-flow-mapper.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Energy Flow Mapper – ein visueller Editor für das Energie-Dashboard von Home Assistant">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://skylolerr.github.io/de/energy-flow-mapper/#app",
+        "name": "Energy Flow Mapper",
+        "description": "Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant. Er zeigt Quellen, Geräte und Untergeräte als Diagramm, für Strom und Wasser, und schreibt Änderungen in die Energie-Einstellungen von Home Assistant, mit einer Sicherung vor jedem Speichern.",
+        "url": "https://skylolerr.github.io/de/energy-flow-mapper/",
+        "inLanguage": "de",
+        "image": "https://skylolerr.github.io/assets/img/og-energy-flow-mapper.png",
+        "screenshot": "https://skylolerr.github.io/assets/img/efm/diagram-light.webp",
+        "applicationCategory": "HomeApplication",
+        "applicationSubCategory": "Benutzerdefinierte Home-Assistant-Integration",
+        "operatingSystem": "Home Assistant 2026.10.0 oder neuer",
+        "softwareRequirements": "Home Assistant 2026.10.0 oder neuer, HACS",
+        "featureList": [
+          "Diagramm des Energie-Dashboards von Home Assistant",
+          "Geräte und Untergeräte per Drag and drop zuordnen",
+          "Netzbezug, Netzeinspeisung, Solar, Batterie und Wasser zuweisen",
+          "Leistung live und Energie pro Zeitraum",
+          "Zähler aus Leistungs- und Durchflusssensoren anlegen",
+          "Sicherungen, Export und Import der Energie-Einstellungen",
+          "Dashboard-Karte zum Anzeigen"
+        ],
+        "license": "https://opensource.org/license/mit",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF" },
+        "author": { "@type": "Person", "name": "Skylolerr", "url": "https://github.com/Skylolerr" },
+        "downloadUrl": "https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest",
+        "installUrl": "https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&repository=ha-energy-flow-mapper&category=integration",
+        "sameAs": ["https://github.com/Skylolerr/ha-energy-flow-mapper"]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Skylolerr", "item": "https://skylolerr.github.io/de/" },
+          { "@type": "ListItem", "position": 2, "name": "Energy Flow Mapper", "item": "https://skylolerr.github.io/de/energy-flow-mapper/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Wie füge ich Geräte zum Energie-Dashboard von Home Assistant hinzu?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Öffne Energy Flow Mapper in der Seitenleiste und ziehe einen Energiesensor aus «Freie Sensoren» ins Diagramm, oder nimm «Hinzufügen». «Freie Sensoren» listet alle Energiezähler und externen Statistiken, die noch nicht im Energie-Dashboard sind. Geschrieben wird erst, wenn du «Speichern» wählst, und vorher siehst du die Liste der Änderungen." }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie lege ich im Energie-Dashboard ein übergeordnetes Gerät fest («enthalten in»)?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant kann den Verbrauch eines Geräts als Teil eines anderen behandeln, zum Beispiel eine Kaffeemaschine hinter einem Unterzähler der Küche. In Energy Flow Mapper ziehst du die Kaffeemaschine auf den Block der Küche; gültige Ziele leuchten auf. Auf dem Handy nimmst du das Menü ⋮ und «Verschieben nach …». Das Diagramm zeigt dann, wie viel vom Verbrauch der Küche nicht einzeln erfasst ist." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ist Energy Flow Mapper einfach noch eine Energie-Karte?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Nein. Energie-Karten und Sankey-Diagramme zeigen das Energie-Dashboard an; Energy Flow Mapper bearbeitet es. Er ändert die Energie-Einstellungen von Home Assistant selbst, die dann das Energie-Dashboard und jede Energie-Karte verwenden. Dazu kommt eine eigene Dashboard-Karte, die nur anzeigt." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann Energy Flow Mapper meine Energie-Einstellungen kaputt machen?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt, standardmässig 20, bis zu 100. «Letztes Speichern rückgängig machen» oder «Sicherungen», «Wiederherstellen» holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende übergeordnete Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind." }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie bringe ich einen Leistungssensor (W) ins Energie-Dashboard?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Das Energie-Dashboard braucht Energie in kWh, keine Leistung in W. Für einen Leistungssensor ohne Zähler wählst du «Nur Leistung» und dann «Zähler anlegen»: Energy Flow Mapper legt einen gewöhnlichen Integral-Helfer an, der die Energie aufsummiert, und setzt ihn ins Diagramm. Der Helfer funktioniert auch ohne Energy Flow Mapper weiter. Durchflusssensoren wie L/min gehen im Tab Wasser genauso." }
+          },
+          {
+            "@type": "Question",
+            "name": "Unterstützt Energy Flow Mapper Wasser und Gas?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wasser ja: der Tab Wasser hat eigene Geräte, Zähler und freie Sensoren, in Litern und m³, mit US-Einheiten in Gallonen. Gasquellen werden angezeigt, aber Home Assistant kennt keine Gasgeräte, also gibt es nichts anzuordnen." }
+          },
+          {
+            "@type": "Question",
+            "name": "Welche Home-Assistant-Version braucht Energy Flow Mapper?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.10.0 oder neuer. Das Panel ist für Admins; die Dashboard-Karte funktioniert für alle, die das Dashboard sehen." }
+          },
+          {
+            "@type": "Question",
+            "name": "HACS findet Energy Flow Mapper nicht. Was kann ich tun?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Nimm den Knopf «In HACS öffnen» auf dieser Seite, oder füge das Repository von Hand hinzu: in HACS das Menü ⋮ öffnen, «Benutzerdefinierte Repositories» wählen, https://github.com/Skylolerr/ha-energy-flow-mapper mit dem Typ Integration eingeben und hinzufügen. Danach nach Energy Flow Mapper suchen, herunterladen und Home Assistant neu starten." }
+          },
+          {
+            "@type": "Question",
+            "name": "Die Karte meldet «Custom element doesn't exist». Was ist falsch?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Lade die Seite neu. Direkt nach dem Installieren oder Aktualisieren hat der Browser noch die alte Home-Assistant-Seite im Cache, und der Lader der Karte ist Teil dieser Seite." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ist Energy Flow Mapper gratis, und braucht er eine Cloud?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Energy Flow Mapper ist gratis und Open Source unter der MIT-Lizenz. Es gibt kein Konto und keinen Cloud-Dienst; alles läuft in deinem Home Assistant." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/de/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
+      <nav class="site-nav" aria-label="Hauptmenü">
+        <a class="nav-hide-sm" href="/de/#projects">Projekte</a>
+        <a href="https://github.com/Skylolerr">GitHub</a>
+        <span class="lang"><a href="/energy-flow-mapper/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/de/energy-flow-mapper/" hreflang="de" lang="de" aria-current="true" aria-label="Deutsch">DE</a></span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
+          <ol><li><a href="/de/">Skylolerr</a></li><li aria-current="page">Energy Flow Mapper</li></ol>
+        </nav>
+        <div class="hero-grid">
+          <img class="app-icon" src="/assets/img/efm/icon.png" alt="" width="132" height="132">
+          <div>
+            <span class="eyebrow">Home-Assistant-Integration</span>
+            <h1>Energy Flow Mapper</h1>
+            <p class="lead"><strong>Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant.</strong> Keine weitere Energie-Karte: Energy Flow Mapper zeigt deine Energie-Konfiguration als Diagramm – Quellen oben, dein Zuhause in der Mitte, Geräte darunter – und du änderst sie per Drag and drop.</p>
+            <div class="actions">
+              <a class="btn btn-hacs" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a>
+              <a class="btn" href="https://github.com/Skylolerr/ha-energy-flow-mapper"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
+              <a class="btn" href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest">Neueste Version</a>
+            </div>
+            <ul class="chips"><li>Drag &amp; drop</li><li>Strom &amp; Wasser</li><li>Dashboard-Karte</li><li>Sicherungen</li></ul>
+          </div>
+        </div>
+        <figure class="shot hero-shot">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/diagram-dark-800.webp 800w, /assets/img/efm/diagram-dark.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw">
+            <img src="/assets/img/efm/diagram-light.webp" srcset="/assets/img/efm/diagram-light-800.webp 800w, /assets/img/efm/diagram-light.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw" alt="Das Panel von Energy Flow Mapper: Quellen oben, Zuhause in der Mitte, Geräte darunter, freie Sensoren links und Details rechts" width="1600" height="780" fetchpriority="high">
+          </picture>
+          <figcaption>Das Panel in Home Assistant: Netz, Solar und Batterie oben, das Zuhause in der Mitte, Geräte und Untergeräte darunter, freie Sensoren links. Die Bilder zeigen die englische Oberfläche; das Panel gibt es auch auf Deutsch.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="demo-title">
+      <div class="wrap">
+        <h2 id="demo-title">So sieht es aus</h2>
+        <div class="grid-2">
+          <figure class="shot">
+            <img src="/assets/img/efm/periods.webp" alt="Wechsel zwischen jetzt, heute, 7 Tagen und 30 Tagen: Werte und Pfeilbreiten passen sich an" width="922" height="582" loading="lazy">
+            <figcaption><b>Live und pro Zeitraum.</b> Leistung jetzt oder die Energie von heute, 7 oder 30 Tagen – die Pfeilbreite folgt dem Wert.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/efm/drag.webp" alt="Die Kaffeemaschine wird auf Office gezogen; die möglichen Ziele leuchten auf" width="922" height="582" loading="lazy">
+            <figcaption><b>Drag and drop.</b> Zieh ein Gerät auf ein anderes, um es dort einzuordnen; gültige Ziele leuchten auf.</figcaption>
+          </figure>
+        </div>
+        <figure class="shot" style="margin-top:28px">
+          <img src="/assets/img/efm/tabs.webp" alt="Wechsel vom Tab Strom zum Tab Wasser und zurück" width="946" height="486" loading="lazy">
+          <figcaption><b>Strom und Wasser.</b> Jedes hat einen eigenen Tab mit eigenen Geräten, Zählern und freien Sensoren.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <div class="wrap">
+        <h2 id="features-title">Funktionen</h2>
+        <div class="features">
+          <div class="feature">
+            <h3>Alles im Blick</h3>
+            <ul>
+              <li><strong>Diagramm deines Energie-Dashboards</strong> – Quellen, Zuhause und Geräte, automatisch angeordnet; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
+              <li><strong>Leistung live und Energie pro Zeitraum</strong> – jetzt, heute, 7 oder 30 Tage, inklusive dem, was nicht einzeln erfasst ist.</li>
+              <li><strong>Plausibilitätswarnungen</strong>, wenn Untergeräte deutlich mehr verbraucht haben als ihr übergeordnetes Gerät – meist eine falsche Zuordnung.</li>
+              <li><strong>Gerät suchen</strong> in grossen Diagrammen.</li>
+            </ul>
+          </div>
+          <div class="feature">
+            <h3>Sicher ändern</h3>
+            <ul>
+              <li><strong>Drag and drop</strong> (oder das Menü ⋮ auf dem Handy) – ein Gerät in ein anderes einordnen, umbenennen oder entfernen.</li>
+              <li><strong>Quellen</strong> – einen Sensor auf Netzbezug, Netzeinspeisung, Solar, Batterie oder Wasser ziehen. Preise bleiben, wie sie sind.</li>
+              <li><strong>Freie Sensoren</strong> – Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt.</li>
+              <li><strong>Zähler anlegen</strong> – macht aus einem Leistungs- oder Durchflusssensor einen gewöhnlichen Integral-Helfer.</li>
+              <li><strong>Entwurf, Prüfung, Speichern</strong> – mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben.</li>
+            </ul>
+          </div>
+          <div class="feature">
+            <h3>Überall</h3>
+            <ul>
+              <li><strong>Dashboard-Karte</strong> – derselbe Baum, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
+              <li><strong>Tab Wasser</strong> – Liter und m³, mit US-Einheiten Gallonen.</li>
+              <li><strong>Sicherungen, Export und Import</strong> – jeden früheren Stand wiederherstellen oder eine Kopie anderswo aufbewahren.</li>
+              <li><strong>Deutsch, Englisch, Französisch und Italienisch</strong>, helles und dunkles Design, Handy-Layout.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="card-title">
+      <div class="wrap">
+        <h2 id="card-title">Dashboard-Karte</h2>
+        <p class="narrow">Die Karte zeigt den Gerätebaum von Strom oder Wasser auf einem beliebigen Dashboard. Sie zeigt nur an – bearbeitet wird im Panel – und alle, die das Dashboard sehen, sehen auch die Karte, wie beim Energie-Dashboard von Home Assistant. Tippe auf ein Gerät, um seinen Verlauf zu öffnen. Hinzufügen im Dashboard-Editor: <em>Karte hinzufügen</em> → <strong>Energy Flow Mapper</strong>; eine Ressource musst du nicht anlegen.</p>
+        <figure class="shot">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/card-dark-800.webp 800w, /assets/img/efm/card-dark.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw">
+            <img src="/assets/img/efm/card-light.webp" srcset="/assets/img/efm/card-light-800.webp 800w, /assets/img/efm/card-light.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw" alt="Zwei Dashboard-Karten: der Energiefluss von 30 Tagen und der Wasserfluss jetzt" width="1600" height="480" loading="lazy">
+          </picture>
+        </figure>
+        <p style="margin-top:24px">In YAML:</p>
+        <pre><code>type: custom:energy-flow-mapper-card
+kind: electricity      # oder water
+period: today          # now, today, week oder month
+root: sensor.kitchen_energy   # optional: nur dieses Gerät und alles darunter
+title: Küche           # optional; ein leerer Titel blendet die Kopfzeile aus
+show_sources: true     # Quellen über dem Zuhause (nicht mit root)
+show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code></pre>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="shots-title">
+      <div class="wrap">
+        <h2 id="shots-title">Screenshots</h2>
+        <div class="grid-2">
+          <figure class="shot">
+            <img src="/assets/img/efm/period.webp" alt="30 Tage mit Verbrauch, der nicht einzeln erfasst ist, und einer Plausibilitätswarnung" width="1200" height="585" loading="lazy">
+            <figcaption><b>30 Tage:</b> Energie pro Gerät, was nicht einzeln erfasst ist, und eine Warnung.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/efm/save.webp" alt="Die Liste der Änderungen vor dem Speichern" width="1200" height="585" loading="lazy">
+            <figcaption><b>Speichern:</b> jede Änderung wird aufgelistet, bevor etwas geschrieben wird.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/efm/backups.webp" alt="Die Liste der Sicherungen mit Knöpfen zum Exportieren und Wiederherstellen" width="1200" height="585" loading="lazy">
+            <figcaption><b>Sicherungen:</b> wiederherstellen, exportieren oder importieren.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/efm/water-dark.webp" alt="Der Tab Wasser über 30 Tage in Litern und Kubikmetern" width="1200" height="480" loading="lazy">
+            <figcaption><b>Wasser, 30 Tage:</b> Liter und m³ pro Gerät.</figcaption>
+          </figure>
+        </div>
+        <div class="phones" style="margin-top:28px">
+          <figure class="shot">
+            <img src="/assets/img/efm/phone-dark.webp" alt="Das Panel auf dem Handy, dunkles Design" width="412" height="640" loading="lazy">
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/efm/phone-light.webp" alt="Das Panel auf dem Handy, helles Design, 7 Tage" width="412" height="640" loading="lazy">
+          </figure>
+        </div>
+        <p class="meta" style="text-align:center;margin-top:16px">Die Screenshots zeigen einen Demo-Haushalt.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="install" aria-labelledby="install-title">
+      <div class="wrap narrow">
+        <h2 id="install-title">Voraussetzungen und Installation</h2>
+        <div class="note warm"><p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Jedes Speichern legt eine Sicherung deiner bisherigen Energie-Einstellungen an, du kannst also immer zurück.</p></div>
+        <h3>Voraussetzungen</h3>
+        <ul>
+          <li>Home Assistant <strong>2026.10.0</strong> oder neuer, mit dem Energie-Dashboard (Teil der Standardkonfiguration).</li>
+          <li><a href="https://hacs.xyz/">HACS</a> für die Installation (oder eine manuelle Kopie, siehe unten).</li>
+          <li>Ein Admin-Konto für das Panel. Die Dashboard-Karte funktioniert für alle.</li>
+        </ul>
+        <h3>Installation</h3>
+        <ol class="steps">
+          <li>
+            <h3>In HACS hinzufügen</h3>
+            <p>Klicke auf <strong>In HACS öffnen</strong> – My Home Assistant öffnet das Repository in deinem eigenen Home Assistant – und wähle <strong>Herunterladen</strong>.</p>
+            <p><a class="btn btn-hacs" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a></p>
+            <p>Oder füge es von Hand als benutzerdefiniertes Repository hinzu:</p>
+            <ol>
+              <li>Öffne <strong>HACS</strong> in der Seitenleiste.</li>
+              <li>Öffne oben rechts das Menü <strong>⋮</strong> und wähle <strong>Benutzerdefinierte Repositories</strong>.</li>
+              <li>Gib <code>https://github.com/Skylolerr/ha-energy-flow-mapper</code> ein, wähle den Typ <strong>Integration</strong> und dann <strong>Hinzufügen</strong>.</li>
+              <li>Suche in HACS nach <strong>Energy Flow Mapper</strong> und wähle <strong>Herunterladen</strong>.</li>
+            </ol>
+          </li>
+          <li>
+            <h3>Home Assistant neu starten</h3>
+            <p>Einstellungen → System → Ein/Aus-Knopf oben rechts → <strong>Home Assistant neu starten</strong>.</p>
+          </li>
+          <li>
+            <h3>Einrichten</h3>
+            <p>Einstellungen → Geräte &amp; Dienste → <strong>Integration hinzufügen</strong> → <strong>Energy Flow Mapper</strong>, oder über den Knopf. Das Einrichten selbst ändert deine Energie-Einstellungen nicht.</p>
+            <p><a class="btn" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=energy_flow_mapper">Energy Flow Mapper einrichten</a></p>
+          </li>
+          <li>
+            <h3>Panel öffnen</h3>
+            <p><strong>Energy Flow Mapper</strong> erscheint für Admins in der Seitenleiste. Geschrieben wird erst, wenn du <strong>Speichern</strong> wählst.</p>
+          </li>
+        </ol>
+        <p><strong>Manuelle Installation:</strong> kopiere <code>custom_components/energy_flow_mapper</code> aus der <a href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest">neuesten Version</a> in den Ordner <code>custom_components</code> deiner Home-Assistant-Konfiguration und starte Home Assistant neu.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap narrow">
+        <h2 id="faq-title">Häufige Fragen</h2>
+        <div class="faq">
+          <details>
+            <summary><h3>Wie füge ich Geräte zum Energie-Dashboard von Home Assistant hinzu?</h3></summary>
+            <div class="answer"><p>Öffne Energy Flow Mapper in der Seitenleiste und ziehe einen Energiesensor aus <strong>Freie Sensoren</strong> ins Diagramm, oder nimm <strong>Hinzufügen</strong>. «Freie Sensoren» listet alle Energiezähler und externen Statistiken, die noch nicht im Energie-Dashboard sind. Geschrieben wird erst, wenn du <strong>Speichern</strong> wählst, und vorher siehst du die Liste der Änderungen.</p></div>
+          </details>
+          <details>
+            <summary><h3>Wie lege ich im Energie-Dashboard ein übergeordnetes Gerät fest («enthalten in»)?</h3></summary>
+            <div class="answer"><p>Home Assistant kann den Verbrauch eines Geräts als Teil eines anderen behandeln, zum Beispiel eine Kaffeemaschine hinter einem Unterzähler der Küche. In Energy Flow Mapper ziehst du die Kaffeemaschine auf den Block der Küche; gültige Ziele leuchten auf. Auf dem Handy nimmst du das Menü <strong>⋮</strong> → <strong>Verschieben nach …</strong>. Das Diagramm zeigt dann, wie viel vom Verbrauch der Küche nicht einzeln erfasst ist.</p></div>
+          </details>
+          <details>
+            <summary><h3>Ist Energy Flow Mapper einfach noch eine Energie-Karte?</h3></summary>
+            <div class="answer"><p>Nein. Energie-Karten und Sankey-Diagramme <em>zeigen</em> das Energie-Dashboard an; Energy Flow Mapper <em>bearbeitet</em> es. Er ändert die Energie-Einstellungen von Home Assistant selbst, die dann das Energie-Dashboard und jede Energie-Karte verwenden. Dazu kommt eine eigene <a href="#card-title">Dashboard-Karte</a>, die nur anzeigt.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann Energy Flow Mapper meine Energie-Einstellungen kaputt machen?</h3></summary>
+            <div class="answer"><p>Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt – standardmässig 20, bis zu 100. <strong>Letztes Speichern rückgängig machen</strong> oder <strong>Sicherungen → Wiederherstellen</strong> holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende übergeordnete Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind.</p></div>
+          </details>
+          <details>
+            <summary><h3>Wie bringe ich einen Leistungssensor (W) ins Energie-Dashboard?</h3></summary>
+            <div class="answer"><p>Das Energie-Dashboard braucht Energie in kWh, keine Leistung in W. Für einen Leistungssensor ohne Zähler wählst du <strong>Nur Leistung → Zähler anlegen</strong>: Energy Flow Mapper legt einen gewöhnlichen Integral-Helfer an, der die Energie aufsummiert, und setzt ihn ins Diagramm. Der Helfer funktioniert auch ohne Energy Flow Mapper weiter. Durchflusssensoren wie L/min gehen im Tab Wasser genauso.</p></div>
+          </details>
+          <details>
+            <summary><h3>Unterstützt Energy Flow Mapper Wasser und Gas?</h3></summary>
+            <div class="answer"><p>Wasser ja: der Tab Wasser hat eigene Geräte, Zähler und freie Sensoren, in Litern und m³, mit US-Einheiten in Gallonen. Gasquellen werden angezeigt, aber Home Assistant kennt keine Gasgeräte, also gibt es nichts anzuordnen.</p></div>
+          </details>
+          <details>
+            <summary><h3>Welche Home-Assistant-Version braucht Energy Flow Mapper?</h3></summary>
+            <div class="answer"><p>Home Assistant <strong>2026.10.0</strong> oder neuer. Das Panel ist für Admins; die Dashboard-Karte funktioniert für alle, die das Dashboard sehen.</p></div>
+          </details>
+          <details>
+            <summary><h3>HACS findet Energy Flow Mapper nicht. Was kann ich tun?</h3></summary>
+            <div class="answer"><p>Nimm den Knopf <a href="#install">In HACS öffnen</a> auf dieser Seite, oder füge das Repository von Hand hinzu: in HACS das Menü <strong>⋮</strong> öffnen, <strong>Benutzerdefinierte Repositories</strong> wählen, <code>https://github.com/Skylolerr/ha-energy-flow-mapper</code> mit dem Typ <strong>Integration</strong> eingeben und hinzufügen. Danach nach Energy Flow Mapper suchen, herunterladen und Home Assistant neu starten.</p></div>
+          </details>
+          <details>
+            <summary><h3>Die Karte meldet «Custom element doesn't exist». Was ist falsch?</h3></summary>
+            <div class="answer"><p>Lade die Seite neu. Direkt nach dem Installieren oder Aktualisieren hat der Browser noch die alte Home-Assistant-Seite im Cache, und der Lader der Karte ist Teil dieser Seite.</p></div>
+          </details>
+          <details>
+            <summary><h3>Ist Energy Flow Mapper gratis, und braucht er eine Cloud?</h3></summary>
+            <div class="answer"><p>Energy Flow Mapper ist gratis und Open Source unter der MIT-Lizenz. Es gibt kein Konto und keinen Cloud-Dienst; alles läuft in deinem Home Assistant.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="links-title">
+      <div class="wrap">
+        <h2 id="links-title">Links</h2>
+        <ul class="link-list">
+          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper"><b>GitHub-Repository</b><span>Quellcode und vollständige Dokumentation (Englisch)</span></a></li>
+          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases"><b>Versionen</b><span>Download und Versionshinweise</span></a></li>
+          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/issues"><b>Issues</b><span>Fehler melden oder Funktion vorschlagen</span></a></li>
+          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/blob/main/CHANGELOG.md"><b>Changelog</b><span>Was sich in jeder Version geändert hat</span></a></li>
+        </ul>
+        <p class="meta" style="margin-top:24px">Auch von Skylolerr: <a href="/de/daily-challenge/">Daily Challenge</a> – Tagesziele mit Streaks für Home Assistant.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Skylolerr · Projekte unter der MIT-Lizenz · <a href="https://github.com/Skylolerr">GitHub</a></p>
+      <p>Keine Cookies, keine Statistik, kein Tracking.</p>
+      <p>Kein offizielles Projekt von Home Assistant, der Open Home Foundation oder HACS und nicht mit ihnen verbunden.</p>
+    </div>
+  </footer>
+</body>
+</html>

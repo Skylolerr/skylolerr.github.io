@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daily Challenge – Tagesziele und Streaks für Home Assistant</title>
+  <meta name="description" content="Tagesziele in Home Assistant verfolgen: Liegestütze, Leseminuten, Gläser Wasser. Streaks, Soll und Ist, Aufholmodus und eine eigene Dashboard-Karte. Gratis via HACS.">
+  <link rel="canonical" href="https://skylolerr.github.io/de/daily-challenge/">
+  <link rel="alternate" hreflang="en" href="https://skylolerr.github.io/daily-challenge/">
+  <link rel="alternate" hreflang="de" href="https://skylolerr.github.io/de/daily-challenge/">
+  <link rel="alternate" hreflang="x-default" href="https://skylolerr.github.io/daily-challenge/">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Skylolerr">
+  <meta property="og:title" content="Daily Challenge – Tagesziele und Streaks für Home Assistant">
+  <meta property="og:description" content="Zählbare tägliche Challenges für Home Assistant mit Streaks, Soll und Ist, optionalem Aufholmodus und eigener Karte. Gratis via HACS.">
+  <meta property="og:url" content="https://skylolerr.github.io/de/daily-challenge/">
+  <meta property="og:image" content="https://skylolerr.github.io/assets/img/og-daily-challenge.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Daily Challenge – Tagesziele für Home Assistant, mit Streaks und eigener Karte">
+  <meta property="og:locale" content="de_CH">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://skylolerr.github.io/de/daily-challenge/#app",
+        "name": "Daily Challenge",
+        "description": "Eine Home-Assistant-Integration für zählbare tägliche Challenges wie 20 Liegestütze oder 8 Gläser Wasser, mit Streaks, Soll und Ist über die ganze Challenge, optionalem Aufholmodus und eigener Dashboard-Karte.",
+        "url": "https://skylolerr.github.io/de/daily-challenge/",
+        "inLanguage": "de",
+        "image": "https://skylolerr.github.io/assets/img/og-daily-challenge.png",
+        "screenshot": "https://skylolerr.github.io/assets/img/dc/hero-light.webp",
+        "applicationCategory": "HomeApplication",
+        "applicationSubCategory": "Benutzerdefinierte Home-Assistant-Integration",
+        "operatingSystem": "Home Assistant 2026.10.0 oder neuer",
+        "softwareRequirements": "Home Assistant 2026.10.0 oder neuer, HACS",
+        "featureList": [
+          "Tagesziel mit eigener Einheit und Schnellknöpfen",
+          "Aktueller und bester Streak mit wählbarer Streak-Regel",
+          "Soll und Ist über die ganze Challenge",
+          "Optionaler Aufholmodus für den Rückstand von gestern",
+          "Dashboard-Karte mit Fortschrittsring und Rückgängig",
+          "Blueprint für Erinnerungen",
+          "Aktionen zum Hinzufügen, Setzen und Abrufen der Werte jedes Tages"
+        ],
+        "license": "https://opensource.org/license/mit",
+        "isAccessibleForFree": true,
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CHF" },
+        "author": { "@type": "Person", "name": "Skylolerr", "url": "https://github.com/Skylolerr" },
+        "downloadUrl": "https://github.com/Skylolerr/ha-daily-challenge/releases/latest",
+        "installUrl": "https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&repository=ha-daily-challenge&category=integration",
+        "sameAs": ["https://github.com/Skylolerr/ha-daily-challenge"]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Skylolerr", "item": "https://skylolerr.github.io/de/" },
+          { "@type": "ListItem", "position": 2, "name": "Daily Challenge", "item": "https://skylolerr.github.io/de/daily-challenge/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Wie verfolge ich ein Tagesziel wie Liegestütze oder Gläser Wasser in Home Assistant?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Installiere Daily Challenge, füge die Integration hinzu und gib einen Namen, eine Einheit und ein Tagesziel ein, zum Beispiel 20 Liegestütze. Leg die Karte Daily Challenge auf ein Dashboard und tippe +1, +5 oder +10, sobald du etwas geschafft hast. Die Karte zeigt den Fortschritt von heute, deinen Streak und ob du vor oder hinter deinem Soll liegst." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ist Daily Challenge ein Habit-Tracker?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Daily Challenge zählt Mengen, keine Ja/Nein-Gewohnheiten. Jede Challenge hat ein Tagesziel und eine Einheit; sie zählt, wie viel du jeden Tag geschafft hast, summiert es über die ganze Challenge und vergleicht es mit dem Soll bis heute. Wenn du willst, zählt auch jede Menge über 0 für den Streak." }
+          },
+          {
+            "@type": "Question",
+            "name": "Was passiert mit meinem Streak, wenn ich einen Tag verpasse?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ohne Aufholen beendet ein verpasster Tag den Streak. Im optionalen Aufholmodus kommt der Rückstand von gestern zum heutigen Ziel dazu; holst du ihn heute auf, zählt gestern trotzdem und der Streak bleibt. Nur gestern lässt sich retten, nichts Älteres." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich einen vergangenen Tag korrigieren?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die Aktionen daily_challenge.set und daily_challenge.add haben ein optionales Datum, damit korrigierst du jeden Tag zwischen dem Startdatum und heute, zum Beispiel in den Entwicklerwerkzeugen oder in einer Automation." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann Home Assistant mich erinnern, wenn das Tagesziel noch offen ist?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Importiere den Blueprint für Erinnerungen: zu einer Zeit deiner Wahl, standardmässig 20:00, meldet er sich, solange das heutige Ziel noch offen ist. Die Nachricht kann enthalten, was noch fehlt." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich andere Karten wie Mushroom, Tile oder ApexCharts verwenden?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jede Challenge legt gewöhnliche Entitäten an: eine Zahl für den heutigen Wert, Knöpfe für die Schritte und Sensoren für das heutige Ziel, den Fortschritt, die Summe, die Streaks, Vorsprung oder Rückstand und mehr. Sie funktionieren mit jeder Karte, in Automationen und im Verlauf." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich mehrere Challenges gleichzeitig verfolgen?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jede Challenge ist ein eigener Eintrag: füge die Integration für die nächste einfach noch einmal hinzu. Jede bekommt ihr eigenes Gerät, ihre Entitäten und ihre Karte." }
+          },
+          {
+            "@type": "Question",
+            "name": "Wird um Mitternacht etwas zurückgesetzt, und was, wenn Home Assistant aus ist?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Nichts wird zurückgesetzt. Jeder Wert wird mit seinem Datum gespeichert, ein neuer Tag beginnt also einfach leer. Neustarts, die Zeitumstellung und ein ausgeschaltetes Home Assistant über Mitternacht sind kein Problem." }
+          },
+          {
+            "@type": "Question",
+            "name": "Welche Home-Assistant-Version braucht Daily Challenge?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.10.0 oder neuer. Die Karte wird mit der Integration automatisch installiert und registriert." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich eine Obergrenze setzen, etwa höchstens ein Kaffee pro Tag?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Noch nicht. Daily Challenge kennt nur Mindestziele, und es gibt keine Ruhe- oder Pausentage: täglich heisst jeden Tag." }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/de/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
+      <nav class="site-nav" aria-label="Hauptmenü">
+        <a class="nav-hide-sm" href="/de/#projects">Projekte</a>
+        <a href="https://github.com/Skylolerr">GitHub</a>
+        <span class="lang"><a href="/daily-challenge/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/de/daily-challenge/" hreflang="de" lang="de" aria-current="true" aria-label="Deutsch">DE</a></span>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
+          <ol><li><a href="/de/">Skylolerr</a></li><li aria-current="page">Daily Challenge</li></ol>
+        </nav>
+        <div class="hero-grid">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/dc/icon-dark.png">
+            <img class="app-icon" src="/assets/img/dc/icon-light.png" alt="" width="132" height="132">
+          </picture>
+          <div>
+            <span class="eyebrow">Home-Assistant-Integration</span>
+            <h1>Daily Challenge</h1>
+            <p class="lead"><strong>Zählbare Tagesziele, direkt in Home Assistant.</strong> Daily Challenge verfolgt Mengen, die du jeden Tag erreichen willst – 20 Liegestütze, 30 Minuten lesen, 8 Gläser Wasser – mit Streaks, Soll und Ist über die ganze Challenge, optionalem Aufholmodus und eigener Dashboard-Karte.</p>
+            <div class="actions">
+              <a class="btn btn-hacs" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a>
+              <a class="btn" href="https://github.com/Skylolerr/ha-daily-challenge"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
+              <a class="btn" href="https://github.com/Skylolerr/ha-daily-challenge/releases/latest">Neueste Version</a>
+            </div>
+            <ul class="chips warm"><li>Streaks</li><li>Soll und Ist</li><li>Aufholmodus</li><li>Dashboard-Karte</li></ul>
+          </div>
+        </div>
+        <figure class="shot hero-shot">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/dc/hero-dark-800.webp 800w, /assets/img/dc/hero-dark.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw">
+            <img src="/assets/img/dc/hero-light.webp" srcset="/assets/img/dc/hero-light-800.webp 800w, /assets/img/dc/hero-light.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw" alt="Drei Karten von Daily Challenge: Liegestütze mit Enddatum, Lesen im Aufholmodus und Wasser mit erreichtem Tagesziel" width="1600" height="569" fetchpriority="high">
+          </picture>
+          <figcaption>Drei Challenges auf einem Dashboard: Liegestütze mit Enddatum, Lesen im Aufholmodus und Wasser mit erreichtem Tagesziel. Die Bilder zeigen die englische Oberfläche; die Karte gibt es auch auf Deutsch.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="demo-title">
+      <div class="wrap">
+        <h2 id="demo-title">So sieht es aus</h2>
+        <div class="grid-3">
+          <figure class="shot">
+            <img src="/assets/img/dc/buttons.webp" alt="Ein Tipp auf +5 füllt den Ring und erreicht das Tagesziel; Rückgängig in der Meldung nimmt es zurück" width="475" height="562" loading="lazy">
+            <figcaption><b>Ein Tipp, mit Rückgängig.</b> Schnellknöpfe für deine Schritte; jede Änderung lässt sich in der folgenden Meldung zurücknehmen.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/dc/input.webp" alt="Langes Drücken auf den Wert öffnet ein Eingabefeld; 32 und Enter setzen den heutigen Wert" width="475" height="562" loading="lazy">
+            <figcaption><b>Wert eintippen.</b> Langes Drücken auf den heutigen Wert öffnet ein Eingabefeld – praktisch nach einem Training ohne Handy.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/dc/catch-up.webp" alt="Im Aufholmodus holen +10 und +5 den Rückstand von gestern auf; die Karte meldet Rückstand aufgeholt" width="475" height="562" loading="lazy">
+            <figcaption><b>Aufholen.</b> Der Rückstand von gestern erhöht das heutige Ziel; holst du ihn auf, bleibt dein Streak.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <div class="wrap">
+        <h2 id="features-title">Funktionen</h2>
+        <div class="features">
+          <div class="feature">
+            <h3>Ziel verfolgen</h3>
+            <ul>
+              <li><strong>Eine Tagesmenge, keine Ja/Nein-Gewohnheit</strong> – jede Challenge hat ihr eigenes Tagesziel, ihre Einheit und ihre Knöpfe.</li>
+              <li><strong>Soll und Ist</strong> über die ganze Laufzeit – Vorsprung oder Rückstand auf einen Blick.</li>
+              <li>Mit <strong>Enddatum</strong>: was noch fehlt, in wie vielen Tagen und wie viel du dafür im Schnitt pro Tag noch brauchst.</li>
+              <li><strong>Jeden vergangenen Tag korrigieren</strong> mit den Aktionen.</li>
+            </ul>
+          </div>
+          <div class="feature">
+            <h3>Motiviert bleiben</h3>
+            <ul>
+              <li><strong>Streaks</strong> mit wählbarer Regel – Tagesziel erreicht, oder irgendeine Menge.</li>
+              <li><strong>Bester Streak, bester Tag</strong>, Durchschnitt pro Tag und Summen pro Woche, Monat und Jahr.</li>
+              <li><strong>Optionaler Aufholmodus</strong> – ein verpasster Tag lässt sich am nächsten Tag nachholen, ohne den Streak zu verlieren.</li>
+              <li><strong>Blueprint für Erinnerungen</strong> – eine Meldung um 20:00, solange das heutige Ziel noch offen ist.</li>
+            </ul>
+          </div>
+          <div class="feature">
+            <h3>Passt in Home Assistant</h3>
+            <ul>
+              <li><strong>Eigene Karte</strong> mit Fortschrittsring, Schnellknöpfen, Rückgängig, Streak sowie Soll und Ist, dazu ein visueller Editor – automatisch installiert und registriert.</li>
+              <li><strong>Gewöhnliche Entitäten</strong>, die genauso mit Tile, Entities, Mushroom oder ApexCharts funktionieren.</li>
+              <li><strong>Deutsch, Englisch, Französisch und Italienisch</strong>, helles und dunkles Design, dein Zahlenformat.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="card-title">
+      <div class="wrap">
+        <h2 id="card-title">Die Karte</h2>
+        <div class="grid-2">
+          <div>
+            <p>Die Karte kommt mit der Integration und wird automatisch als Dashboard-Ressource registriert. Füge sie im Dashboard-Editor hinzu (<em>Karte hinzufügen</em> → <strong>Daily Challenge</strong>) und schalte jeden Teil im visuellen Editor ein oder aus, oder in YAML:</p>
+            <pre><code>type: custom:daily-challenge-card
+entity: number.push_ups_today   # eine beliebige Entität der Challenge
+show_streak: true
+show_target_vs_actual: true
+show_remaining: true
+show_required_average: true
+show_catch_up: true
+show_buttons: true</code></pre>
+            <p>Nach dem Enddatum zeigt die Karte die Summe im Vergleich zum Endziel.</p>
+          </div>
+          <figure class="shot center-shot">
+            <img src="/assets/img/dc/card-finished.webp" alt="Eine beendete Challenge: 136 von 155 km, Challenge beendet · 87 %" width="376" height="326" loading="lazy">
+            <figcaption><b>Eine beendete Challenge:</b> 136 von 155 km, 87 %.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="install" aria-labelledby="install-title">
+      <div class="wrap narrow">
+        <h2 id="install-title">Voraussetzungen und Installation</h2>
+        <div class="note warm"><p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Sie stehen immer im Changelog, und deine erfassten Daten werden migriert, nie verworfen.</p></div>
+        <h3>Voraussetzungen</h3>
+        <ul>
+          <li>Home Assistant <strong>2026.10.0</strong> oder neuer.</li>
+          <li><a href="https://hacs.xyz/">HACS</a> für die Installation (oder eine manuelle Kopie, siehe unten).</li>
+        </ul>
+        <h3>Installation</h3>
+        <ol class="steps">
+          <li>
+            <h3>In HACS hinzufügen</h3>
+            <p>Klicke auf <strong>In HACS öffnen</strong> – My Home Assistant öffnet das Repository in deinem eigenen Home Assistant – und wähle <strong>Herunterladen</strong>.</p>
+            <p><a class="btn btn-hacs" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a></p>
+            <p>Oder füge es von Hand als benutzerdefiniertes Repository hinzu:</p>
+            <ol>
+              <li>Öffne <strong>HACS</strong> in der Seitenleiste.</li>
+              <li>Öffne oben rechts das Menü <strong>⋮</strong> und wähle <strong>Benutzerdefinierte Repositories</strong>.</li>
+              <li>Gib <code>https://github.com/Skylolerr/ha-daily-challenge</code> ein, wähle den Typ <strong>Integration</strong> und dann <strong>Hinzufügen</strong>.</li>
+              <li>Suche in HACS nach <strong>Daily Challenge</strong> und wähle <strong>Herunterladen</strong>.</li>
+            </ol>
+          </li>
+          <li>
+            <h3>Home Assistant neu starten</h3>
+            <p>Einstellungen → System → Ein/Aus-Knopf oben rechts → <strong>Home Assistant neu starten</strong>.</p>
+          </li>
+          <li>
+            <h3>Challenge anlegen</h3>
+            <p>Einstellungen → Geräte &amp; Dienste → <strong>Integration hinzufügen</strong> → <strong>Daily Challenge</strong>, oder über den Knopf. Gib Namen, Einheit und Tagesziel ein. Jede Challenge ist ein eigener Eintrag; für eine weitere fügst du die Integration noch einmal hinzu.</p>
+            <p><a class="btn" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=daily_challenge">Daily Challenge einrichten</a></p>
+          </li>
+          <li>
+            <h3>Karte hinzufügen</h3>
+            <p><em>Dashboard bearbeiten</em> → <em>Karte hinzufügen</em> → <strong>Daily Challenge</strong>.</p>
+          </li>
+        </ol>
+        <p><strong>Manuelle Installation:</strong> lade <code>daily_challenge.zip</code> aus der <a href="https://github.com/Skylolerr/ha-daily-challenge/releases/latest">neuesten Version</a> herunter, entpacke es nach <code>config/custom_components/daily_challenge/</code> und starte Home Assistant neu.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+      <div class="wrap narrow">
+        <h2 id="faq-title">Häufige Fragen</h2>
+        <div class="faq">
+          <details>
+            <summary><h3>Wie verfolge ich ein Tagesziel wie Liegestütze oder Gläser Wasser in Home Assistant?</h3></summary>
+            <div class="answer"><p>Installiere Daily Challenge, füge die Integration hinzu und gib einen Namen, eine Einheit und ein Tagesziel ein – zum Beispiel 20 Liegestütze. Leg die Karte Daily Challenge auf ein Dashboard und tippe <strong>+1</strong>, <strong>+5</strong> oder <strong>+10</strong>, sobald du etwas geschafft hast. Die Karte zeigt den Fortschritt von heute, deinen Streak und ob du vor oder hinter deinem Soll liegst.</p></div>
+          </details>
+          <details>
+            <summary><h3>Ist Daily Challenge ein Habit-Tracker?</h3></summary>
+            <div class="answer"><p>Daily Challenge zählt Mengen, keine Ja/Nein-Gewohnheiten. Jede Challenge hat ein Tagesziel und eine Einheit; sie zählt, wie viel du jeden Tag geschafft hast, summiert es über die ganze Challenge und vergleicht es mit dem Soll bis heute. Wenn du willst, zählt auch jede Menge über 0 für den Streak.</p></div>
+          </details>
+          <details>
+            <summary><h3>Was passiert mit meinem Streak, wenn ich einen Tag verpasse?</h3></summary>
+            <div class="answer"><p>Ohne Aufholen beendet ein verpasster Tag den Streak. Im optionalen <strong>Aufholmodus</strong> kommt der Rückstand von gestern zum heutigen Ziel dazu; holst du ihn heute auf, zählt gestern trotzdem und der Streak bleibt. Nur gestern lässt sich retten, nichts Älteres.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich einen vergangenen Tag korrigieren?</h3></summary>
+            <div class="answer"><p>Ja. Die Aktionen <code>daily_challenge.set</code> und <code>daily_challenge.add</code> haben ein optionales Datum, damit korrigierst du jeden Tag zwischen dem Startdatum und heute – zum Beispiel in den Entwicklerwerkzeugen oder in einer Automation.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann Home Assistant mich erinnern, wenn das Tagesziel noch offen ist?</h3></summary>
+            <div class="answer"><p>Ja. Importiere den <a href="https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2FSkylolerr%2Fha-daily-challenge%2Fblob%2Fmain%2Fblueprints%2Fautomation%2Fdaily_challenge%2Freminder.yaml">Blueprint für Erinnerungen</a>: zu einer Zeit deiner Wahl, standardmässig 20:00, meldet er sich, solange das heutige Ziel noch offen ist. Die Nachricht kann enthalten, was noch fehlt.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich andere Karten wie Mushroom, Tile oder ApexCharts verwenden?</h3></summary>
+            <div class="answer"><p>Ja. Jede Challenge legt gewöhnliche Entitäten an: eine Zahl für den heutigen Wert, Knöpfe für die Schritte und Sensoren für das heutige Ziel, den Fortschritt, die Summe, die Streaks, Vorsprung oder Rückstand und mehr. Sie funktionieren mit jeder Karte, in Automationen und im Verlauf.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich mehrere Challenges gleichzeitig verfolgen?</h3></summary>
+            <div class="answer"><p>Ja. Jede Challenge ist ein eigener Eintrag: füge die Integration für die nächste einfach noch einmal hinzu. Jede bekommt ihr eigenes Gerät, ihre Entitäten und ihre Karte.</p></div>
+          </details>
+          <details>
+            <summary><h3>Wird um Mitternacht etwas zurückgesetzt, und was, wenn Home Assistant aus ist?</h3></summary>
+            <div class="answer"><p>Nichts wird zurückgesetzt. Jeder Wert wird mit seinem Datum gespeichert, ein neuer Tag beginnt also einfach leer. Neustarts, die Zeitumstellung und ein ausgeschaltetes Home Assistant über Mitternacht sind kein Problem.</p></div>
+          </details>
+          <details>
+            <summary><h3>Welche Home-Assistant-Version braucht Daily Challenge?</h3></summary>
+            <div class="answer"><p>Home Assistant <strong>2026.10.0</strong> oder neuer. Die Karte wird mit der Integration automatisch installiert und registriert.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich eine Obergrenze setzen, etwa höchstens ein Kaffee pro Tag?</h3></summary>
+            <div class="answer"><p>Noch nicht. Daily Challenge kennt nur Mindestziele, und es gibt keine Ruhe- oder Pausentage: täglich heisst jeden Tag.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="links-title">
+      <div class="wrap">
+        <h2 id="links-title">Links</h2>
+        <ul class="link-list">
+          <li><a href="https://github.com/Skylolerr/ha-daily-challenge"><b>GitHub-Repository</b><span>Quellcode und vollständige Dokumentation (Englisch)</span></a></li>
+          <li><a href="https://github.com/Skylolerr/ha-daily-challenge/releases"><b>Versionen</b><span>Download und Versionshinweise</span></a></li>
+          <li><a href="https://github.com/Skylolerr/ha-daily-challenge/issues"><b>Issues</b><span>Fehler melden oder Funktion vorschlagen</span></a></li>
+          <li><a href="https://github.com/Skylolerr/ha-daily-challenge/blob/main/CHANGELOG.md"><b>Changelog</b><span>Was sich in jeder Version geändert hat</span></a></li>
+        </ul>
+        <p class="meta" style="margin-top:24px">Auch von Skylolerr: <a href="/de/energy-flow-mapper/">Energy Flow Mapper</a> – ein visueller Editor für das Energie-Dashboard von Home Assistant.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Skylolerr · Projekte unter der MIT-Lizenz · <a href="https://github.com/Skylolerr">GitHub</a></p>
+      <p>Keine Cookies, keine Statistik, kein Tracking.</p>
+      <p>Kein offizielles Projekt von Home Assistant, der Open Home Foundation oder HACS und nicht mit ihnen verbunden.</p>
+    </div>
+  </footer>
+</body>
+</html>
