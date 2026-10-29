@@ -565,8 +565,15 @@ main {
   box-shadow: none;
 }
 
-.hero-shot {
-  margin-top: 48px;
+/* .shot sets margin: 0 further down, so this needs the higher specificity. */
+.shot.hero-shot {
+  margin-top: 40px;
+}
+
+@media (min-width: 860px) {
+  .shot.hero-shot {
+    margin-top: 56px;
+  }
 }
 
 .hero-shot figcaption {
