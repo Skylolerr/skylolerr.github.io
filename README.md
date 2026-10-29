@@ -21,6 +21,7 @@ requests, no cookies or tracking. GitHub Pages serves the files as they are
 | `assets/img/` | WebP screenshots and animations, icons, Open Graph images |
 | `assets/logo/` | The Skylolerr logo: SVG source and 1024 px PNG; `favicon.svg` is the same with rounded corners |
 | `sitemap.xml`, `robots.txt` | For search engines, with hreflang alternates |
+| `llms.txt` | Plain-text summary of the site and projects for AI assistants ([llmstxt.org](https://llmstxt.org/)); keep it in step with the pages |
 | `scripts/prepare_images.py` | Builds `assets/img/` from the projects' `docs/images` |
 | `scripts/check_site.py` | Checks links, images, SEO tags, hreflang, JSON-LD and the sitemap |
 | `scripts/set_domain.py` | Switches all absolute URLs to a custom domain and writes `CNAME` |

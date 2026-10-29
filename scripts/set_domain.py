@@ -1,6 +1,6 @@
 """Switch the site to a custom domain (or back to skylolerr.github.io).
 
-Every absolute URL (canonical, hreflang, Open Graph, JSON-LD, sitemap, robots.txt)
+Every absolute URL (canonical, hreflang, Open Graph, JSON-LD, sitemap, robots.txt, llms.txt)
 contains the site origin. This script replaces the current origin with the new one
 in all those files and writes or removes the CNAME file that GitHub Pages reads.
 
@@ -16,7 +16,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DEFAULT = "skylolerr.github.io"
-FILES = ["**/*.html", "sitemap.xml", "robots.txt"]
+FILES = ["**/*.html", "sitemap.xml", "robots.txt", "llms.txt"]
 DOMAIN = re.compile(r"^(?=.{1,253}$)([a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$")
 
 

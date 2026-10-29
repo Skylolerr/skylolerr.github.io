@@ -1,0 +1,28 @@
+# Skylolerr
+
+> Free, open-source Home Assistant custom integrations by Skylolerr, installed with HACS: Energy Flow Mapper, a visual drag-and-drop editor for the Home Assistant energy dashboard, and Daily Challenge, quantity-based daily goals with streaks. Both need Home Assistant 2026.10.0 or newer, are MIT-licensed and translated into English, German, French and Italian.
+
+Every page exists in English and in German (under /de/). Each project page has requirements, installation steps (HACS button and custom repository), screenshots and a FAQ.
+
+## Projects
+
+- [Energy Flow Mapper](https://skylolerr.com/energy-flow-mapper/): Edits Home Assistant's own energy settings in a diagram instead of only displaying them. Assign grid import, grid export, solar, battery and water sources by drag and drop, nest devices under upstream devices ("included in"), see live power and energy per period including consumption that is not tracked individually, create meters (integral helpers) from power and flow sensors, and keep a backup before every save. Includes a read-only dashboard card for all users. Repository: https://github.com/Skylolerr/ha-energy-flow-mapper
+- [Daily Challenge](https://skylolerr.com/daily-challenge/): Tracks daily amounts such as 20 push-ups or 8 glasses of water, not yes/no habits. Streaks with a choice of rule, target vs. actual over the whole challenge, an optional catch-up mode for yesterday's deficit, a reminder blueprint, actions to correct past days, plain entities and its own dashboard card. Repository: https://github.com/Skylolerr/ha-daily-challenge
+
+## Install
+
+- Energy Flow Mapper in HACS: https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&repository=ha-energy-flow-mapper&category=integration
+- Daily Challenge in HACS: https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&repository=ha-daily-challenge&category=integration
+- Without the button: HACS → ⋮ → Custom repositories → the repository URL with the type Integration → Download → restart Home Assistant.
+
+## German
+
+- [Startseite](https://skylolerr.com/de/)
+- [Energy Flow Mapper (Deutsch)](https://skylolerr.com/de/energy-flow-mapper/)
+- [Daily Challenge (Deutsch)](https://skylolerr.com/de/daily-challenge/)
+
+## Optional
+
+- [Releases of Energy Flow Mapper](https://github.com/Skylolerr/ha-energy-flow-mapper/releases)
+- [Releases of Daily Challenge](https://github.com/Skylolerr/ha-daily-challenge/releases)
+- [Skylolerr on GitHub](https://github.com/Skylolerr)
