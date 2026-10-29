@@ -1107,6 +1107,46 @@ th {
   color: var(--muted);
 }
 
+/* Support box and coffee link */
+
+.support {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px 24px;
+  margin-top: 28px;
+  padding: 18px 22px;
+  border: 1px solid rgb(255 166 43 / 30%);
+  border-radius: var(--radius);
+  background: var(--warm-soft);
+}
+
+.support p {
+  margin: 0;
+  max-width: 40em;
+  color: var(--muted);
+}
+
+.support strong {
+  color: var(--text);
+}
+
+.btn-coffee svg {
+  color: var(--warm);
+}
+
+.coffee-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.coffee-link svg {
+  width: 15px;
+  height: 15px;
+}
+
 /* Footer */
 
 .site-footer {
