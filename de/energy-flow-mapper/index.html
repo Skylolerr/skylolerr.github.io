@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://skylolerr.com/energy-flow-mapper/">
   <link rel="alternate" hreflang="de" href="https://skylolerr.com/de/energy-flow-mapper/">
   <link rel="alternate" hreflang="x-default" href="https://skylolerr.com/energy-flow-mapper/">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#1161C4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F4A9B" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -127,13 +127,14 @@
   }
   </script>
 </head>
-<body>
+<body data-project="efm">
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="/de/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
       <nav class="site-nav" aria-label="Hauptmenü">
-        <a class="nav-hide-sm" href="/de/#projects">Projekte</a>
+        <a class="nav-wide" href="/de/energy-flow-mapper/" aria-current="page">Energy Flow Mapper</a>
+        <a class="nav-wide" href="/de/daily-challenge/">Daily Challenge</a>
         <a href="https://github.com/Skylolerr">GitHub</a>
         <span class="lang"><a href="/energy-flow-mapper/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/de/energy-flow-mapper/" hreflang="de" lang="de" aria-current="true" aria-label="Deutsch">DE</a></span>
       </nav>
@@ -141,87 +142,134 @@
   </header>
 
   <main id="main">
+    <div class="product-bar">
+      <div class="wrap">
+        <span class="product-name"><img src="/assets/img/efm/icon.png" alt="" width="28" height="28">Energy Flow Mapper</span>
+        <nav class="bar-nav" aria-label="Auf dieser Seite">
+          <a href="#features">Funktionen</a>
+          <a href="#install">Installation</a>
+          <a href="#faq">Fragen</a>
+          <a href="#links">Links</a>
+        </nav>
+        <a class="btn btn-white btn-small" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration">In HACS öffnen</a>
+      </div>
+    </div>
+
     <section class="hero">
       <div class="wrap">
-        <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
-          <ol><li><a href="/de/">Skylolerr</a></li><li aria-current="page">Energy Flow Mapper</li></ol>
-        </nav>
-        <div class="hero-grid">
-          <img class="app-icon" src="/assets/img/efm/icon.png" alt="" width="132" height="132">
-          <div>
-            <span class="eyebrow">Home-Assistant-Integration</span>
-            <h1>Energy Flow Mapper</h1>
-            <p class="lead"><strong>Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant.</strong> Keine weitere Energie-Karte: Energy Flow Mapper zeigt deine Energie-Konfiguration als Diagramm – Quellen oben, dein Zuhause in der Mitte, Geräte darunter – und du änderst sie per Drag and drop.</p>
-            <div class="actions">
-              <a class="btn btn-hacs" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a>
-              <a class="btn" href="https://github.com/Skylolerr/ha-energy-flow-mapper"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
-              <a class="btn" href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest">Neueste Version</a>
-            </div>
-            <ul class="chips"><li>Drag &amp; drop</li><li>Strom &amp; Wasser</li><li>Dashboard-Karte</li><li>Sicherungen</li></ul>
+        <div class="hero-copy">
+          <nav class="breadcrumb" aria-label="Brotkrümelnavigation">
+            <ol><li><a href="/de/">Skylolerr</a></li><li aria-current="page">Energy Flow Mapper</li></ol>
+          </nav>
+          <h1>Energy Flow Mapper</h1>
+          <p class="deck">Das Energie-Dashboard als Diagramm, das du bearbeiten kannst.</p>
+          <p class="lead">Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant. Keine weitere Energie-Karte: Energy Flow Mapper zeigt deine Energie-Konfiguration als Diagramm, mit den Quellen oben, deinem Zuhause in der Mitte und den Geräten darunter, und du änderst sie per Drag and drop.</p>
+          <div class="actions">
+            <a class="btn btn-node" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a>
+            <a class="btn btn-ghost" href="https://github.com/Skylolerr/ha-energy-flow-mapper"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
+            <a class="btn btn-ghost" href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest">Neueste Version</a>
           </div>
         </div>
-        <figure class="shot hero-shot">
+      </div>
+      <div class="hero-art">
+        <svg class="ribbons" viewBox="0 0 560 900" aria-hidden="true">
+          <g fill="none">
+            <path pathLength="100" d="M270 120 C270 330 90 340 90 700 V900" stroke="#fff" stroke-width="76"/>
+            <path pathLength="100" d="M300 120 C300 360 300 420 300 900" stroke="#CFE9FB" stroke-width="44"/>
+            <path pathLength="100" d="M336 120 C336 330 500 340 500 700 V900" stroke="#8FD3F5" stroke-width="24"/>
+          </g>
+          <rect x="190" y="84" width="220" height="56" rx="28" fill="#FFA62B"/>
+        </svg>
+        <svg class="ribbons-sm" viewBox="0 0 343 160" aria-hidden="true">
+          <g fill="none">
+            <path d="M160 30 C160 90 60 90 60 160" stroke="#fff" stroke-width="36"/>
+            <path d="M172 30 V160" stroke="#CFE9FB" stroke-width="22"/>
+            <path d="M186 30 C186 90 290 90 290 160" stroke="#8FD3F5" stroke-width="12"/>
+          </g>
+          <rect x="112" y="8" width="120" height="32" rx="16" fill="#FFA62B"/>
+        </svg>
+      </div>
+      <div class="wrap">
+        <figure class="overhang">
           <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/diagram-dark-800.webp 800w, /assets/img/efm/diagram-dark.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw">
-            <img src="/assets/img/efm/diagram-light.webp" srcset="/assets/img/efm/diagram-light-800.webp 800w, /assets/img/efm/diagram-light.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw" alt="Das Panel von Energy Flow Mapper: Quellen oben, Zuhause in der Mitte, Geräte darunter, freie Sensoren links und Details rechts" width="1600" height="780" fetchpriority="high">
+            <source media="(max-width: 1099px) and (prefers-color-scheme: dark)" srcset="/assets/img/efm/flow-dark.webp" width="922" height="582">
+            <source media="(max-width: 1099px)" srcset="/assets/img/efm/flow-light.webp" width="922" height="582">
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/diagram-dark-800.webp 800w, /assets/img/efm/diagram-dark.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw">
+            <img src="/assets/img/efm/diagram-light.webp" srcset="/assets/img/efm/diagram-light-800.webp 800w, /assets/img/efm/diagram-light.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="Das Panel von Energy Flow Mapper: Quellen oben, Zuhause in der Mitte, Geräte darunter, freie Sensoren links und Details rechts" width="1600" height="780" fetchpriority="high">
           </picture>
           <figcaption>Das Panel in Home Assistant: Netz, Solar und Batterie oben, das Zuhause in der Mitte, Geräte und Untergeräte darunter, freie Sensoren links. Die Bilder zeigen die englische Oberfläche; das Panel gibt es auch auf Deutsch.</figcaption>
         </figure>
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="demo-title">
-      <div class="wrap">
-        <h2 id="demo-title">So sieht es aus</h2>
-        <div class="grid-2">
+    <section class="section after-hero" aria-labelledby="demo-title">
+      <div class="wrap split split-4-8">
+        <div class="sticky">
+          <h2 id="demo-title">Ziehen, ablegen, Zeitraum wechseln</h2>
+          <p class="muted">Leistung jetzt oder die Energie von heute, 7 oder 30 Tagen. Geschrieben wird erst, wenn du Speichern wählst.</p>
+        </div>
+        <div class="stack">
           <figure class="shot">
-            <img src="/assets/img/efm/periods.webp" alt="Wechsel zwischen jetzt, heute, 7 Tagen und 30 Tagen: Werte und Pfeilbreiten passen sich an" width="922" height="582" loading="lazy">
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/efm/periods-still.webp">
+              <img src="/assets/img/efm/periods.webp" alt="Wechsel zwischen jetzt, heute, 7 Tagen und 30 Tagen: Werte und Pfeilbreiten passen sich an" width="922" height="582" loading="lazy">
+            </picture>
             <figcaption><b>Live und pro Zeitraum.</b> Leistung jetzt oder die Energie von heute, 7 oder 30 Tagen – die Pfeilbreite folgt dem Wert.</figcaption>
           </figure>
           <figure class="shot">
-            <img src="/assets/img/efm/drag.webp" alt="Die Kaffeemaschine wird auf Office gezogen; die möglichen Ziele leuchten auf" width="922" height="582" loading="lazy">
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/efm/drag-still.webp">
+              <img src="/assets/img/efm/drag.webp" alt="Die Kaffeemaschine wird auf Office gezogen; die möglichen Ziele leuchten auf" width="922" height="582" loading="lazy">
+            </picture>
             <figcaption><b>Drag and drop.</b> Zieh ein Gerät auf ein anderes, um es dort einzuordnen; gültige Ziele leuchten auf.</figcaption>
           </figure>
+          <figure class="shot">
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/efm/tabs-still.webp">
+              <img src="/assets/img/efm/tabs.webp" alt="Wechsel vom Tab Strom zum Tab Wasser und zurück" width="946" height="486" loading="lazy">
+            </picture>
+            <figcaption><b>Strom und Wasser.</b> Jedes hat einen eigenen Tab mit eigenen Geräten, Zählern und freien Sensoren.</figcaption>
+          </figure>
         </div>
-        <figure class="shot" style="margin-top:28px">
-          <img src="/assets/img/efm/tabs.webp" alt="Wechsel vom Tab Strom zum Tab Wasser und zurück" width="946" height="486" loading="lazy">
-          <figcaption><b>Strom und Wasser.</b> Jedes hat einen eigenen Tab mit eigenen Geräten, Zählern und freien Sensoren.</figcaption>
-        </figure>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="features-title">
+    <section class="section tint" id="features" aria-labelledby="features-title">
       <div class="wrap">
-        <h2 id="features-title">Funktionen</h2>
-        <div class="features">
-          <div class="feature">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span>
-            <h3>Alles im Blick</h3>
-            <ul>
-              <li><strong>Diagramm deines Energie-Dashboards</strong> – Quellen, Zuhause und Geräte, automatisch angeordnet; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
-              <li><strong>Leistung live und Energie pro Zeitraum</strong> – jetzt, heute, 7 oder 30 Tage, inklusive dem, was nicht einzeln erfasst ist.</li>
+        <h2 class="heading-center" id="features-title">Sehen, ändern, überall nutzen</h2>
+        <svg class="tree" viewBox="0 0 1160 96" preserveAspectRatio="none" aria-hidden="true">
+          <g fill="none">
+            <path d="M580 0 C580 60 193 40 193 96" stroke="var(--bar-solar)" stroke-width="6" vector-effect="non-scaling-stroke"/>
+            <path d="M580 0 V96" stroke="var(--bar-discharge)" stroke-width="4" vector-effect="non-scaling-stroke"/>
+            <path d="M580 0 C580 60 967 40 967 96" stroke="var(--bar-export)" stroke-width="3" vector-effect="non-scaling-stroke"/>
+          </g>
+        </svg>
+        <div class="feature-cols">
+          <div>
+            <div class="node-lg node-solar"><h3>Alles im Blick</h3></div>
+            <ul class="feature-list">
+              <li><strong class="lead-in">Diagramm deines Energie-Dashboards</strong>Quellen, Zuhause und Geräte, automatisch angeordnet; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
+              <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, inklusive dem, was nicht einzeln erfasst ist.</li>
               <li><strong>Plausibilitätswarnungen</strong>, wenn Untergeräte deutlich mehr verbraucht haben als ihr übergeordnetes Gerät – meist eine falsche Zuordnung.</li>
               <li><strong>Gerät suchen</strong> in grossen Diagrammen.</li>
             </ul>
           </div>
-          <div class="feature">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4.5 6v5.5c0 4.6 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.9 7.5-9.5V6L12 3Z"/><path d="m8.8 12.2 2.2 2.2 4.3-4.4"/></svg></span>
-            <h3>Sicher ändern</h3>
-            <ul>
-              <li><strong>Drag and drop</strong> (oder das Menü ⋮ auf dem Handy) – ein Gerät in ein anderes einordnen, umbenennen oder entfernen.</li>
-              <li><strong>Quellen</strong> – einen Sensor auf Netzbezug, Netzeinspeisung, Solar, Batterie oder Wasser ziehen. Preise bleiben, wie sie sind.</li>
-              <li><strong>Freie Sensoren</strong> – Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt.</li>
-              <li><strong>Zähler anlegen</strong> – macht aus einem Leistungs- oder Durchflusssensor einen gewöhnlichen Integral-Helfer.</li>
-              <li><strong>Entwurf, Prüfung, Speichern</strong> – mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben.</li>
+          <div>
+            <div class="node-lg node-discharge"><h3>Sicher ändern</h3></div>
+            <ul class="feature-list">
+              <li><strong class="lead-in">Drag and drop (oder das Menü ⋮ auf dem Handy)</strong>Ein Gerät in ein anderes einordnen, umbenennen oder entfernen.</li>
+              <li><strong class="lead-in">Quellen</strong>Einen Sensor auf Netzbezug, Netzeinspeisung, Solar, Batterie oder Wasser ziehen. Preise bleiben, wie sie sind.</li>
+              <li><strong class="lead-in">Freie Sensoren</strong>Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt.</li>
+              <li><strong class="lead-in">Zähler anlegen</strong>Macht aus einem Leistungs- oder Durchflusssensor einen gewöhnlichen Integral-Helfer.</li>
+              <li><strong class="lead-in">Entwurf, Prüfung, Speichern</strong>Mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben.</li>
             </ul>
           </div>
-          <div class="feature">
-            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="14" height="10" rx="2"/><path d="M6 18h6M9 14v4"/><rect x="17.5" y="8" width="4.5" height="12" rx="1.3"/></svg></span>
-            <h3>Überall</h3>
-            <ul>
-              <li><strong>Dashboard-Karte</strong> – derselbe Baum, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
-              <li><strong>Tab Wasser</strong> – Liter und m³, mit US-Einheiten Gallonen.</li>
-              <li><strong>Sicherungen, Export und Import</strong> – jeden früheren Stand wiederherstellen oder eine Kopie anderswo aufbewahren.</li>
+          <div>
+            <div class="node-lg node-export"><h3>Überall</h3></div>
+            <ul class="feature-list">
+              <li><strong class="lead-in">Dashboard-Karte</strong>Derselbe Baum, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
+              <li><strong class="lead-in">Tab Wasser</strong>Liter und m³, mit US-Einheiten Gallonen.</li>
+              <li><strong class="lead-in">Sicherungen, Export und Import</strong>Jeden früheren Stand wiederherstellen oder eine Kopie anderswo aufbewahren.</li>
               <li><strong>Deutsch, Englisch, Französisch und Italienisch</strong>, helles und dunkles Design, Handy-Layout.</li>
             </ul>
           </div>
@@ -229,31 +277,33 @@
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="card-title">
+    <section class="section band-ink" aria-labelledby="card-title">
       <div class="wrap">
-        <h2 id="card-title">Dashboard-Karte</h2>
-        <p class="narrow">Die Karte zeigt den Gerätebaum von Strom oder Wasser auf einem beliebigen Dashboard. Sie zeigt nur an – bearbeitet wird im Panel – und alle, die das Dashboard sehen, sehen auch die Karte, wie beim Energie-Dashboard von Home Assistant. Tippe auf ein Gerät, um seinen Verlauf zu öffnen. Hinzufügen im Dashboard-Editor: <em>Karte hinzufügen</em> → <strong>Energy Flow Mapper</strong>; eine Ressource musst du nicht anlegen.</p>
+        <div class="split split-5-7">
+          <h2 id="card-title">Eine Nur-Lesen-Karte für jedes Dashboard</h2>
+          <p>Die Karte zeigt den Gerätebaum von Strom oder Wasser auf einem beliebigen Dashboard. Sie zeigt nur an – bearbeitet wird im Panel – und alle, die das Dashboard sehen, sehen auch die Karte, wie beim Energie-Dashboard von Home Assistant. Tippe auf ein Gerät, um seinen Verlauf zu öffnen. Hinzufügen im Dashboard-Editor: <em>Karte hinzufügen</em> → <strong>Energy Flow Mapper</strong>; eine Ressource musst du nicht anlegen.</p>
+        </div>
         <figure class="shot">
-          <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/card-dark-800.webp 800w, /assets/img/efm/card-dark.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw">
-            <img src="/assets/img/efm/card-light.webp" srcset="/assets/img/efm/card-light-800.webp 800w, /assets/img/efm/card-light.webp 1600w" sizes="(min-width: 1120px) 1064px, 100vw" alt="Zwei Dashboard-Karten: der Energiefluss von 30 Tagen und der Wasserfluss jetzt" width="1600" height="480" loading="lazy">
-          </picture>
+          <img src="/assets/img/efm/card-dark.webp" srcset="/assets/img/efm/card-dark-800.webp 800w, /assets/img/efm/card-dark.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="Zwei Dashboard-Karten: der Energiefluss von 30 Tagen und der Wasserfluss jetzt" width="1600" height="480" loading="lazy">
         </figure>
-        <p style="margin-top:24px">In YAML:</p>
-        <pre><code>type: custom:energy-flow-mapper-card
+        <div class="yaml">
+          <p>In YAML:</p>
+          <pre><code>type: custom:energy-flow-mapper-card
 kind: electricity      # oder water
 period: today          # now, today, week oder month
 root: sensor.kitchen_energy   # optional: nur dieses Gerät und alles darunter
 title: Küche           # optional; ein leerer Titel blendet die Kopfzeile aus
 show_sources: true     # Quellen über dem Zuhause (nicht mit root)
 show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code></pre>
+        </div>
       </div>
     </section>
 
     <section class="section" aria-labelledby="shots-title">
       <div class="wrap">
-        <h2 id="shots-title">Screenshots</h2>
-        <div class="grid-2">
+        <h2 id="shots-title">Mehr vom Panel</h2>
+      </div>
+      <div class="strip" role="region" tabindex="0" aria-label="Screenshots, seitlich scrollen">
           <figure class="shot">
             <img src="/assets/img/efm/period.webp" alt="30 Tage mit Verbrauch, der nicht einzeln erfasst ist, und einer Plausibilitätswarnung" width="1200" height="585" loading="lazy">
             <figcaption><b>30 Tage:</b> Energie pro Gerät, was nicht einzeln erfasst ist, und eine Warnung.</figcaption>
@@ -270,36 +320,37 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
             <img src="/assets/img/efm/water-dark.webp" alt="Der Tab Wasser über 30 Tage in Litern und Kubikmetern" width="1200" height="480" loading="lazy">
             <figcaption><b>Wasser, 30 Tage:</b> Liter und m³ pro Gerät.</figcaption>
           </figure>
-        </div>
-        <div class="phones" style="margin-top:28px">
           <figure class="shot">
             <img src="/assets/img/efm/phone-dark.webp" alt="Das Panel auf dem Handy, dunkles Design" width="412" height="640" loading="lazy">
           </figure>
           <figure class="shot">
             <img src="/assets/img/efm/phone-light.webp" alt="Das Panel auf dem Handy, helles Design, 7 Tage" width="412" height="640" loading="lazy">
           </figure>
-        </div>
-        <p class="meta" style="text-align:center;margin-top:16px">Die Screenshots zeigen einen Demo-Haushalt.</p>
+      </div>
+      <div class="wrap">
+        <p class="small muted strip-note">Die Screenshots zeigen einen Demo-Haushalt.</p>
       </div>
     </section>
 
-    <section class="section section-alt" id="install" aria-labelledby="install-title">
-      <div class="wrap narrow">
-        <h2 id="install-title">Voraussetzungen und Installation</h2>
-        <div class="note warm"><p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Jedes Speichern legt eine Sicherung deiner bisherigen Energie-Einstellungen an, du kannst also immer zurück.</p></div>
-        <h3>Voraussetzungen</h3>
-        <ul>
-          <li>Home Assistant <strong>2026.10.0</strong> oder neuer, mit dem Energie-Dashboard (Teil der Standardkonfiguration).</li>
-          <li><a href="https://hacs.xyz/">HACS</a> für die Installation (oder eine manuelle Kopie, siehe unten).</li>
-          <li>Ein Admin-Konto für das Panel. Die Dashboard-Karte funktioniert für alle.</li>
-        </ul>
-        <h3>Installation</h3>
+    <section class="section tint" id="install" aria-labelledby="install-title">
+      <div class="wrap split split-5-7">
+        <div class="install-side sticky">
+          <h2 id="install-title">In vier Schritten installiert</h2>
+          <div class="note"><p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Jedes Speichern legt eine Sicherung deiner bisherigen Energie-Einstellungen an, du kannst also immer zurück.</p></div>
+          <h3>Voraussetzungen</h3>
+          <ul>
+                    <li>Home Assistant <strong>2026.10.0</strong> oder neuer, mit dem Energie-Dashboard (Teil der Standardkonfiguration).</li>
+                    <li><a href="https://hacs.xyz/">HACS</a> für die Installation (oder eine manuelle Kopie, siehe unten).</li>
+                    <li>Ein Admin-Konto für das Panel. Die Dashboard-Karte funktioniert für alle.</li>
+                  </ul>
+          <p><strong>Manuelle Installation:</strong> kopiere <code>custom_components/energy_flow_mapper</code> aus der <a href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest">neuesten Version</a> in den Ordner <code>custom_components</code> deiner Home-Assistant-Konfiguration und starte Home Assistant neu.</p>
+        </div>
         <ol class="steps">
           <li>
             <h3>In HACS hinzufügen</h3>
             <p>Klicke auf <strong>In HACS öffnen</strong> – My Home Assistant öffnet das Repository in deinem eigenen Home Assistant – und wähle <strong>Herunterladen</strong>.</p>
-            <p><a class="btn btn-hacs" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a></p>
-            <p>Oder füge es von Hand als benutzerdefiniertes Repository hinzu:</p>
+            <p><a class="btn btn-solid" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-energy-flow-mapper&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a></p>
+            <p class="by-hand">Oder füge es von Hand als benutzerdefiniertes Repository hinzu:</p>
             <ol>
               <li>Öffne <strong>HACS</strong> in der Seitenleiste.</li>
               <li>Öffne oben rechts das Menü <strong>⋮</strong> und wähle <strong>Benutzerdefinierte Repositories</strong>.</li>
@@ -314,20 +365,22 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
           <li>
             <h3>Einrichten</h3>
             <p>Einstellungen → Geräte &amp; Dienste → <strong>Integration hinzufügen</strong> → <strong>Energy Flow Mapper</strong>, oder über den Knopf. Das Einrichten selbst ändert deine Energie-Einstellungen nicht.</p>
-            <p><a class="btn" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=energy_flow_mapper">Energy Flow Mapper einrichten</a></p>
+            <p><a class="btn btn-line" href="https://my.home-assistant.io/redirect/config_flow_start/?domain=energy_flow_mapper">Energy Flow Mapper einrichten</a></p>
           </li>
           <li>
             <h3>Panel öffnen</h3>
             <p><strong>Energy Flow Mapper</strong> erscheint für Admins in der Seitenleiste. Geschrieben wird erst, wenn du <strong>Speichern</strong> wählst.</p>
           </li>
         </ol>
-        <p><strong>Manuelle Installation:</strong> kopiere <code>custom_components/energy_flow_mapper</code> aus der <a href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases/latest">neuesten Version</a> in den Ordner <code>custom_components</code> deiner Home-Assistant-Konfiguration und starte Home Assistant neu.</p>
       </div>
     </section>
 
     <section class="section" id="faq" aria-labelledby="faq-title">
-      <div class="wrap narrow">
-        <h2 id="faq-title">Häufige Fragen</h2>
+      <div class="wrap split split-4-8">
+        <div class="sticky">
+          <h2 id="faq-title">Häufige Fragen</h2>
+          <p class="muted">Nicht dabei? <a href="https://github.com/Skylolerr/ha-energy-flow-mapper/issues">Eröffne ein Issue auf GitHub.</a></p>
+        </div>
         <div class="faq">
           <details>
             <summary><h3>Wie füge ich Geräte zum Energie-Dashboard von Home Assistant hinzu?</h3></summary>
@@ -373,29 +426,56 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="links-title">
-      <div class="wrap">
-        <h2 id="links-title">Links</h2>
-        <ul class="link-list">
-          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper"><b>GitHub-Repository</b><span>Quellcode und vollständige Dokumentation (Englisch)</span></a></li>
-          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases"><b>Versionen</b><span>Download und Versionshinweise</span></a></li>
-          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/issues"><b>Issues</b><span>Fehler melden oder Funktion vorschlagen</span></a></li>
-          <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/blob/main/CHANGELOG.md"><b>Changelog</b><span>Was sich in jeder Version geändert hat</span></a></li>
-        </ul>
+    <section class="close" id="links" aria-labelledby="links-title">
+      <div class="wrap split split-7-5">
+        <div>
+          <h2 id="links-title">Code, Versionen und Issues</h2>
+          <ul class="link-rows">
+            <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper"><b>GitHub-Repository</b><span>Quellcode und vollständige Dokumentation (Englisch)</span></a></li>
+            <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/releases"><b>Versionen</b><span>Download und Versionshinweise</span></a></li>
+            <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/issues"><b>Issues</b><span>Fehler melden oder Funktion vorschlagen</span></a></li>
+            <li><a href="https://github.com/Skylolerr/ha-energy-flow-mapper/blob/main/CHANGELOG.md"><b>Changelog</b><span>Was sich in jeder Version geändert hat</span></a></li>
+          </ul>
+        </div>
         <div class="support">
           <p><strong>Gefällt dir Energy Flow Mapper?</strong> Er ist gratis und Open Source. Wenn er dir Zeit spart, kannst du die Weiterentwicklung mit einem Kaffee unterstützen.</p>
           <a class="btn btn-coffee" href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Spendier mir einen Kaffee</a>
         </div>
-        <p class="meta" style="margin-top:24px">Auch von Skylolerr: <a href="/de/daily-challenge/">Daily Challenge</a> – Tagesziele mit Streaks für Home Assistant.</p>
       </div>
     </section>
+
+    <a class="cross" href="/de/daily-challenge/">
+      <div class="wrap">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="/assets/img/dc/icon-dark.png">
+          <img src="/assets/img/dc/icon-light.png" alt="" width="64" height="64" loading="lazy">
+        </picture>
+        <span class="cross-text">
+          <span class="small">Auch von Skylolerr</span>
+          <span class="cross-name">Daily Challenge</span>
+          <span>Tagesziele mit Streaks für Home Assistant.</span>
+        </span>
+        <span class="cross-arrow" aria-hidden="true">→</span>
+      </div>
+    </a>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">
-      <p>© 2026 Skylolerr · Projekte unter der MIT-Lizenz · <a href="https://github.com/Skylolerr">GitHub</a> · <a class="coffee-link" href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Spendier mir einen Kaffee</a></p>
-      <p>Keine Cookies, keine Statistik, kein Tracking.</p>
-      <p>Kein offizielles Projekt von Home Assistant, der Open Home Foundation oder HACS und nicht mit ihnen verbunden.</p>
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="/de/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
+        <p class="small">© 2026 Skylolerr · Projekte unter der MIT-Lizenz</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="/de/energy-flow-mapper/">Energy Flow Mapper</a></li>
+        <li><a href="/de/daily-challenge/">Daily Challenge</a></li>
+        <li><a href="https://github.com/Skylolerr">GitHub</a></li>
+        <li><a href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Spendier mir einen Kaffee</a></li>
+      </ul>
+      <div class="small">
+        <p>Keine Cookies, keine Statistik, kein Tracking.</p>
+        <p>Kein offizielles Projekt von Home Assistant, der Open Home Foundation oder HACS und nicht mit ihnen verbunden.</p>
+      </div>
     </div>
   </footer>
 </body>
