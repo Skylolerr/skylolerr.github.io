@@ -9,8 +9,8 @@
   <link rel="alternate" hreflang="en" href="https://skylolerr.com/">
   <link rel="alternate" hreflang="de" href="https://skylolerr.com/de/">
   <link rel="alternate" hreflang="x-default" href="https://skylolerr.com/">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#1161C4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F4A9B" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -59,13 +59,14 @@
   }
   </script>
 </head>
-<body>
+<body data-project="efm">
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="/de/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
       <nav class="site-nav" aria-label="Hauptmenü">
-        <a class="nav-hide-sm" href="/de/#projects">Projekte</a>
+        <a class="nav-wide" href="/de/energy-flow-mapper/">Energy Flow Mapper</a>
+        <a class="nav-wide" href="/de/daily-challenge/">Daily Challenge</a>
         <a href="https://github.com/Skylolerr">GitHub</a>
         <span class="lang"><a href="/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/de/" hreflang="de" lang="de" aria-current="true" aria-label="Deutsch">DE</a></span>
       </nav>
@@ -75,95 +76,137 @@
   <main id="main">
     <section class="hero hero-home">
       <div class="wrap">
-        <div class="hero-grid">
-          <div>
-            <h1>Home-Assistant-Integrationen von <span class="grad-text">Skylolerr</span></h1>
-            <p class="lead">Kostenlose Open-Source-Integrationen für Home Assistant: ein visueller Editor für das Energie-Dashboard und tägliche Challenges mit Streaks.</p>
-            <div class="actions">
-              <a class="btn btn-primary" href="#projects">Zu den Projekten</a>
-              <a class="btn" href="https://github.com/Skylolerr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>Skylolerr auf GitHub</a>
-            </div>
-            <ul class="hero-stats"><li>Gratis und Open Source</li><li>Installiert mit HACS</li><li>Deutsch, Englisch, Französisch, Italienisch</li></ul>
+        <div class="hero-copy">
+          <h1><span class="kicker">Home-Assistant-Integrationen von Skylolerr</span>Bearbeite dein Energie-Dashboard. Zähl deine Tagesziele.</h1>
+          <p class="lead">Zwei kostenlose Open-Source-Integrationen: ein visueller Editor für das Energie-Dashboard und Tagesziele mit Streaks. Beide installierst du mit HACS.</p>
+          <div class="actions">
+            <a class="btn btn-node" href="/de/energy-flow-mapper/">Energy Flow Mapper</a>
+            <a class="btn btn-white" href="/de/daily-challenge/">Daily Challenge</a>
+            <a class="btn btn-ghost" href="https://github.com/Skylolerr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
           </div>
-          <div class="showcase" aria-hidden="true">
-            <div class="window">
+          <p class="small">Gratis und Open Source. Deutsch, Englisch, Französisch und Italienisch.</p>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg class="hero-s" viewBox="0 0 900 960" preserveAspectRatio="xMaxYMin slice" aria-hidden="true">
+          <path d="M770 130 H290 L130 290 V373 L258 501 H642 L770 629 V960" fill="none" stroke="#18BCF2" stroke-width="112" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="770" cy="130" r="104" fill="#FFA62B"/>
+          <circle cx="770" cy="130" r="40" fill="#fff"/>
+        </svg>
+      </div>
+    </section>
+
+    <div id="projects">
+      <section class="home-efm" aria-labelledby="efm-title">
+        <div class="trace-run" aria-hidden="true"></div>
+        <svg class="trace-out" viewBox="0 0 1440 640" aria-hidden="true">
+          <path d="M1000 0 V480 L920 560 H400 L340 620 V640" fill="none" stroke="var(--trace-ground)" stroke-width="44" stroke-linejoin="round"/>
+        </svg>
+        <div class="wrap">
+          <div class="grid">
+            <div class="copy">
+              <h2 id="efm-title">Energy Flow Mapper</h2>
+              <p class="claim">Energie-Karten zeigen dein Dashboard. Dieser Editor ändert es.</p>
+              <p class="muted">Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant. Netz, Solar, Batterie, Geräte und Untergeräte als Diagramm, für Strom und Wasser, und sicher ändern, mit einer Sicherung vor jedem Speichern.</p>
+              <ul class="nodes">
+              <li>Drag &amp; drop</li>
+              <li>Strom &amp; Wasser</li>
+              <li>Dashboard-Karte</li>
+              </ul>
+              <p class="small muted">Home Assistant 2026.10 oder neuer · MIT-Lizenz · Beta</p>
+              <div class="actions">
+                <a class="btn btn-solid" href="/de/energy-flow-mapper/">Energy Flow Mapper ansehen</a>
+                <a class="btn btn-line" href="https://github.com/Skylolerr/ha-energy-flow-mapper">GitHub</a>
+              </div>
+            </div>
+            <figure class="overhang-home">
               <picture>
-                <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/diagram-dark-800.webp">
-                <img src="/assets/img/efm/diagram-light-800.webp" alt="" width="800" height="390" fetchpriority="high">
+                <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/flow-dark.webp">
+                <img src="/assets/img/efm/flow-light.webp" alt="Das Panel von Energy Flow Mapper: Quellen oben, Zuhause in der Mitte, Geräte darunter" width="922" height="582" fetchpriority="high">
               </picture>
-            </div>
-            <img class="float-card" src="/assets/img/dc/buttons.webp" alt="" width="475" height="562">
+            </figure>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="section section-alt" id="projects" aria-labelledby="projects-title">
-      <div class="wrap">
-        <h2 id="projects-title">Projekte</h2>
-        <div class="projects">
-          <article class="project-card">
-            <a href="/de/energy-flow-mapper/" tabindex="-1" aria-hidden="true">
-              <picture class="banner">
-                <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/banner-dark.webp">
-                <img src="/assets/img/efm/banner-light.webp" alt="" width="1200" height="300">
-              </picture>
-            </a>
-            <div class="body">
-              <h3><a href="/de/energy-flow-mapper/">Energy Flow Mapper</a></h3>
-              <p>Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant. Netz, Solar, Batterie, Geräte und Untergeräte als Diagramm – für Strom und Wasser – und sicher ändern, mit einer Sicherung vor jedem Speichern.</p>
-              <ul class="chips"><li>Drag &amp; drop</li><li>Strom &amp; Wasser</li><li>Dashboard-Karte</li></ul>
-              <p class="meta">Home Assistant 2026.10 oder neuer · MIT-Lizenz · Beta</p>
-              <div class="actions">
-                <a class="btn btn-primary" href="/de/energy-flow-mapper/">Mehr erfahren</a>
-                <a class="btn" href="https://github.com/Skylolerr/ha-energy-flow-mapper">GitHub</a>
-              </div>
+      <section class="home-dc" aria-labelledby="dc-title">
+        <svg class="ring-stage" viewBox="0 0 1440 800" aria-hidden="true">
+          <defs>
+            <linearGradient id="trace-ring" gradientUnits="userSpaceOnUse" x1="760" y1="0" x2="1400" y2="0">
+              <stop offset="0" stop-color="#fff"/>
+              <stop offset="1" stop-color="#FFD35C"/>
+            </linearGradient>
+          </defs>
+          <circle cx="1072" cy="404" r="324" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="44"/>
+          <path class="ring-draw" pathLength="100" d="M340 0 V20 L400 80 H1072 A324 324 0 1 1 748 404" fill="none" stroke="url(#trace-ring)" stroke-width="44" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+        <picture>
+          <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/buttons-still.webp">
+          <img class="ring-card" src="/assets/img/dc/buttons.webp" alt="Ein Tipp auf +5 füllt den Ring und erreicht das Tagesziel; Rückgängig in der Meldung nimmt es zurück" width="475" height="562" loading="lazy">
+        </picture>
+        <div class="wrap">
+          <figure class="ring-sm">
+            <svg viewBox="0 0 640 640" aria-hidden="true">
+              <circle cx="320" cy="320" r="288" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="40"/>
+              <path d="M-800 32 H320 A288 288 0 1 1 32 320" fill="none" stroke="#fff" stroke-width="40" stroke-linecap="round"/>
+            </svg>
+            <picture>
+              <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/buttons-still.webp">
+              <img src="/assets/img/dc/buttons.webp" alt="Ein Tipp auf +5 füllt den Ring und erreicht das Tagesziel; Rückgängig in der Meldung nimmt es zurück" width="475" height="562" loading="lazy">
+            </picture>
+          </figure>
+          <div class="copy">
+            <h2 id="dc-title">Daily Challenge</h2>
+            <p class="claim">20 Liegestütze sind eine Zahl, kein Häkchen.</p>
+            <p>Zählbare Tagesziele für Home Assistant: 20 Liegestütze, 30 Minuten lesen, 8 Gläser Wasser. Mit Streaks, Soll und Ist, optionalem Aufholmodus und einer eigenen Dashboard-Karte.</p>
+            <ul class="nodes">
+              <li>Streaks</li>
+              <li>Aufholmodus</li>
+              <li>Dashboard-Karte</li>
+            </ul>
+            <p class="small">Home Assistant 2026.10 oder neuer · MIT-Lizenz · Beta</p>
+            <div class="actions">
+              <a class="btn btn-white" href="/de/daily-challenge/">Daily Challenge ansehen</a>
+              <a class="btn btn-ghost" href="https://github.com/Skylolerr/ha-daily-challenge">GitHub</a>
             </div>
-          </article>
-          <article class="project-card">
-            <a href="/de/daily-challenge/" tabindex="-1" aria-hidden="true">
-              <picture class="banner">
-                <source media="(prefers-color-scheme: dark)" srcset="/assets/img/dc/banner-dark.webp">
-                <img src="/assets/img/dc/banner-light.webp" alt="" width="1200" height="300">
-              </picture>
-            </a>
-            <div class="body">
-              <h3><a href="/de/daily-challenge/">Daily Challenge</a></h3>
-              <p>Zählbare Tagesziele für Home Assistant – 20 Liegestütze, 30 Minuten lesen, 8 Gläser Wasser. Mit Streaks, Soll und Ist, optionalem Aufholmodus und einer eigenen Dashboard-Karte.</p>
-              <ul class="chips warm"><li>Streaks</li><li>Aufholmodus</li><li>Dashboard-Karte</li></ul>
-              <p class="meta">Home Assistant 2026.10 oder neuer · MIT-Lizenz · Beta</p>
-              <div class="actions">
-                <a class="btn btn-primary" href="/de/daily-challenge/">Mehr erfahren</a>
-                <a class="btn" href="https://github.com/Skylolerr/ha-daily-challenge">GitHub</a>
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <section class="section" aria-labelledby="install-title">
-      <div class="wrap narrow">
-        <h2 id="install-title">Installation</h2>
-        <p>Alle Projekte werden mit <a href="https://hacs.xyz/">HACS</a> installiert, dem Home Assistant Community Store. Jede Projektseite hat einen Knopf <strong>In HACS öffnen</strong>, der über <a href="https://my.home-assistant.io/">My Home Assistant</a> das richtige Repository in deinem eigenen Home Assistant öffnet. Findet HACS ein Projekt nicht über den Namen, fügst du es als benutzerdefiniertes Repository hinzu – die Schritte stehen auf jeder Projektseite.</p>
-        <p>Die Projekte brauchen Home Assistant <strong>2026.10.0</strong> oder neuer und werden mit der aktuellen Version getestet.</p>
-      </div>
-    </section>
-
-    <section class="section section-alt" aria-labelledby="about-title">
-      <div class="wrap narrow">
-        <h2 id="about-title">Über</h2>
-        <p>Skylolerr entwickelt Home-Assistant-Integrationen für Alltagsprobleme zu Hause und veröffentlicht sie als Open Source. Jedes Projekt hat Tests, Übersetzungen in Deutsch, Englisch, Französisch und Italienisch, ein helles und ein dunkles Design und ein Changelog für jede Version. Bei einem Update gehen keine Daten verloren: gespeicherte Daten werden migriert, und Energy Flow Mapper legt vor jeder Änderung eine Sicherung an.</p>
-        <p>Einen Fehler gefunden oder eine Idee? Eröffne ein Issue im GitHub-Repository des Projekts – Fragen, Übersetzungen und Pull Requests sind willkommen.</p>
+    <section class="section tint">
+      <div class="wrap info-grid">
+        <div aria-labelledby="install-title">
+          <h2 id="install-title">Installation</h2>
+          <p>Alle Projekte werden mit <a href="https://hacs.xyz/">HACS</a> installiert, dem Home Assistant Community Store. Jede Projektseite hat einen Knopf <strong>In HACS öffnen</strong>, der über <a href="https://my.home-assistant.io/">My Home Assistant</a> das richtige Repository in deinem eigenen Home Assistant öffnet. Findet HACS ein Projekt nicht über den Namen, fügst du es als benutzerdefiniertes Repository hinzu; die Schritte stehen auf jeder Projektseite.</p>
+          <p class="info-line">Home Assistant 2026.10.0 oder neuer</p>
+          <p class="muted">Getestet mit der aktuellen Version.</p>
+        </div>
+        <div aria-labelledby="about-title">
+          <h2 id="about-title">Über Skylolerr</h2>
+          <p>Skylolerr entwickelt Home-Assistant-Integrationen für Alltagsprobleme zu Hause und veröffentlicht sie als Open Source. Jedes Projekt hat Tests, Übersetzungen in Deutsch, Englisch, Französisch und Italienisch, ein helles und ein dunkles Design und ein Changelog für jede Version. Bei einem Update gehen keine Daten verloren: gespeicherte Daten werden migriert, und Energy Flow Mapper legt vor jeder Änderung eine Sicherung an.</p>
+          <p>Einen Fehler gefunden oder eine Idee? Eröffne ein Issue im GitHub-Repository des Projekts – Fragen, Übersetzungen und Pull Requests sind willkommen.</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">
-      <p>© 2026 Skylolerr · Projekte unter der MIT-Lizenz · <a href="https://github.com/Skylolerr">GitHub</a> · <a class="coffee-link" href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Spendier mir einen Kaffee</a></p>
-      <p>Keine Cookies, keine Statistik, kein Tracking.</p>
-      <p>Kein offizielles Projekt von Home Assistant, der Open Home Foundation oder HACS und nicht mit ihnen verbunden.</p>
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="/de/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
+        <p class="small">© 2026 Skylolerr · Projekte unter der MIT-Lizenz</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="/de/energy-flow-mapper/">Energy Flow Mapper</a></li>
+        <li><a href="/de/daily-challenge/">Daily Challenge</a></li>
+        <li><a href="https://github.com/Skylolerr">GitHub</a></li>
+        <li><a href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Spendier mir einen Kaffee</a></li>
+      </ul>
+      <div class="small">
+        <p>Keine Cookies, keine Statistik, kein Tracking.</p>
+        <p>Kein offizielles Projekt von Home Assistant, der Open Home Foundation oder HACS und nicht mit ihnen verbunden.</p>
+      </div>
     </div>
   </footer>
 </body>
