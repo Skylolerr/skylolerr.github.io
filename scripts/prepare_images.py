@@ -183,7 +183,8 @@ def main() -> None:
     (IMG / "efm").mkdir(parents=True, exist_ok=True)
     (IMG / "dc").mkdir(parents=True, exist_ok=True)
 
-    # Energy Flow Mapper
+    # Energy Flow Mapper (efm/vertical.webp is not built here: its screenshot of the
+    # next release is not in docs/images yet)
     for name in ("banner-light", "banner-dark"):
         webp(efm / f"{name}.png", IMG / "efm" / f"{name}.webp", 1200)
     for name in ("diagram-light", "diagram-dark", "card-light", "card-dark"):
