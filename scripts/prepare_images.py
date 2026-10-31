@@ -20,7 +20,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont, ImageSequence
+from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageSequence
 
 ROOT = Path(__file__).resolve().parent.parent
 IMG = ROOT / "assets" / "img"
@@ -34,6 +34,17 @@ DC_ICON = (113, 124, 352)
 # Crop boxes inside the built 1600 px screenshots: (left, top, right, bottom).
 EFM_FLOW = (339, 122, 1261, 704)  # the "Energy flow" card
 DC_CARD_ONE = (26, 26, 523, 543)  # the push-ups card
+
+# Frames that show the action the alt text of each animation describes.
+STILLS = (
+    ("efm", "periods", (69, 73, 77)),  # 30 days selected
+    ("efm", "drag", (31,)),  # the coffee machine on its way to Office, targets lit
+    ("efm", "tabs", (21, 26, 30)),  # the water tab
+    ("dc", "buttons", (25, 27, 32)),  # +5 reached today's goal, with Undo in the message
+    ("dc", "input", (26,)),  # the input with 32 typed
+    ("dc", "catch-up", (38, 42, 46)),  # Deficit made up
+)
+DC_START = (0, 9, 47)  # the card before anything is tapped: 15 of 20, like the ring around it
 
 
 def webp(src: Path, dst: Path, width: int | None = None, quality: int = 82) -> None:
@@ -69,9 +80,21 @@ def crop_webp(src: Path, dst: Path, box: tuple[int, int, int, int]) -> None:
     print(f"{dst.relative_to(ROOT)}  {im.size}  {dst.stat().st_size // 1024} KB")
 
 
-def still_webp(src: Path, dst: Path) -> None:
-    """The first frame of an animation, for visitors who prefer reduced motion."""
-    im = Image.open(src).convert("RGB")
+def still_webp(src: Path, dst: Path, frames: tuple[int, ...]) -> None:
+    """A still of an animation, for reduced motion and for the pause control.
+
+    Three frames of one state are merged per pixel (the median), which removes the
+    mouse cursor because it is somewhere else in each of them.
+    """
+    anim = Image.open(src)
+    shots = []
+    for number in frames:
+        anim.seek(number)
+        shots.append(anim.convert("RGB"))
+    im = shots[0]
+    if len(shots) == 3:
+        a, b, c = shots
+        im = ImageChops.lighter(ImageChops.darker(a, b), ImageChops.darker(ImageChops.lighter(a, b), c))
     im.save(dst, "WEBP", quality=88, method=6)
     print(f"{dst.relative_to(ROOT)}  {im.size}  {dst.stat().st_size // 1024} KB")
 
@@ -81,10 +104,9 @@ def derived() -> None:
     for theme in ("light", "dark"):
         crop_webp(IMG / "efm" / f"diagram-{theme}.webp", IMG / "efm" / f"flow-{theme}.webp", EFM_FLOW)
         crop_webp(IMG / "dc" / f"hero-{theme}.webp", IMG / "dc" / f"card-one-{theme}.webp", DC_CARD_ONE)
-    for name in ("periods", "drag", "tabs"):
-        still_webp(IMG / "efm" / f"{name}.webp", IMG / "efm" / f"{name}-still.webp")
-    for name in ("buttons", "input", "catch-up"):
-        still_webp(IMG / "dc" / f"{name}.webp", IMG / "dc" / f"{name}-still.webp")
+    for folder, name, frames in STILLS:
+        still_webp(IMG / folder / f"{name}.webp", IMG / folder / f"{name}-still.webp", frames)
+    still_webp(IMG / "dc" / "buttons.webp", IMG / "dc" / "buttons-start.webp", DC_START)
 
 
 def rounded(im: Image.Image, radius: int) -> Image.Image:
