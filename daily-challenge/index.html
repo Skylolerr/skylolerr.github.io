@@ -161,7 +161,7 @@
             <ol><li><a href="/">Skylolerr</a></li><li aria-current="page">Daily Challenge</li></ol>
           </nav>
           <h1>Daily Challenge</h1>
-          <p class="deck">Daily goals you can count, right in Home Assistant.</p>
+          <p class="deck">Daily goals you can count, in Home Assistant.</p>
           <p class="lead">Daily Challenge tracks amounts you want to reach every day: 20 push-ups, 30 minutes of reading, 8 glasses of water. With streaks, target vs. actual over the whole challenge, an optional catch-up mode and its own dashboard card.</p>
           <div class="actions">
             <a class="btn btn-white" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>Open in HACS</a>
@@ -188,12 +188,12 @@
       <div class="wrap">
         <figure class="overhang">
           <picture>
-            <source media="(max-width: 1099px) and (prefers-color-scheme: dark)" srcset="/assets/img/dc/card-one-dark.webp" width="497" height="517">
-            <source media="(max-width: 1099px)" srcset="/assets/img/dc/card-one-light.webp" width="497" height="517">
+            <source media="(max-width: 719px) and (prefers-color-scheme: dark)" srcset="/assets/img/dc/card-one-dark.webp" width="497" height="517">
+            <source media="(max-width: 719px)" srcset="/assets/img/dc/card-one-light.webp" width="497" height="517">
             <source media="(prefers-color-scheme: dark)" srcset="/assets/img/dc/hero-dark-800.webp 800w, /assets/img/dc/hero-dark.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw">
-            <img src="/assets/img/dc/hero-light.webp" srcset="/assets/img/dc/hero-light-800.webp 800w, /assets/img/dc/hero-light.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="Daily Challenge cards with a progress ring, streak and quick buttons" width="1600" height="569" fetchpriority="high">
+            <img src="/assets/img/dc/hero-light.webp" srcset="/assets/img/dc/hero-light-800.webp 800w, /assets/img/dc/hero-light.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="Daily Challenge on a dashboard with a progress ring, streak and quick buttons" width="1600" height="569" fetchpriority="high">
           </picture>
-          <figcaption>Three challenges on a dashboard: push-ups with an end date, reading in catch-up mode, and water with today's goal reached.</figcaption>
+          <figcaption><span class="cap-wide">Three challenges on a dashboard: push-ups with an end date, reading in catch-up mode, and water with today's goal reached.</span><span class="cap-narrow">A challenge on a dashboard: push-ups with an end date.</span></figcaption>
         </figure>
       </div>
     </section>
@@ -202,25 +202,31 @@
       <div class="wrap">
         <h2 id="demo-title">Tap, type or catch up</h2>
         <div class="stagger">
-          <figure>
+          <figure class="anim">
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/buttons-still.webp">
               <img src="/assets/img/dc/buttons.webp" alt="Tapping +5 fills the ring and reaches today's goal; Undo in the message takes it back" width="475" height="562" loading="lazy">
             </picture>
+            <img class="anim-still" src="/assets/img/dc/buttons-still.webp" alt="Tapping +5 fills the ring and reaches today's goal; Undo in the message takes it back" width="475" height="562" loading="lazy">
+            <label class="anim-pause"><input type="checkbox">Pause animation</label>
             <figcaption><b>One tap, with undo.</b> Quick buttons for your steps; every change can be taken back from the message that follows.</figcaption>
           </figure>
-          <figure>
+          <figure class="anim">
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/input-still.webp">
               <img src="/assets/img/dc/input.webp" alt="A long press on the value opens an input; 32 and Enter set today's value" width="475" height="562" loading="lazy">
             </picture>
-            <figcaption><b>Type a value.</b> A long press on today's value opens an input – handy after a workout without the phone.</figcaption>
+            <img class="anim-still" src="/assets/img/dc/input-still.webp" alt="A long press on the value opens an input; 32 and Enter set today's value" width="475" height="562" loading="lazy">
+            <label class="anim-pause"><input type="checkbox">Pause animation</label>
+            <figcaption><b>Type a value.</b> A long press on today's value opens an input, handy after a workout without the phone.</figcaption>
           </figure>
-          <figure>
+          <figure class="anim">
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/catch-up-still.webp">
               <img src="/assets/img/dc/catch-up.webp" alt="In catch-up mode +10 and +5 make up yesterday's deficit; the card says Deficit made up" width="475" height="562" loading="lazy">
             </picture>
+            <img class="anim-still" src="/assets/img/dc/catch-up-still.webp" alt="In catch-up mode +10 and +5 make up yesterday's deficit; the card says Deficit made up" width="475" height="562" loading="lazy">
+            <label class="anim-pause"><input type="checkbox">Pause animation</label>
             <figcaption><b>Catch up.</b> Yesterday's deficit raises today's target; make it up and your streak survives.</figcaption>
           </figure>
         </div>
@@ -229,50 +235,32 @@
 
     <section class="section tint" id="features" aria-labelledby="features-title">
       <div class="wrap">
-        <h2 id="features-title">Your goal, your streak, your dashboard</h2>
+        <h2 id="features-title">What a challenge tracks</h2>
         <div class="ring-rows">
         <div class="ring-row">
-          <div class="ring-row-head">
-            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule-strong)" stroke-width="7"/>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--link-warm)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="33 100" transform="rotate(-90 20 20)"/>
-            </svg>
-            <h3>Track your goal</h3>
-          </div>
+          <h3>Track your goal</h3>
           <ul class="feature-list">
-            <li><strong class="lead-in">A daily amount, not a yes/no habit</strong>Each challenge has its own daily target, unit and buttons.</li>
-            <li><strong>Target vs. actual</strong> over the whole runtime – ahead or behind at a glance.</li>
-            <li>With an <strong>end date</strong>: what is left, in how many days, and the average still needed per day.</li>
-            <li><strong>Correct any past day</strong> with the actions.</li>
+            <li><strong class="lead-in">A daily amount</strong>Each challenge has its own daily target, unit and buttons.</li>
+            <li><strong class="lead-in">Target vs. actual</strong>Over the whole runtime: ahead or behind at a glance.</li>
+            <li><strong class="lead-in">End date</strong>What is left, in how many days, and the average still needed per day.</li>
+            <li><strong class="lead-in">Correct any past day</strong>With the actions.</li>
           </ul>
         </div>
         <div class="ring-row">
-          <div class="ring-row-head">
-            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule-strong)" stroke-width="7"/>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--link-warm)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="66 100" transform="rotate(-90 20 20)"/>
-            </svg>
-            <h3>Stay motivated</h3>
-          </div>
+          <h3>Stay motivated</h3>
           <ul class="feature-list">
-            <li><strong>Streaks</strong> with a choice of rule – daily target reached, or any amount.</li>
-            <li><strong>Best streak, best day</strong>, daily average and weekly, monthly and yearly sums.</li>
+            <li><strong class="lead-in">Streaks</strong>With a choice of rule: daily target reached, or any amount.</li>
+            <li><strong class="lead-in">Best streak, best day</strong>Daily average and weekly, monthly and yearly sums.</li>
             <li><strong class="lead-in">Optional catch-up mode</strong>A missed day can be made up the next day without breaking the streak.</li>
             <li><strong class="lead-in">Reminder blueprint</strong>A notification at 20:00 while today's goal is still open.</li>
           </ul>
         </div>
         <div class="ring-row">
-          <div class="ring-row-head">
-            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule-strong)" stroke-width="7"/>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--link-warm)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="100 100" transform="rotate(-90 20 20)"/>
-            </svg>
-            <h3>Fits into Home Assistant</h3>
-          </div>
+          <h3>Fits into Home Assistant</h3>
           <ul class="feature-list">
-            <li><strong>Its own card</strong> with a progress ring, quick buttons, undo, streak and target vs. actual, plus a visual editor – installed and registered automatically.</li>
-            <li><strong>Plain entities</strong> that work just as well with Tile, Entities, Mushroom or ApexCharts.</li>
-            <li><strong>English, German, French and Italian</strong>, light and dark theme, your number format.</li>
+            <li><strong class="lead-in">Its own card</strong>With a progress ring, quick buttons, undo, streak and target vs. actual, plus a visual editor. Installed and registered automatically.</li>
+            <li><strong class="lead-in">Plain entities</strong>They work just as well with Tile, Entities, Mushroom or ApexCharts.</li>
+            <li><strong class="lead-in">English, German, French and Italian</strong>Light and dark theme, your number format.</li>
           </ul>
         </div>
         </div>
@@ -284,7 +272,7 @@
         <div>
           <h2 id="card-title">The card comes with it</h2>
           <p>The card comes with the integration and is registered as a dashboard resource automatically. Add it in the dashboard editor (<em>Add card</em> → <strong>Daily Challenge</strong>) and switch each part on or off in the visual editor, or in YAML:</p>
-          <pre><code>type: custom:daily-challenge-card
+          <pre tabindex="0" role="region" aria-label="YAML example"><code>type: custom:daily-challenge-card
 entity: number.push_ups_today   # any entity of the challenge
 show_streak: true
 show_target_vs_actual: true
@@ -308,27 +296,27 @@ show_buttons: true</code></pre>
     </section>
 
     <section class="section tint" id="install" aria-labelledby="install-title">
-      <div class="wrap split split-5-7">
+      <div class="wrap split split-5-7 install-grid">
         <div class="install-side sticky">
           <h2 id="install-title">Install in four steps</h2>
-          <div class="note"><p><strong>Beta.</strong> Breaking changes are possible before 1.0. They are always listed in the changelog, and your recorded data is migrated, never dropped.</p></div>
+          <p><strong>Beta.</strong> Breaking changes are possible before 1.0. They are always listed in the changelog, and your recorded data is migrated, never dropped.</p>
           <h3>Requirements</h3>
           <ul>
                     <li>Home Assistant <strong>2026.10.0</strong> or newer.</li>
                     <li><a href="https://hacs.xyz/">HACS</a> for the installation (or a manual copy, see below).</li>
                   </ul>
-          <p><strong>Manual installation:</strong> download <code>daily_challenge.zip</code> from the <a href="https://github.com/Skylolerr/ha-daily-challenge/releases/latest">latest release</a>, extract it to <code>config/custom_components/daily_challenge/</code> and restart Home Assistant.</p>
+          <p class="manual"><strong>Manual installation:</strong> download <code>daily_challenge.zip</code> from the <a href="https://github.com/Skylolerr/ha-daily-challenge/releases/latest">latest release</a>, extract it to <code>config/<wbr>custom_components/<wbr>daily_challenge/</code> and restart Home Assistant.</p>
         </div>
         <ol class="steps">
           <li>
             <h3>Add it to HACS</h3>
-            <p>Click <strong>Open in HACS</strong> – My Home Assistant opens the repository in your own Home Assistant – and select <strong>Download</strong>.</p>
+            <p>Click <strong>Open in HACS</strong>: My Home Assistant opens the repository in your own Home Assistant. Then select <strong>Download</strong>.</p>
             <p><a class="btn btn-solid" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>Open in HACS</a></p>
             <p class="by-hand">Or add it as a custom repository by hand:</p>
             <ol>
               <li>Open <strong>HACS</strong> in the sidebar.</li>
               <li>Open the <strong>⋮</strong> menu at the top right and choose <strong>Custom repositories</strong>.</li>
-              <li>Enter <code>https://github.com/Skylolerr/ha-daily-challenge</code>, choose the type <strong>Integration</strong> and select <strong>Add</strong>.</li>
+              <li>Enter <code>https://github.com/<wbr>Skylolerr/<wbr>ha-daily-challenge</code>, choose the type <strong>Integration</strong> and select <strong>Add</strong>.</li>
               <li>Search for <strong>Daily Challenge</strong> in HACS and select <strong>Download</strong>.</li>
             </ol>
           </li>

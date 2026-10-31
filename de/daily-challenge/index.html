@@ -162,7 +162,7 @@
             <ol><li><a href="/de/">Skylolerr</a></li><li aria-current="page">Daily Challenge</li></ol>
           </nav>
           <h1>Daily Challenge</h1>
-          <p class="deck">Zählbare Tagesziele, direkt in Home Assistant.</p>
+          <p class="deck">Zählbare Tagesziele in Home Assistant.</p>
           <p class="lead">Daily Challenge verfolgt Mengen, die du jeden Tag erreichen willst: 20 Liegestütze, 30 Minuten lesen, 8 Gläser Wasser. Mit Streaks, Soll und Ist über die ganze Challenge, optionalem Aufholmodus und eigener Dashboard-Karte.</p>
           <div class="actions">
             <a class="btn btn-white" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a>
@@ -189,12 +189,12 @@
       <div class="wrap">
         <figure class="overhang">
           <picture>
-            <source media="(max-width: 1099px) and (prefers-color-scheme: dark)" srcset="/assets/img/dc/card-one-dark.webp" width="497" height="517">
-            <source media="(max-width: 1099px)" srcset="/assets/img/dc/card-one-light.webp" width="497" height="517">
+            <source media="(max-width: 719px) and (prefers-color-scheme: dark)" srcset="/assets/img/dc/card-one-dark.webp" width="497" height="517">
+            <source media="(max-width: 719px)" srcset="/assets/img/dc/card-one-light.webp" width="497" height="517">
             <source media="(prefers-color-scheme: dark)" srcset="/assets/img/dc/hero-dark-800.webp 800w, /assets/img/dc/hero-dark.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw">
-            <img src="/assets/img/dc/hero-light.webp" srcset="/assets/img/dc/hero-light-800.webp 800w, /assets/img/dc/hero-light.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="Karten von Daily Challenge mit Fortschrittsring, Streak und Schnellknöpfen" width="1600" height="569" fetchpriority="high">
+            <img src="/assets/img/dc/hero-light.webp" srcset="/assets/img/dc/hero-light-800.webp 800w, /assets/img/dc/hero-light.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="Daily Challenge auf einem Dashboard mit Fortschrittsring, Streak und Schnellknöpfen" width="1600" height="569" fetchpriority="high">
           </picture>
-          <figcaption>Drei Challenges auf einem Dashboard: Liegestütze mit Enddatum, Lesen im Aufholmodus und Wasser mit erreichtem Tagesziel. Die Bilder zeigen die englische Oberfläche; die Karte gibt es auch auf Deutsch.</figcaption>
+          <figcaption><span class="cap-wide">Drei Challenges auf einem Dashboard: Liegestütze mit Enddatum, Lesen im Aufholmodus und Wasser mit erreichtem Tagesziel.</span><span class="cap-narrow">Eine Challenge auf einem Dashboard: Liegestütze mit Enddatum.</span> Die Bilder zeigen die englische Oberfläche; die Karte gibt es auch auf Deutsch.</figcaption>
         </figure>
       </div>
     </section>
@@ -203,25 +203,31 @@
       <div class="wrap">
         <h2 id="demo-title">Antippen, eintippen, aufholen</h2>
         <div class="stagger">
-          <figure>
+          <figure class="anim">
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/buttons-still.webp">
               <img src="/assets/img/dc/buttons.webp" alt="Ein Tipp auf +5 füllt den Ring und erreicht das Tagesziel; Rückgängig in der Meldung nimmt es zurück" width="475" height="562" loading="lazy">
             </picture>
+            <img class="anim-still" src="/assets/img/dc/buttons-still.webp" alt="Ein Tipp auf +5 füllt den Ring und erreicht das Tagesziel; Rückgängig in der Meldung nimmt es zurück" width="475" height="562" loading="lazy">
+            <label class="anim-pause"><input type="checkbox">Animation anhalten</label>
             <figcaption><b>Ein Tipp, mit Rückgängig.</b> Schnellknöpfe für deine Schritte; jede Änderung lässt sich in der folgenden Meldung zurücknehmen.</figcaption>
           </figure>
-          <figure>
+          <figure class="anim">
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/input-still.webp">
               <img src="/assets/img/dc/input.webp" alt="Langes Drücken auf den Wert öffnet ein Eingabefeld; 32 und Enter setzen den heutigen Wert" width="475" height="562" loading="lazy">
             </picture>
-            <figcaption><b>Wert eintippen.</b> Langes Drücken auf den heutigen Wert öffnet ein Eingabefeld – praktisch nach einem Training ohne Handy.</figcaption>
+            <img class="anim-still" src="/assets/img/dc/input-still.webp" alt="Langes Drücken auf den Wert öffnet ein Eingabefeld; 32 und Enter setzen den heutigen Wert" width="475" height="562" loading="lazy">
+            <label class="anim-pause"><input type="checkbox">Animation anhalten</label>
+            <figcaption><b>Wert eintippen.</b> Langes Drücken auf den heutigen Wert öffnet ein Eingabefeld, praktisch nach einem Training ohne Handy.</figcaption>
           </figure>
-          <figure>
+          <figure class="anim">
             <picture>
               <source media="(prefers-reduced-motion: reduce)" srcset="/assets/img/dc/catch-up-still.webp">
               <img src="/assets/img/dc/catch-up.webp" alt="Im Aufholmodus holen +10 und +5 den Rückstand von gestern auf; die Karte meldet Rückstand aufgeholt" width="475" height="562" loading="lazy">
             </picture>
+            <img class="anim-still" src="/assets/img/dc/catch-up-still.webp" alt="Im Aufholmodus holen +10 und +5 den Rückstand von gestern auf; die Karte meldet Rückstand aufgeholt" width="475" height="562" loading="lazy">
+            <label class="anim-pause"><input type="checkbox">Animation anhalten</label>
             <figcaption><b>Aufholen.</b> Der Rückstand von gestern erhöht das heutige Ziel; holst du ihn auf, bleibt dein Streak.</figcaption>
           </figure>
         </div>
@@ -230,50 +236,32 @@
 
     <section class="section tint" id="features" aria-labelledby="features-title">
       <div class="wrap">
-        <h2 id="features-title">Dein Ziel, dein Streak, dein Dashboard</h2>
+        <h2 id="features-title">Was eine Challenge erfasst</h2>
         <div class="ring-rows">
         <div class="ring-row">
-          <div class="ring-row-head">
-            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule-strong)" stroke-width="7"/>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--link-warm)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="33 100" transform="rotate(-90 20 20)"/>
-            </svg>
-            <h3>Ziel verfolgen</h3>
-          </div>
+          <h3>Ziel verfolgen</h3>
           <ul class="feature-list">
-            <li><strong class="lead-in">Eine Tagesmenge, keine Ja/Nein-Gewohnheit</strong>Jede Challenge hat ihr eigenes Tagesziel, ihre Einheit und ihre Knöpfe.</li>
-            <li><strong>Soll und Ist</strong> über die ganze Laufzeit – Vorsprung oder Rückstand auf einen Blick.</li>
-            <li>Mit <strong>Enddatum</strong>: was noch fehlt, in wie vielen Tagen und wie viel du dafür im Schnitt pro Tag noch brauchst.</li>
-            <li><strong>Jeden vergangenen Tag korrigieren</strong> mit den Aktionen.</li>
+            <li><strong class="lead-in">Eine Tagesmenge</strong>Jede Challenge hat ihr eigenes Tagesziel, ihre Einheit und ihre Knöpfe.</li>
+            <li><strong class="lead-in">Soll und Ist</strong>Über die ganze Laufzeit: Vorsprung oder Rückstand auf einen Blick.</li>
+            <li><strong class="lead-in">Enddatum</strong>Was noch fehlt, in wie vielen Tagen und wie viel du dafür im Schnitt pro Tag noch brauchst.</li>
+            <li><strong class="lead-in">Jeden vergangenen Tag korrigieren</strong>Mit den Aktionen.</li>
           </ul>
         </div>
         <div class="ring-row">
-          <div class="ring-row-head">
-            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule-strong)" stroke-width="7"/>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--link-warm)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="66 100" transform="rotate(-90 20 20)"/>
-            </svg>
-            <h3>Motiviert bleiben</h3>
-          </div>
+          <h3>Motiviert bleiben</h3>
           <ul class="feature-list">
-            <li><strong>Streaks</strong> mit wählbarer Regel – Tagesziel erreicht, oder irgendeine Menge.</li>
-            <li><strong>Bester Streak, bester Tag</strong>, Durchschnitt pro Tag und Summen pro Woche, Monat und Jahr.</li>
+            <li><strong class="lead-in">Streaks</strong>Mit wählbarer Regel: Tagesziel erreicht, oder irgendeine Menge.</li>
+            <li><strong class="lead-in">Bester Streak, bester Tag</strong>Durchschnitt pro Tag und Summen pro Woche, Monat und Jahr.</li>
             <li><strong class="lead-in">Optionaler Aufholmodus</strong>Ein verpasster Tag lässt sich am nächsten Tag nachholen, ohne den Streak zu verlieren.</li>
             <li><strong class="lead-in">Blueprint für Erinnerungen</strong>Eine Meldung um 20:00, solange das heutige Ziel noch offen ist.</li>
           </ul>
         </div>
         <div class="ring-row">
-          <div class="ring-row-head">
-            <svg viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--rule-strong)" stroke-width="7"/>
-              <circle cx="20" cy="20" r="16" fill="none" stroke="var(--link-warm)" stroke-width="7" stroke-linecap="round" pathLength="100" stroke-dasharray="100 100" transform="rotate(-90 20 20)"/>
-            </svg>
-            <h3>Passt in Home Assistant</h3>
-          </div>
+          <h3>Passt in Home Assistant</h3>
           <ul class="feature-list">
-            <li><strong>Eigene Karte</strong> mit Fortschrittsring, Schnellknöpfen, Rückgängig, Streak sowie Soll und Ist, dazu ein visueller Editor – automatisch installiert und registriert.</li>
-            <li><strong>Gewöhnliche Entitäten</strong>, die genauso mit Tile, Entities, Mushroom oder ApexCharts funktionieren.</li>
-            <li><strong>Deutsch, Englisch, Französisch und Italienisch</strong>, helles und dunkles Design, dein Zahlenformat.</li>
+            <li><strong class="lead-in">Eigene Karte</strong>Mit Fortschrittsring, Schnellknöpfen, Rückgängig, Streak sowie Soll und Ist, dazu ein visueller Editor. Automatisch installiert und registriert.</li>
+            <li><strong class="lead-in">Gewöhnliche Entitäten</strong>Sie funktionieren genauso mit Tile, Entities, Mushroom oder ApexCharts.</li>
+            <li><strong class="lead-in">Deutsch, Englisch, Französisch und Italienisch</strong>Helles und dunkles Design, dein Zahlenformat.</li>
           </ul>
         </div>
         </div>
@@ -285,7 +273,7 @@
         <div>
           <h2 id="card-title">Die Karte ist dabei</h2>
           <p>Die Karte kommt mit der Integration und wird automatisch als Dashboard-Ressource registriert. Füge sie im Dashboard-Editor hinzu (<em>Karte hinzufügen</em> → <strong>Daily Challenge</strong>) und schalte jeden Teil im visuellen Editor ein oder aus, oder in YAML:</p>
-          <pre><code>type: custom:daily-challenge-card
+          <pre tabindex="0" role="region" aria-label="YAML-Beispiel"><code>type: custom:daily-challenge-card
 entity: number.push_ups_today   # eine beliebige Entität der Challenge
 show_streak: true
 show_target_vs_actual: true
@@ -309,27 +297,27 @@ show_buttons: true</code></pre>
     </section>
 
     <section class="section tint" id="install" aria-labelledby="install-title">
-      <div class="wrap split split-5-7">
+      <div class="wrap split split-5-7 install-grid">
         <div class="install-side sticky">
           <h2 id="install-title">In vier Schritten installiert</h2>
-          <div class="note"><p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Sie stehen immer im Changelog, und deine erfassten Daten werden migriert, nie verworfen.</p></div>
+          <p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Sie stehen immer im Changelog, und deine erfassten Daten werden migriert, nie verworfen.</p>
           <h3>Voraussetzungen</h3>
           <ul>
                     <li>Home Assistant <strong>2026.10.0</strong> oder neuer.</li>
                     <li><a href="https://hacs.xyz/">HACS</a> für die Installation (oder eine manuelle Kopie, siehe unten).</li>
                   </ul>
-          <p><strong>Manuelle Installation:</strong> lade <code>daily_challenge.zip</code> aus der <a href="https://github.com/Skylolerr/ha-daily-challenge/releases/latest">neuesten Version</a> herunter, entpacke es nach <code>config/custom_components/daily_challenge/</code> und starte Home Assistant neu.</p>
+          <p class="manual"><strong>Manuelle Installation:</strong> lade <code>daily_challenge.zip</code> aus der <a href="https://github.com/Skylolerr/ha-daily-challenge/releases/latest">neuesten Version</a> herunter, entpacke es nach <code>config/<wbr>custom_components/<wbr>daily_challenge/</code> und starte Home Assistant neu.</p>
         </div>
         <ol class="steps">
           <li>
             <h3>In HACS hinzufügen</h3>
-            <p>Klicke auf <strong>In HACS öffnen</strong> – My Home Assistant öffnet das Repository in deinem eigenen Home Assistant – und wähle <strong>Herunterladen</strong>.</p>
+            <p>Klicke auf <strong>In HACS öffnen</strong>: My Home Assistant öffnet das Repository in deinem eigenen Home Assistant. Wähle dann <strong>Herunterladen</strong>.</p>
             <p><a class="btn btn-solid" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a></p>
             <p class="by-hand">Oder füge es von Hand als benutzerdefiniertes Repository hinzu:</p>
             <ol>
               <li>Öffne <strong>HACS</strong> in der Seitenleiste.</li>
               <li>Öffne oben rechts das Menü <strong>⋮</strong> und wähle <strong>Benutzerdefinierte Repositories</strong>.</li>
-              <li>Gib <code>https://github.com/Skylolerr/ha-daily-challenge</code> ein, wähle den Typ <strong>Integration</strong> und dann <strong>Hinzufügen</strong>.</li>
+              <li>Gib <code>https://github.com/<wbr>Skylolerr/<wbr>ha-daily-challenge</code> ein, wähle den Typ <strong>Integration</strong> und dann <strong>Hinzufügen</strong>.</li>
               <li>Suche in HACS nach <strong>Daily Challenge</strong> und wähle <strong>Herunterladen</strong>.</li>
             </ol>
           </li>
