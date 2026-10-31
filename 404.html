@@ -5,17 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Page not found – Skylolerr</title>
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#161d26" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#1161C4" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0F4A9B" media="(prefers-color-scheme: dark)">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="stylesheet" href="/assets/css/site.css">
 </head>
-<body>
+<body data-project="efm" class="page-404">
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="/"><img src="/favicon.svg" alt="" width="30" height="30">Skylolerr</a>
       <nav class="site-nav" aria-label="Main">
+        <a class="nav-wide" href="/energy-flow-mapper/">Energy Flow Mapper</a>
+        <a class="nav-wide" href="/daily-challenge/">Daily Challenge</a>
         <a href="https://github.com/Skylolerr">GitHub</a>
         <span class="lang"><a href="/" hreflang="en" lang="en" aria-label="English">EN</a><a href="/de/" hreflang="de" lang="de" aria-label="Deutsch">DE</a></span>
       </nav>
@@ -23,31 +25,43 @@
   </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="wrap narrow">
-        <h1>Page not found</h1>
-        <p class="lead">This page does not exist. Try one of the projects instead:</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="/">Home</a>
-          <a class="btn" href="/energy-flow-mapper/">Energy Flow Mapper</a>
-          <a class="btn" href="/daily-challenge/">Daily Challenge</a>
-        </div>
-        <div lang="de">
-          <h2 style="margin-top:32px">Seite nicht gefunden</h2>
-          <p>Diese Seite gibt es nicht. Hier geht es weiter:</p>
+    <section class="hero hero-404">
+      <div class="wrap">
+        <div class="hero-copy">
+          <h1>Page not found</h1>
+          <p class="lead">This page does not exist. Try one of the projects instead:</p>
           <div class="actions">
-            <a class="btn" href="/de/">Startseite</a>
-            <a class="btn" href="/de/energy-flow-mapper/">Energy Flow Mapper</a>
-            <a class="btn" href="/de/daily-challenge/">Daily Challenge</a>
+            <a class="btn btn-node" href="/">Home</a>
+            <a class="btn btn-ghost" href="/energy-flow-mapper/">Energy Flow Mapper</a>
+            <a class="btn btn-ghost" href="/daily-challenge/">Daily Challenge</a>
+          </div>
+          <div lang="de">
+            <h2>Seite nicht gefunden</h2>
+            <p>Diese Seite gibt es nicht. Hier geht es weiter:</p>
+            <div class="actions">
+              <a class="btn btn-ghost" href="/de/">Startseite</a>
+              <a class="btn btn-ghost" href="/de/energy-flow-mapper/">Energy Flow Mapper</a>
+              <a class="btn btn-ghost" href="/de/daily-challenge/">Daily Challenge</a>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="hero-art">
+        <svg class="hero-s hero-s-broken" viewBox="0 0 900 960" aria-hidden="true">
+          <g fill="none" stroke="#18BCF2" stroke-width="112" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M770 130 H290 L130 290 V373 L258 501 H380"/>
+            <path d="M580 501 H642 L770 629 V706 L642 834 H130"/>
+          </g>
+          <circle cx="770" cy="130" r="104" fill="#FFA62B"/>
+          <circle cx="770" cy="130" r="40" fill="#fff"/>
+        </svg>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <p>© 2026 Skylolerr · <a href="https://github.com/Skylolerr">GitHub</a> · <a class="coffee-link" href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Buy me a coffee</a></p>
+      <p class="small footer-short">© 2026 Skylolerr · <a href="https://github.com/Skylolerr">GitHub</a> · <a href="https://buymeacoffee.com/skylolerr"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3c-.6 1 .6 2 0 3M12 3c-.6 1 .6 2 0 3"/></svg>Buy me a coffee</a></p>
     </div>
   </footer>
 </body>
