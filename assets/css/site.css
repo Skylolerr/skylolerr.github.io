@@ -594,7 +594,7 @@ body[data-project="dc"] .product-bar .btn-white:hover,
   display: flex;
   gap: var(--s-6);
   align-items: center;
-  height: 56px;
+  height: 55px; /* 56 px with the border above it */
 }
 
 .product-name {
@@ -1535,7 +1535,6 @@ figcaption b {
   .trace-out,
   .ring-stage,
   .ring-card,
-  .hero-s-broken,
   .nav-wide,
   .bar-nav,
   .tree {
@@ -1584,6 +1583,10 @@ figcaption b {
     display: block;
     width: 100%;
     height: clamp(240px, 62vw, 420px);
+  }
+
+  .hero-s-broken {
+    display: none;
   }
 
   .hero-404 .hero-copy {
