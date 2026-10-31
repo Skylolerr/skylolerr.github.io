@@ -6,6 +6,11 @@ Run it again after the project images change:
 
     python scripts/prepare_images.py [--efm PATH] [--dc PATH]
 
+Crops and stills are made from the WebP files already in assets/img/. To rebuild
+only those, without the project folders:
+
+    python scripts/prepare_images.py --derived
+
 Requires Pillow. The default paths are the sibling project folders on the
 maintainer's machine.
 """
@@ -25,6 +30,10 @@ FONT_DIR = Path("C:/Windows/Fonts")
 # Icon boxes inside the 2400x600 banners: (left, top, size).
 EFM_ICON = (134, 128, 344)
 DC_ICON = (113, 124, 352)
+
+# Crop boxes inside the built 1600 px screenshots: (left, top, right, bottom).
+EFM_FLOW = (339, 122, 1261, 704)  # the "Energy flow" card
+DC_CARD_ONE = (26, 26, 523, 543)  # the push-ups card
 
 
 def webp(src: Path, dst: Path, width: int | None = None, quality: int = 82) -> None:
@@ -52,6 +61,30 @@ def animated_webp(src: Path, dst: Path) -> None:
         method=6,
     )
     print(f"{dst.relative_to(ROOT)}  {im.size}  {len(frames)} frames  {dst.stat().st_size // 1024} KB")
+
+
+def crop_webp(src: Path, dst: Path, box: tuple[int, int, int, int]) -> None:
+    im = Image.open(src).convert("RGB").crop(box)
+    im.save(dst, "WEBP", quality=88, method=6)
+    print(f"{dst.relative_to(ROOT)}  {im.size}  {dst.stat().st_size // 1024} KB")
+
+
+def still_webp(src: Path, dst: Path) -> None:
+    """The first frame of an animation, for visitors who prefer reduced motion."""
+    im = Image.open(src).convert("RGB")
+    im.save(dst, "WEBP", quality=88, method=6)
+    print(f"{dst.relative_to(ROOT)}  {im.size}  {dst.stat().st_size // 1024} KB")
+
+
+def derived() -> None:
+    """Crops and stills, made from the files already in assets/img/."""
+    for theme in ("light", "dark"):
+        crop_webp(IMG / "efm" / f"diagram-{theme}.webp", IMG / "efm" / f"flow-{theme}.webp", EFM_FLOW)
+        crop_webp(IMG / "dc" / f"hero-{theme}.webp", IMG / "dc" / f"card-one-{theme}.webp", DC_CARD_ONE)
+    for name in ("periods", "drag", "tabs"):
+        still_webp(IMG / "efm" / f"{name}.webp", IMG / "efm" / f"{name}-still.webp")
+    for name in ("buttons", "input", "catch-up"):
+        still_webp(IMG / "dc" / f"{name}.webp", IMG / "dc" / f"{name}-still.webp")
 
 
 def rounded(im: Image.Image, radius: int) -> Image.Image:
@@ -119,7 +152,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--efm", type=Path, default=PROJECTS / "HA Energy Hierarchy" / "docs" / "images")
     parser.add_argument("--dc", type=Path, default=PROJECTS / "Hacs integrationen" / "docs" / "images")
+    parser.add_argument("--derived", action="store_true", help="only rebuild the crops and stills")
     args = parser.parse_args()
+    if args.derived:
+        derived()
+        return
     efm, dc = args.efm, args.dc
     (IMG / "efm").mkdir(parents=True, exist_ok=True)
     (IMG / "dc").mkdir(parents=True, exist_ok=True)
@@ -161,6 +198,8 @@ def main() -> None:
     logo = ROOT / "assets" / "logo" / "skylolerr-logo-1024.png"
     og_home(logo, [efm_icon, dc_light], IMG / "og-home.png")
     site_icons(logo)
+
+    derived()
 
 
 if __name__ == "__main__":
