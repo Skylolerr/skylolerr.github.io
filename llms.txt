@@ -6,15 +6,14 @@ Every page exists in English and in German (under /de/). Each project page has r
 
 ## Projects
 
-- [Energy Flow Mapper](https://skylolerr.com/energy-flow-mapper/): Edits Home Assistant's own energy settings in a diagram instead of only displaying them. Assign grid import, grid export, solar, battery and water sources by drag and drop, nest devices under upstream devices ("included in"), see live power and energy per period including consumption that is not tracked individually, create meters (integral helpers) from power and flow sensors, and keep a backup before every save. Includes a read-only dashboard card for all users. A vertical diagram for large trees is coming in the next release. Repository: https://github.com/Skylolerr/ha-energy-flow-mapper
+- [Energy Flow Mapper](https://skylolerr.com/energy-flow-mapper/): Edits Home Assistant's own energy settings in a diagram instead of only displaying them. Assign grid import, grid export, solar, battery and water sources by drag and drop, nest devices under upstream devices ("included in"), see live power and energy per period including consumption that is not tracked individually, create meters (integral helpers) from power and flow sensors, and keep a backup before every save. Includes a read-only dashboard card for all users. Listed in HACS: search for Energy Flow Mapper there, no custom repository needed. A vertical diagram for large trees is coming in the next release. Repository: https://github.com/Skylolerr/ha-energy-flow-mapper
 - [Daily Challenge](https://skylolerr.com/daily-challenge/): Tracks daily amounts such as 20 push-ups or 8 glasses of water, not yes/no habits. Streaks with a choice of rule, target vs. actual over the whole challenge, an optional catch-up mode for yesterday's deficit, a reminder blueprint, actions to correct past days, plain entities and its own dashboard card. Listed in HACS: search for Daily Challenge there, no custom repository needed. Repository: https://github.com/Skylolerr/ha-daily-challenge
 
 ## Install
 
 - Energy Flow Mapper in HACS: https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&repository=ha-energy-flow-mapper&category=integration
 - Daily Challenge in HACS: https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&repository=ha-daily-challenge&category=integration
-- Daily Challenge without the button: search for Daily Challenge in HACS → Download → restart Home Assistant.
-- Energy Flow Mapper without the button: HACS → ⋮ → Custom repositories → the repository URL with the type Integration → Download → restart Home Assistant.
+- Without the button: search for the project name in HACS → Download → restart Home Assistant. Both projects are in the HACS default list.
 
 ## German
 
