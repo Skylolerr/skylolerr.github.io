@@ -52,7 +52,7 @@
           "Zähler aus Leistungs- und Durchflusssensoren anlegen",
           "Sicherungen, Export und Import der Energie-Einstellungen",
           "Dashboard-Karte zum Anzeigen",
-          "Vertikales Diagramm für grosse Bäume (kommt mit der nächsten Version)"
+          "Vertikales Diagramm für grosse Bäume"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -259,7 +259,7 @@
               <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, auch das, was nicht einzeln erfasst ist.</li>
               <li><strong class="lead-in">Plausibilitätswarnungen</strong>Wenn Untergeräte deutlich mehr verbraucht haben als ihr übergeordnetes Gerät, meist eine falsche Zuordnung.</li>
               <li><strong class="lead-in">Gerät suchen</strong>In grossen Diagrammen.</li>
-              <li><strong class="lead-in">Vertikales Diagramm für grosse Bäume</strong>Läuft von links nach rechts statt von oben nach unten, im Panel und in der Karte. Kommt mit der nächsten Version.</li>
+              <li><strong class="lead-in">Vertikales Diagramm für grosse Bäume</strong>Läuft von links nach rechts statt von oben nach unten, im Panel und in der Karte.</li>
             </ul>
           </div>
           <div>
@@ -301,7 +301,8 @@ kind: electricity      # oder water
 period: today          # now, today, week oder month
 root: sensor.kitchen_energy   # optional: nur dieses Gerät und alles darunter
 title: Küche           # optional; ein leerer Titel blendet die Kopfzeile aus
-show_sources: true     # Quellen über dem Zuhause (nicht mit root)
+orientation: vertical  # horizontal (Standard) oder vertical (von links nach rechts)
+show_sources: true     # Quellen vor dem Zuhause (nicht mit root)
 show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code></pre>
         </div>
       </div>
@@ -314,7 +315,7 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
       <div class="strip" role="region" tabindex="0" aria-label="Screenshots, seitlich scrollen">
           <figure class="shot">
             <img src="/assets/img/efm/vertical.webp" alt="Das vertikale Diagramm: Quellen links, dann das Zuhause und die Geräte jeder Ebene untereinander, darüber die Knöpfe Horizontal und Vertikal" width="1200" height="585" loading="lazy">
-            <figcaption><b>Vertikales Diagramm:</b> läuft von links nach rechts, für grosse Bäume. Kommt mit der nächsten Version.</figcaption>
+            <figcaption><b>Vertikales Diagramm:</b> läuft von links nach rechts, für grosse Bäume.</figcaption>
           </figure>
           <figure class="shot">
             <img src="/assets/img/efm/period.webp" alt="30 Tage mit Verbrauch, der nicht einzeln erfasst ist, und einer Plausibilitätswarnung" width="1200" height="585" loading="lazy">

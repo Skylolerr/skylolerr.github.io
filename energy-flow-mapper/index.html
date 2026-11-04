@@ -51,7 +51,7 @@
           "Create meters from power and flow sensors",
           "Backups, export and import of the energy settings",
           "Read-only dashboard card",
-          "Vertical diagram for large trees (coming in the next release)"
+          "Vertical diagram for large trees"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -258,7 +258,7 @@
               <li><strong class="lead-in">Live power and energy per period</strong>Now, today, 7 or 30 days, including what is not tracked individually.</li>
               <li><strong class="lead-in">Plausibility warnings</strong>When sub-devices used clearly more than their parent, usually a wrong assignment.</li>
               <li><strong class="lead-in">Find a device</strong>In big diagrams.</li>
-              <li><strong class="lead-in">Vertical diagram for large trees</strong>Runs from left to right instead of top-down, in the panel and the card. Coming in the next release.</li>
+              <li><strong class="lead-in">Vertical diagram for large trees</strong>Runs from left to right instead of top-down, in the panel and the card.</li>
             </ul>
           </div>
           <div>
@@ -300,7 +300,8 @@ kind: electricity      # or water
 period: today          # now, today, week or month
 root: sensor.kitchen_energy   # optional: only this device and everything below it
 title: Kitchen         # optional; an empty title hides the header
-show_sources: true     # sources above Home (not with root)
+orientation: vertical  # horizontal (default, top-down) or vertical (left to right)
+show_sources: true     # sources before Home (not with root)
 show_untracked: true   # blocks for what is not tracked individually</code></pre>
         </div>
       </div>
@@ -313,7 +314,7 @@ show_untracked: true   # blocks for what is not tracked individually</code></pre
       <div class="strip" role="region" tabindex="0" aria-label="Screenshots, scroll sideways">
           <figure class="shot">
             <img src="/assets/img/efm/vertical.webp" alt="The vertical diagram: sources on the left, then Home and the devices of each level stacked below each other, with the buttons Horizontal and Vertical above it" width="1200" height="585" loading="lazy">
-            <figcaption><b>Vertical diagram:</b> runs from left to right, for large trees. Coming in the next release.</figcaption>
+            <figcaption><b>Vertical diagram:</b> runs from left to right, for large trees.</figcaption>
           </figure>
           <figure class="shot">
             <img src="/assets/img/efm/period.webp" alt="30 days with consumption that is not tracked individually and a plausibility warning" width="1200" height="585" loading="lazy">
