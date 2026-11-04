@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Energy Flow Mapper – Home Assistant energy dashboard editor</title>
-  <meta name="description" content="Edit the Home Assistant energy dashboard visually: drag and drop devices, sub-devices, grid, solar, battery and water meters, with a backup before every save. Free via HACS.">
+  <meta name="description" content="Edit the Home Assistant energy dashboard visually: drag and drop devices, child devices, grid, solar, battery and water meters, with a backup before every save. Free via HACS.">
   <link rel="canonical" href="https://skylolerr.com/energy-flow-mapper/">
   <link rel="alternate" hreflang="en" href="https://skylolerr.com/energy-flow-mapper/">
   <link rel="alternate" hreflang="de" href="https://skylolerr.com/de/energy-flow-mapper/">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Skylolerr">
   <meta property="og:title" content="Energy Flow Mapper – a visual editor for the Home Assistant energy dashboard">
-  <meta property="og:description" content="Map grid, solar, battery, water meters, devices and sub-devices by drag and drop. Backups before every save, a dashboard card for everyone. Free via HACS.">
+  <meta property="og:description" content="Map grid, solar, battery, water meters, devices and child devices by drag and drop. Backups before every save, a dashboard card for everyone. Free via HACS.">
   <meta property="og:url" content="https://skylolerr.com/energy-flow-mapper/">
   <meta property="og:image" content="https://skylolerr.com/assets/img/og-energy-flow-mapper.png">
   <meta property="og:image:width" content="1200">
@@ -35,7 +35,7 @@
         "@type": "SoftwareApplication",
         "@id": "https://skylolerr.com/energy-flow-mapper/#app",
         "name": "Energy Flow Mapper",
-        "description": "A visual drag-and-drop editor for the Home Assistant energy dashboard. It shows sources, devices and sub-devices as a diagram, for electricity and water, and writes changes to Home Assistant's energy settings with a backup before every save.",
+        "description": "A visual drag-and-drop editor for the Home Assistant energy dashboard. It shows sources, Home, devices and child devices as a diagram, for electricity and water, and writes changes to Home Assistant's energy settings with a backup before every save.",
         "url": "https://skylolerr.com/energy-flow-mapper/",
         "image": "https://skylolerr.com/assets/img/og-energy-flow-mapper.png",
         "screenshot": "https://skylolerr.com/assets/img/efm/diagram-light.webp",
@@ -45,13 +45,15 @@
         "softwareRequirements": "Home Assistant 2026.10.0 or newer, HACS",
         "featureList": [
           "Diagram of the Home Assistant energy dashboard",
-          "Drag and drop devices and sub-devices (upstream devices)",
+          "Drag and drop devices and child devices (upstream devices)",
           "Assign grid import, grid export, solar, battery and water sources",
           "Live power and energy per period",
           "Create meters from power and flow sensors",
           "Backups, export and import of the energy settings",
           "Read-only dashboard card",
-          "Vertical diagram for large trees"
+          "Vertical diagram for large trees",
+          "Home consumption and untracked consumption",
+          "Assign the home meter (Home Assistant 2026.11 or newer)"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -79,7 +81,12 @@
           {
             "@type": "Question",
             "name": "How do I set an upstream device (\"included in\") in the energy dashboard?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant can treat the consumption of one device as part of another one, for example a coffee machine behind a kitchen sub-meter. In Energy Flow Mapper you drag the coffee machine onto the kitchen block; valid targets light up. On a phone, use the ⋮ menu and Move to. The diagram then shows how much of the kitchen's consumption is not tracked individually." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant can treat the consumption of one device as part of another one, for example a coffee machine behind a kitchen sub-meter. In Energy Flow Mapper you drag the coffee machine onto the kitchen block; valid targets light up. On a phone, use the ⋮ menu and Move to. The diagram then shows the kitchen's untracked consumption: what its child devices do not cover." }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I set the home meter in the energy dashboard?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.11 added a home meter for the whole home. In Energy Flow Mapper, drop a free sensor on + Home meter at Home, or tap + Home meter and choose one. If one of your devices already is your main meter, drag it onto + Home meter or choose Use as home meter in its ⋮ menu: its child devices move up a level and it keeps its name. Home then shows what the house used, and Untracked consumption below Home shows what no device covers yet. On Home Assistant 2026.10, Home calculates the consumption of a period from grid, solar and battery instead. A meter whose data is hours behind, for example from a utility portal, gives no home value instead of a misleading one." }
           },
           {
             "@type": "Question",
@@ -89,7 +96,7 @@
           {
             "@type": "Question",
             "name": "Can Energy Flow Mapper break my energy settings?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Every save, restore and import stores a backup of the previous settings first, 20 by default and up to 100. Undo last save or Backups, Restore brings them back, and you can export the settings as a JSON file. Before saving, the draft is checked for loops, missing parents, duplicates and sensors used twice, and Home Assistant's own checks run as well. Prices and other fields that Energy Flow Mapper does not edit are kept as they are." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Every save, restore and import stores a backup of the previous settings first, 20 by default and up to 100. Undo last save or Backups, Restore brings them back, and you can export the settings as a JSON file. Before saving, the draft is checked for loops, missing upstream devices, duplicates and sensors used twice, and Home Assistant's own checks run as well. Prices and other fields that Energy Flow Mapper does not edit are kept as they are." }
           },
           {
             "@type": "Question",
@@ -104,7 +111,7 @@
           {
             "@type": "Question",
             "name": "Which Home Assistant version does Energy Flow Mapper need?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.10.0 or newer. The panel is for admins; the dashboard card works for every user who can see the dashboard." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.10.0 or newer; the home meter needs 2026.11 or newer. The panel is for admins; the dashboard card works for every user who can see the dashboard." }
           },
           {
             "@type": "Question",
@@ -197,7 +204,7 @@
             <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/diagram-dark-800.webp 800w, /assets/img/efm/diagram-dark.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw">
             <img src="/assets/img/efm/diagram-light.webp" srcset="/assets/img/efm/diagram-light-800.webp 800w, /assets/img/efm/diagram-light.webp 1600w" sizes="(min-width: 1240px) 1160px, 100vw" alt="The Energy Flow Mapper panel: sources at the top, Home in the middle, devices below" width="1600" height="780" fetchpriority="high">
           </picture>
-          <figcaption>The panel in Home Assistant: grid, solar and battery at the top, Home in the middle, devices and sub-devices below.</figcaption>
+          <figcaption>The panel in Home Assistant: grid, solar and battery at the top, Home in the middle, devices and child devices below.</figcaption>
         </figure>
       </div>
     </section>
@@ -254,9 +261,10 @@
           <div>
             <h3 class="feature-head head-solar">See your setup</h3>
             <ul class="feature-list">
-              <li><strong class="lead-in">Diagram of your energy dashboard</strong>Sources, Home and devices, arranged automatically; zoom and pan with mouse, touch or trackpad.</li>
-              <li><strong class="lead-in">Live power and energy per period</strong>Now, today, 7 or 30 days, including what is not tracked individually.</li>
-              <li><strong class="lead-in">Plausibility warnings</strong>When sub-devices used clearly more than their parent, usually a wrong assignment.</li>
+              <li><strong class="lead-in">Diagram of your energy dashboard</strong>Sources, Home and devices, arranged automatically, with the names and terms of Home Assistant; zoom and pan with mouse, touch or trackpad.</li>
+              <li><strong class="lead-in">The whole home</strong>Home shows what the house used, measured by the home meter or calculated from grid, solar and battery. Below it, the untracked consumption that no device covers yet.</li>
+              <li><strong class="lead-in">Live power and energy per period</strong>Now, today, 7 or 30 days, including untracked consumption.</li>
+              <li><strong class="lead-in">Plausibility warnings</strong>When child devices used clearly more than their upstream device, or the devices more than the home, usually a wrong assignment.</li>
               <li><strong class="lead-in">Find a device</strong>In big diagrams.</li>
               <li><strong class="lead-in">Vertical diagram for large trees</strong>Runs from left to right instead of top-down, in the panel and the card.</li>
             </ul>
@@ -267,6 +275,7 @@
               <li><strong class="lead-in">Drag and drop (or the ⋮ menu on phones)</strong>Include a device in another one, rename or remove it.</li>
               <li><strong class="lead-in">Sources</strong>Drop a sensor onto grid import, grid export, solar, battery or water. Prices stay as they are.</li>
               <li><strong class="lead-in">Free sensors</strong>Meters and external statistics not in the dashboard yet, added with one drag.</li>
+              <li><strong class="lead-in">Home meter</strong>With Home Assistant 2026.11 or newer: assign, replace or remove it at Home, or turn your main meter device into it.</li>
               <li><strong class="lead-in">Create meter</strong>Turns a power or flow sensor into an ordinary integral helper.</li>
               <li><strong class="lead-in">Draft, check, save</strong>With undo, a list of changes and a backup before every write.</li>
             </ul>
@@ -274,7 +283,7 @@
           <div>
             <h3 class="feature-head head-export">Everywhere</h3>
             <ul class="feature-list">
-              <li><strong class="lead-in">Dashboard card</strong>The same tree, read-only, on any dashboard and for every user.</li>
+              <li><strong class="lead-in">Dashboard card</strong>The same tree with home consumption, read-only, on any dashboard and for every user.</li>
               <li><strong class="lead-in">Water tab</strong>Litres and m³, or gallons with US units.</li>
               <li><strong class="lead-in">Backups, export and import</strong>Restore any earlier state or keep a copy elsewhere.</li>
               <li><strong class="lead-in">English, German, French and Italian</strong>Light and dark theme, phone layout.</li>
@@ -302,7 +311,7 @@ root: sensor.kitchen_energy   # optional: only this device and everything below 
 title: Kitchen         # optional; an empty title hides the header
 orientation: vertical  # horizontal (default, top-down) or vertical (left to right)
 show_sources: true     # sources before Home (not with root)
-show_untracked: true   # blocks for what is not tracked individually</code></pre>
+show_untracked: true   # blocks for untracked consumption</code></pre>
         </div>
       </div>
     </section>
@@ -317,8 +326,8 @@ show_untracked: true   # blocks for what is not tracked individually</code></pre
             <figcaption><b>Vertical diagram:</b> runs from left to right, for large trees.</figcaption>
           </figure>
           <figure class="shot">
-            <img src="/assets/img/efm/period.webp" alt="30 days with consumption that is not tracked individually and a plausibility warning" width="1200" height="585" loading="lazy">
-            <figcaption><b>30 days:</b> energy per device, what is not tracked individually, and a warning.</figcaption>
+            <img src="/assets/img/efm/period.webp" alt="30 days with untracked consumption and a plausibility warning" width="1200" height="585" loading="lazy">
+            <figcaption><b>30 days:</b> energy per device, untracked consumption, and a warning.</figcaption>
           </figure>
           <figure class="shot">
             <img src="/assets/img/efm/save.webp" alt="The list of changes shown before saving" width="1200" height="585" loading="lazy">
@@ -351,7 +360,7 @@ show_untracked: true   # blocks for what is not tracked individually</code></pre
           <p><strong>Beta.</strong> Breaking changes are possible before 1.0. Every save keeps a backup of your previous energy settings, so you can always go back.</p>
           <h3>Requirements</h3>
           <ul>
-                    <li>Home Assistant <strong>2026.10.0</strong> or newer, with the energy dashboard (part of the default configuration).</li>
+                    <li>Home Assistant <strong>2026.10.0</strong> or newer, with the energy dashboard (part of the default configuration). The home meter needs 2026.11 or newer.</li>
                     <li><a href="https://hacs.xyz/">HACS</a> for the installation (or a manual copy, see below).</li>
                     <li>An admin user for the panel. The dashboard card works for every user.</li>
                   </ul>
@@ -394,7 +403,11 @@ show_untracked: true   # blocks for what is not tracked individually</code></pre
           </details>
           <details>
             <summary><h3>How do I set an upstream device ("included in") in the energy dashboard?</h3></summary>
-            <div class="answer"><p>Home Assistant can treat the consumption of one device as part of another one, for example a coffee machine behind a kitchen sub-meter. In Energy Flow Mapper you drag the coffee machine onto the kitchen block; valid targets light up. On a phone, use the <strong>⋮</strong> menu → <strong>Move to …</strong>. The diagram then shows how much of the kitchen's consumption is not tracked individually.</p></div>
+            <div class="answer"><p>Home Assistant can treat the consumption of one device as part of another one, for example a coffee machine behind a kitchen sub-meter. In Energy Flow Mapper you drag the coffee machine onto the kitchen block; valid targets light up. On a phone, use the <strong>⋮</strong> menu → <strong>Move to …</strong>. The diagram then shows the kitchen's untracked consumption: what its child devices do not cover.</p></div>
+          </details>
+          <details>
+            <summary><h3>How do I set the home meter in the energy dashboard?</h3></summary>
+            <div class="answer"><p>Home Assistant 2026.11 added a home meter for the whole home. In Energy Flow Mapper, drop a free sensor on <strong>+ Home meter</strong> at Home, or tap <strong>+ Home meter</strong> and choose one. If one of your devices already is your main meter, drag it onto <strong>+ Home meter</strong> or choose <strong>⋮</strong> → <strong>Use as home meter</strong>: its child devices move up a level and it keeps its name. Home then shows what the house used, and <strong>Untracked consumption</strong> below Home shows what no device covers yet. On Home Assistant 2026.10, Home calculates the consumption of a period from grid, solar and battery instead. A meter whose data is hours behind, for example from a utility portal, gives no home value instead of a misleading one.</p></div>
           </details>
           <details>
             <summary><h3>Is Energy Flow Mapper just another energy card?</h3></summary>
@@ -402,7 +415,7 @@ show_untracked: true   # blocks for what is not tracked individually</code></pre
           </details>
           <details>
             <summary><h3>Can Energy Flow Mapper break my energy settings?</h3></summary>
-            <div class="answer"><p>Every save, restore and import stores a backup of the previous settings first – 20 by default, up to 100. <strong>Undo last save</strong> or <strong>Backups → Restore</strong> brings them back, and you can export the settings as a JSON file. Before saving, the draft is checked for loops, missing parents, duplicates and sensors used twice, and Home Assistant's own checks run as well. Prices and other fields that Energy Flow Mapper does not edit are kept as they are.</p></div>
+            <div class="answer"><p>Every save, restore and import stores a backup of the previous settings first – 20 by default, up to 100. <strong>Undo last save</strong> or <strong>Backups → Restore</strong> brings them back, and you can export the settings as a JSON file. Before saving, the draft is checked for loops, missing upstream devices, duplicates and sensors used twice, and Home Assistant's own checks run as well. Prices and other fields that Energy Flow Mapper does not edit are kept as they are.</p></div>
           </details>
           <details>
             <summary><h3>How do I add a power sensor (W) to the energy dashboard?</h3></summary>
@@ -414,7 +427,7 @@ show_untracked: true   # blocks for what is not tracked individually</code></pre
           </details>
           <details>
             <summary><h3>Which Home Assistant version does Energy Flow Mapper need?</h3></summary>
-            <div class="answer"><p>Home Assistant <strong>2026.10.0</strong> or newer. The panel is for admins; the dashboard card works for every user who can see the dashboard.</p></div>
+            <div class="answer"><p>Home Assistant <strong>2026.10.0</strong> or newer; the home meter needs 2026.11 or newer. The panel is for admins; the dashboard card works for every user who can see the dashboard.</p></div>
           </details>
           <details>
             <summary><h3>HACS does not find Energy Flow Mapper. What can I do?</h3></summary>

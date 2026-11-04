@@ -35,7 +35,7 @@
         "@type": "SoftwareApplication",
         "@id": "https://skylolerr.com/de/energy-flow-mapper/#app",
         "name": "Energy Flow Mapper",
-        "description": "Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant. Er zeigt Quellen, Geräte und Untergeräte als Diagramm, für Strom und Wasser, und schreibt Änderungen in die Energie-Einstellungen von Home Assistant, mit einer Sicherung vor jedem Speichern.",
+        "description": "Ein visueller Drag-and-drop-Editor für das Energie-Dashboard von Home Assistant. Er zeigt Quellen, Zuhause, Geräte und Untergeräte als Diagramm, für Strom und Wasser, und schreibt Änderungen in die Energie-Einstellungen von Home Assistant, mit einer Sicherung vor jedem Speichern.",
         "url": "https://skylolerr.com/de/energy-flow-mapper/",
         "inLanguage": "de",
         "image": "https://skylolerr.com/assets/img/og-energy-flow-mapper.png",
@@ -52,7 +52,9 @@
           "Zähler aus Leistungs- und Durchflusssensoren anlegen",
           "Sicherungen, Export und Import der Energie-Einstellungen",
           "Dashboard-Karte zum Anzeigen",
-          "Vertikales Diagramm für grosse Bäume"
+          "Vertikales Diagramm für grosse Bäume",
+          "Verbrauch des Zuhauses und nicht erfasster Verbrauch",
+          "Hauszähler zuordnen (Home Assistant 2026.11 oder neuer)"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -79,8 +81,13 @@
           },
           {
             "@type": "Question",
-            "name": "Wie lege ich im Energie-Dashboard ein übergeordnetes Gerät fest («enthalten in»)?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant kann den Verbrauch eines Geräts als Teil eines anderen behandeln, zum Beispiel eine Kaffeemaschine hinter einem Unterzähler der Küche. In Energy Flow Mapper ziehst du die Kaffeemaschine auf den Block der Küche; gültige Ziele leuchten auf. Auf dem Handy nimmst du das Menü ⋮ und «Verschieben nach …». Das Diagramm zeigt dann, wie viel vom Verbrauch der Küche nicht einzeln erfasst ist." }
+            "name": "Wie lege ich im Energie-Dashboard ein vorgelagertes Gerät fest («enthalten in»)?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant kann den Verbrauch eines Geräts als Teil eines anderen behandeln, zum Beispiel eine Kaffeemaschine hinter einem Unterzähler der Küche. In Energy Flow Mapper ziehst du die Kaffeemaschine auf den Block der Küche; gültige Ziele leuchten auf. Auf dem Handy nimmst du das Menü ⋮ und «Verschieben nach …». Das Diagramm zeigt dann den nicht erfassten Verbrauch der Küche: was ihre Untergeräte nicht abdecken." }
+          },
+          {
+            "@type": "Question",
+            "name": "Wie lege ich im Energie-Dashboard den Hauszähler fest?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.11 kennt einen Hauszähler für das ganze Zuhause. In Energy Flow Mapper ziehst du einen freien Sensor auf «+ Hauszähler» beim Zuhause, oder du tippst auf «+ Hauszähler» und wählst einen aus. Ist eines deiner Geräte schon dein Hauptzähler, ziehst du es auf «+ Hauszähler» oder wählst im Menü ⋮ «Als Hauszähler verwenden»: Seine Untergeräte rücken eine Ebene nach oben, und sein Name bleibt. Das Zuhause zeigt dann, was das Haus verbraucht hat, und «Nicht erfasster Verbrauch» darunter zeigt, was noch kein Gerät abdeckt. Mit Home Assistant 2026.10 berechnet das Zuhause den Verbrauch eines Zeitraums stattdessen aus Netz, Solar und Batterie. Ein Zähler, dessen Daten Stunden hinterherhinken, zum Beispiel aus einem Portal des Energieversorgers, gibt keinen Wert für das Zuhause statt eines irreführenden." }
           },
           {
             "@type": "Question",
@@ -90,7 +97,7 @@
           {
             "@type": "Question",
             "name": "Kann Energy Flow Mapper meine Energie-Einstellungen kaputt machen?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt, standardmässig 20, bis zu 100. «Letztes Speichern rückgängig machen» oder «Sicherungen», «Wiederherstellen» holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende übergeordnete Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt, standardmässig 20, bis zu 100. «Letztes Speichern rückgängig machen» oder «Sicherungen», «Wiederherstellen» holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende vorgelagerte Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind." }
           },
           {
             "@type": "Question",
@@ -105,7 +112,7 @@
           {
             "@type": "Question",
             "name": "Welche Home-Assistant-Version braucht Energy Flow Mapper?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.10.0 oder neuer. Das Panel ist für Admins; die Dashboard-Karte funktioniert für alle, die das Dashboard sehen." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.10.0 oder neuer; der Hauszähler braucht 2026.11 oder neuer. Das Panel ist für Admins; die Dashboard-Karte funktioniert für alle, die das Dashboard sehen." }
           },
           {
             "@type": "Question",
@@ -255,9 +262,10 @@
           <div>
             <h3 class="feature-head head-solar">Alles im Blick</h3>
             <ul class="feature-list">
-              <li><strong class="lead-in">Diagramm deines Energie-Dashboards</strong>Quellen, Zuhause und Geräte, automatisch angeordnet; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
-              <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, auch das, was nicht einzeln erfasst ist.</li>
-              <li><strong class="lead-in">Plausibilitätswarnungen</strong>Wenn Untergeräte deutlich mehr verbraucht haben als ihr übergeordnetes Gerät, meist eine falsche Zuordnung.</li>
+              <li><strong class="lead-in">Diagramm deines Energie-Dashboards</strong>Quellen, Zuhause und Geräte, automatisch angeordnet, mit den Namen und Begriffen von Home Assistant; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
+              <li><strong class="lead-in">Das ganze Zuhause</strong>Das Zuhause zeigt, was das Haus verbraucht hat, gemessen vom Hauszähler oder berechnet aus Netz, Solar und Batterie. Darunter der nicht erfasste Verbrauch, den noch kein Gerät abdeckt.</li>
+              <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, auch der nicht erfasste Verbrauch.</li>
+              <li><strong class="lead-in">Plausibilitätswarnungen</strong>Wenn Untergeräte deutlich mehr verbraucht haben als ihr vorgelagertes Gerät oder die Geräte mehr als das Zuhause, meist eine falsche Zuordnung.</li>
               <li><strong class="lead-in">Gerät suchen</strong>In grossen Diagrammen.</li>
               <li><strong class="lead-in">Vertikales Diagramm für grosse Bäume</strong>Läuft von links nach rechts statt von oben nach unten, im Panel und in der Karte.</li>
             </ul>
@@ -268,6 +276,7 @@
               <li><strong class="lead-in">Drag and drop (oder das Menü ⋮ auf dem Handy)</strong>Ein Gerät in ein anderes einordnen, umbenennen oder entfernen.</li>
               <li><strong class="lead-in">Quellen</strong>Einen Sensor auf Netzbezug, Netzeinspeisung, Solar, Batterie oder Wasser ziehen. Preise bleiben, wie sie sind.</li>
               <li><strong class="lead-in">Freie Sensoren</strong>Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt.</li>
+              <li><strong class="lead-in">Hauszähler</strong>Ab Home Assistant 2026.11: beim Zuhause zuordnen, ersetzen oder entfernen, oder dein Gerät mit dem Hauptzähler dazu machen.</li>
               <li><strong class="lead-in">Zähler anlegen</strong>Macht aus einem Leistungs- oder Durchflusssensor einen gewöhnlichen Integral-Helfer.</li>
               <li><strong class="lead-in">Entwurf, Prüfung, Speichern</strong>Mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben.</li>
             </ul>
@@ -275,7 +284,7 @@
           <div>
             <h3 class="feature-head head-export">Überall</h3>
             <ul class="feature-list">
-              <li><strong class="lead-in">Dashboard-Karte</strong>Derselbe Baum, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
+              <li><strong class="lead-in">Dashboard-Karte</strong>Derselbe Baum mit dem Verbrauch des Zuhauses, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
               <li><strong class="lead-in">Tab Wasser</strong>Liter und m³, mit US-Einheiten Gallonen.</li>
               <li><strong class="lead-in">Sicherungen, Export und Import</strong>Jeden früheren Stand wiederherstellen oder eine Kopie anderswo aufbewahren.</li>
               <li><strong class="lead-in">Deutsch, Englisch, Französisch und Italienisch</strong>Helles und dunkles Design, Handy-Layout.</li>
@@ -303,7 +312,7 @@ root: sensor.kitchen_energy   # optional: nur dieses Gerät und alles darunter
 title: Küche           # optional; ein leerer Titel blendet die Kopfzeile aus
 orientation: vertical  # horizontal (Standard) oder vertical (von links nach rechts)
 show_sources: true     # Quellen vor dem Zuhause (nicht mit root)
-show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code></pre>
+show_untracked: true   # Blöcke für den nicht erfassten Verbrauch</code></pre>
         </div>
       </div>
     </section>
@@ -318,8 +327,8 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
             <figcaption><b>Vertikales Diagramm:</b> läuft von links nach rechts, für grosse Bäume.</figcaption>
           </figure>
           <figure class="shot">
-            <img src="/assets/img/efm/period.webp" alt="30 Tage mit Verbrauch, der nicht einzeln erfasst ist, und einer Plausibilitätswarnung" width="1200" height="585" loading="lazy">
-            <figcaption><b>30 Tage:</b> Energie pro Gerät, was nicht einzeln erfasst ist, und eine Warnung.</figcaption>
+            <img src="/assets/img/efm/period.webp" alt="30 Tage mit nicht erfasstem Verbrauch und einer Plausibilitätswarnung" width="1200" height="585" loading="lazy">
+            <figcaption><b>30 Tage:</b> Energie pro Gerät, nicht erfasster Verbrauch und eine Warnung.</figcaption>
           </figure>
           <figure class="shot">
             <img src="/assets/img/efm/save.webp" alt="Die Liste der Änderungen vor dem Speichern" width="1200" height="585" loading="lazy">
@@ -352,7 +361,7 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
           <p><strong>Beta.</strong> Vor 1.0 sind Breaking Changes möglich. Jedes Speichern legt eine Sicherung deiner bisherigen Energie-Einstellungen an, du kannst also immer zurück.</p>
           <h3>Voraussetzungen</h3>
           <ul>
-                    <li>Home Assistant <strong>2026.10.0</strong> oder neuer, mit dem Energie-Dashboard (Teil der Standardkonfiguration).</li>
+                    <li>Home Assistant <strong>2026.10.0</strong> oder neuer, mit dem Energie-Dashboard (Teil der Standardkonfiguration). Der Hauszähler braucht 2026.11 oder neuer.</li>
                     <li><a href="https://hacs.xyz/">HACS</a> für die Installation (oder eine manuelle Kopie, siehe unten).</li>
                     <li>Ein Admin-Konto für das Panel. Die Dashboard-Karte funktioniert für alle.</li>
                   </ul>
@@ -394,8 +403,12 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
             <div class="answer"><p>Öffne Energy Flow Mapper in der Seitenleiste und ziehe einen Energiesensor aus <strong>Freie Sensoren</strong> ins Diagramm, oder nimm <strong>Hinzufügen</strong>. «Freie Sensoren» listet alle Energiezähler und externen Statistiken, die noch nicht im Energie-Dashboard sind. Geschrieben wird erst, wenn du <strong>Speichern</strong> wählst, und vorher siehst du die Liste der Änderungen.</p></div>
           </details>
           <details>
-            <summary><h3>Wie lege ich im Energie-Dashboard ein übergeordnetes Gerät fest («enthalten in»)?</h3></summary>
-            <div class="answer"><p>Home Assistant kann den Verbrauch eines Geräts als Teil eines anderen behandeln, zum Beispiel eine Kaffeemaschine hinter einem Unterzähler der Küche. In Energy Flow Mapper ziehst du die Kaffeemaschine auf den Block der Küche; gültige Ziele leuchten auf. Auf dem Handy nimmst du das Menü <strong>⋮</strong> → <strong>Verschieben nach …</strong>. Das Diagramm zeigt dann, wie viel vom Verbrauch der Küche nicht einzeln erfasst ist.</p></div>
+            <summary><h3>Wie lege ich im Energie-Dashboard ein vorgelagertes Gerät fest («enthalten in»)?</h3></summary>
+            <div class="answer"><p>Home Assistant kann den Verbrauch eines Geräts als Teil eines anderen behandeln, zum Beispiel eine Kaffeemaschine hinter einem Unterzähler der Küche. In Energy Flow Mapper ziehst du die Kaffeemaschine auf den Block der Küche; gültige Ziele leuchten auf. Auf dem Handy nimmst du das Menü <strong>⋮</strong> → <strong>Verschieben nach …</strong>. Das Diagramm zeigt dann den nicht erfassten Verbrauch der Küche: was ihre Untergeräte nicht abdecken.</p></div>
+          </details>
+          <details>
+            <summary><h3>Wie lege ich im Energie-Dashboard den Hauszähler fest?</h3></summary>
+            <div class="answer"><p>Home Assistant 2026.11 kennt einen Hauszähler für das ganze Zuhause. In Energy Flow Mapper ziehst du einen freien Sensor auf <strong>+ Hauszähler</strong> beim Zuhause, oder du tippst auf <strong>+ Hauszähler</strong> und wählst einen aus. Ist eines deiner Geräte schon dein Hauptzähler, ziehst du es auf <strong>+ Hauszähler</strong> oder wählst <strong>⋮</strong> → <strong>Als Hauszähler verwenden</strong>: Seine Untergeräte rücken eine Ebene nach oben, und sein Name bleibt. Das Zuhause zeigt dann, was das Haus verbraucht hat, und <strong>Nicht erfasster Verbrauch</strong> darunter zeigt, was noch kein Gerät abdeckt. Mit Home Assistant 2026.10 berechnet das Zuhause den Verbrauch eines Zeitraums stattdessen aus Netz, Solar und Batterie. Ein Zähler, dessen Daten Stunden hinterherhinken, zum Beispiel aus einem Portal des Energieversorgers, gibt keinen Wert für das Zuhause statt eines irreführenden.</p></div>
           </details>
           <details>
             <summary><h3>Ist Energy Flow Mapper einfach noch eine Energie-Karte?</h3></summary>
@@ -403,7 +416,7 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
           </details>
           <details>
             <summary><h3>Kann Energy Flow Mapper meine Energie-Einstellungen kaputt machen?</h3></summary>
-            <div class="answer"><p>Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt – standardmässig 20, bis zu 100. <strong>Letztes Speichern rückgängig machen</strong> oder <strong>Sicherungen → Wiederherstellen</strong> holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende übergeordnete Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind.</p></div>
+            <div class="answer"><p>Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt – standardmässig 20, bis zu 100. <strong>Letztes Speichern rückgängig machen</strong> oder <strong>Sicherungen → Wiederherstellen</strong> holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende vorgelagerte Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind.</p></div>
           </details>
           <details>
             <summary><h3>Wie bringe ich einen Leistungssensor (W) ins Energie-Dashboard?</h3></summary>
@@ -415,7 +428,7 @@ show_untracked: true   # Blöcke für das, was nicht einzeln erfasst ist</code><
           </details>
           <details>
             <summary><h3>Welche Home-Assistant-Version braucht Energy Flow Mapper?</h3></summary>
-            <div class="answer"><p>Home Assistant <strong>2026.10.0</strong> oder neuer. Das Panel ist für Admins; die Dashboard-Karte funktioniert für alle, die das Dashboard sehen.</p></div>
+            <div class="answer"><p>Home Assistant <strong>2026.10.0</strong> oder neuer; der Hauszähler braucht 2026.11 oder neuer. Das Panel ist für Admins; die Dashboard-Karte funktioniert für alle, die das Dashboard sehen.</p></div>
           </details>
           <details>
             <summary><h3>HACS findet Energy Flow Mapper nicht. Was kann ich tun?</h3></summary>
