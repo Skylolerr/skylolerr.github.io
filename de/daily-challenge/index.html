@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Daily Challenge – Tagesziele und Streaks für Home Assistant</title>
-  <meta name="description" content="Tagesziele in Home Assistant verfolgen: Liegestütze, Leseminuten, Gläser Wasser. Streaks, Soll und Ist, Aufholmodus und eine eigene Dashboard-Karte. Gratis via HACS.">
+  <meta name="description" content="Tagesziele in Home Assistant verfolgen: Liegestütze, Leseminuten, Gläser Wasser. Streaks, Kalender, Meilensteine, Zählen per Sensor und eigene Karten. Gratis via HACS.">
   <link rel="canonical" href="https://skylolerr.com/de/daily-challenge/">
   <link rel="alternate" hreflang="en" href="https://skylolerr.com/daily-challenge/">
   <link rel="alternate" hreflang="de" href="https://skylolerr.com/de/daily-challenge/">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Skylolerr">
   <meta property="og:title" content="Daily Challenge – Tagesziele und Streaks für Home Assistant">
-  <meta property="og:description" content="Zählbare tägliche Challenges für Home Assistant mit Streaks, Soll und Ist, optionalem Aufholmodus und eigener Karte. Gratis via HACS.">
+  <meta property="og:description" content="Zählbare tägliche Challenges für Home Assistant mit Streaks, einem Kalender deiner Tage, Meilensteinen, automatischem Zählen per Sensor und eigenen Karten. Gratis via HACS.">
   <meta property="og:url" content="https://skylolerr.com/de/daily-challenge/">
   <meta property="og:image" content="https://skylolerr.com/assets/img/og-daily-challenge.png">
   <meta property="og:image:width" content="1200">
@@ -35,7 +35,7 @@
         "@type": "SoftwareApplication",
         "@id": "https://skylolerr.com/de/daily-challenge/#app",
         "name": "Daily Challenge",
-        "description": "Eine Home-Assistant-Integration für zählbare tägliche Challenges wie 20 Liegestütze oder 8 Gläser Wasser, mit Streaks, Soll und Ist über die ganze Challenge, optionalem Aufholmodus und eigener Dashboard-Karte.",
+        "description": "Eine Home-Assistant-Integration für zählbare tägliche Challenges wie 20 Liegestütze oder 8 Gläser Wasser, mit Streaks, Soll und Ist über die ganze Challenge, einem Kalender der Tageswerte, Meilensteinen, automatischem Zählen per Sensor, Assist, optionalem Aufholmodus und eigenen Dashboard-Karten.",
         "url": "https://skylolerr.com/de/daily-challenge/",
         "inLanguage": "de",
         "image": "https://skylolerr.com/assets/img/og-daily-challenge.png",
@@ -50,7 +50,12 @@
           "Soll und Ist über die ganze Challenge",
           "Optionaler Aufholmodus für den Rückstand von gestern",
           "Dashboard-Karte mit Fortschrittsring und Rückgängig",
-          "Blueprint für Erinnerungen",
+          "Kalender (Heatmap) der Tageswerte, mit Korrektur in der Karte",
+          "Automatisch zählen per Sensor oder steigendem Zähler",
+          "Meilenstein-Ereignisse, Konfetti und Geräte-Auslöser",
+          "Assist: Challenges per Sprache oder Chat erhöhen, setzen und abfragen",
+          "Übersichtskarte mit allen Challenges",
+          "Blueprints für Erinnerungen, Meilensteine, schnelles Hinzufügen, eine Wochenzusammenfassung und Assist",
           "Aktionen zum Hinzufügen, Setzen und Abrufen der Werte jedes Tages"
         ],
         "license": "https://opensource.org/license/mit",
@@ -89,7 +94,22 @@
           {
             "@type": "Question",
             "name": "Kann ich einen vergangenen Tag korrigieren?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Die Aktionen daily_challenge.set und daily_challenge.add haben ein optionales Datum, damit korrigierst du jeden Tag zwischen dem Startdatum und heute, zum Beispiel in den Entwicklerwerkzeugen oder in einer Automation." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Tippe in der Karte im Kalender auf den Tag, ändere den Wert und wähle Speichern; Rückgängig nimmt es zurück. Auch die Aktionen daily_challenge.set und daily_challenge.add haben ein optionales Datum, damit korrigierst du jeden Tag zwischen dem Startdatum und heute, zum Beispiel in den Entwicklerwerkzeugen oder in einer Automation." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ein Sensor für mich zählen, etwa Schritte oder ein Kilometerzähler?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Unter «Automatisch zählen» in den Optionen einer Challenge wählst du einen Sensor, eine Zahl, eine Eingabezahl oder einen Zähler als Quelle. Als Tageswert zeigt die Quelle die heutige Menge, etwa Schritte heute, und setzt sie; die Knöpfe gibt es dann nicht. Als Zähler steigt die Quelle immer weiter, etwa ein Kilometerzähler, und jeder Anstieg wird addiert; die Knöpfe bleiben." }
+          },
+          {
+            "@type": "Question",
+            "name": "Feiert Daily Challenge Meilensteine?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Das Ereignis «Meilenstein» einer Challenge meldet sich, wenn der Streak 7, 14, 30 … Tage erreicht, bei einem neuen besten Streak oder Tag und wenn die Gesamtmenge 100, 250, 500 … erreicht; welche Arten zählen, wählst du in den Optionen. Die Karte zeigt Konfetti mit einem kurzen Text wie «7 Tage in Folge!», der Blueprint für Meilensteine gratuliert dir, und im Automations-Editor gibt es Geräte-Auslöser wie «Meilenstein erreicht» und «Tagesziel heute erreicht»." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich eine Challenge per Sprache mit Assist nachführen?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Mit einem KI-Assistenten als Konversationsagent gibst du die Entität «Heute» der Challenge für Assist frei; der Assistent kann deine Challenges dann erhöhen, setzen und abfragen, etwa nach «Ich habe gerade 20 Liegestütze gemacht». Für das eingebaute Assist fügt der Blueprint für Sprachbefehle Sätze hinzu, auf Englisch voreingestellt und leicht auf Deutsch umzustellen, zum Beispiel «füge 20 zu Liegestütze hinzu»." }
           },
           {
             "@type": "Question",
@@ -104,7 +124,7 @@
           {
             "@type": "Question",
             "name": "Kann ich mehrere Challenges gleichzeitig verfolgen?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jede Challenge ist ein eigener Eintrag: füge die Integration für die nächste einfach noch einmal hinzu. Jede bekommt ihr eigenes Gerät, ihre Entitäten und ihre Karte." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Jede Challenge ist ein eigener Eintrag: füge die Integration für die nächste einfach noch einmal hinzu. Jede bekommt ihr eigenes Gerät, ihre Entitäten und ihre Karte. Die Übersichtskarte zeigt alle auf einen Blick, jede mit einem Knopf +." }
           },
           {
             "@type": "Question",
@@ -163,7 +183,7 @@
           </nav>
           <h1>Daily Challenge</h1>
           <p class="deck">Zählbare Tagesziele in Home Assistant.</p>
-          <p class="lead">Daily Challenge verfolgt Mengen, die du jeden Tag erreichen willst: 20 Liegestütze, 30 Minuten lesen, 8 Gläser Wasser. Mit Streaks, Soll und Ist über die ganze Challenge, optionalem Aufholmodus und eigener Dashboard-Karte. Direkt in HACS verfügbar.</p>
+          <p class="lead">Daily Challenge verfolgt Mengen, die du jeden Tag erreichen willst: 20 Liegestütze, 30 Minuten lesen, 8 Gläser Wasser. Mit Streaks, Soll und Ist über die ganze Challenge, einem Kalender deiner Tage, Meilensteinen, optionalem Aufholmodus und eigenen Dashboard-Karten. Direkt in HACS verfügbar.</p>
           <div class="actions">
             <a class="btn btn-white" href="https://my.home-assistant.io/redirect/hacs_repository/?owner=Skylolerr&amp;repository=ha-daily-challenge&amp;category=integration"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 3 2 12h3v8h5v-5h4v5h5v-8h3L12 3Z"/></svg>In HACS öffnen</a>
             <a class="btn btn-ghost" href="https://github.com/Skylolerr/ha-daily-challenge"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>GitHub</a>
@@ -244,7 +264,9 @@
             <li><strong class="lead-in">Eine Tagesmenge</strong>Jede Challenge hat ihr eigenes Tagesziel, ihre Einheit und ihre Knöpfe.</li>
             <li><strong class="lead-in">Soll und Ist</strong>Über die ganze Laufzeit: Vorsprung oder Rückstand auf einen Blick.</li>
             <li><strong class="lead-in">Enddatum</strong>Was noch fehlt, in wie vielen Tagen und wie viel du dafür im Schnitt pro Tag noch brauchst.</li>
-            <li><strong class="lead-in">Jeden vergangenen Tag korrigieren</strong>Mit den Aktionen.</li>
+            <li><strong class="lead-in">Kalender deiner Tage</strong>Ein Feld pro Tag für das letzte Jahr, 6 oder 3 Monate, eingefärbt danach, wie nah der Tag am Ziel war.</li>
+            <li><strong class="lead-in">Jeden vergangenen Tag korrigieren</strong>Im Kalender antippen, mit Rückgängig, oder mit den Aktionen.</li>
+            <li><strong class="lead-in">Automatisch zählen</strong>Übernimmt den heutigen Wert von einem Sensor wie Schritte heute oder addiert jeden Anstieg eines Zählers wie eines Kilometerzählers.</li>
           </ul>
         </div>
         <div class="ring-row">
@@ -253,13 +275,16 @@
             <li><strong class="lead-in">Streaks</strong>Mit wählbarer Regel: Tagesziel erreicht, oder irgendeine Menge.</li>
             <li><strong class="lead-in">Bester Streak, bester Tag</strong>Durchschnitt pro Tag und Summen pro Woche, Monat und Jahr.</li>
             <li><strong class="lead-in">Optionaler Aufholmodus</strong>Ein verpasster Tag lässt sich am nächsten Tag nachholen, ohne den Streak zu verlieren.</li>
-            <li><strong class="lead-in">Blueprint für Erinnerungen</strong>Eine Meldung um 20:00, solange das heutige Ziel noch offen ist.</li>
+            <li><strong class="lead-in">Meilensteine</strong>Streaks von 7, 14, 30 … Tagen, ein neuer bester Streak oder Tag und Gesamtmengen von 100, 250, 500 …, mit Konfetti in der Karte und einem Blueprint, der dir gratuliert.</li>
+            <li><strong class="lead-in">Erinnerung und Wochenzusammenfassung</strong>Eine Meldung um 20:00, solange das heutige Ziel noch offen ist, und eine Bilanz der Woche an einem Tag deiner Wahl.</li>
           </ul>
         </div>
         <div class="ring-row">
           <h3>Passt in Home Assistant</h3>
           <ul class="feature-list">
-            <li><strong class="lead-in">Eigene Karte</strong>Mit Fortschrittsring, Schnellknöpfen, Rückgängig, Streak sowie Soll und Ist, dazu ein visueller Editor. Automatisch installiert und registriert.</li>
+            <li><strong class="lead-in">Eigene Karte</strong>Mit Fortschrittsring, Schnellknöpfen, Rückgängig, Streak, Soll und Ist, Statistik und Kalender, dazu ein visueller Editor. Automatisch installiert und registriert.</li>
+            <li><strong class="lead-in">Übersichtskarte</strong>Alle Challenges auf einen Blick, jede mit einem Knopf +.</li>
+            <li><strong class="lead-in">Assist, Knöpfe und NFC-Tags</strong>Per Sprache oder Chat hinzufügen, mit einem Tastendruck oder einem gescannten Tag; Geräte-Auslöser für das Tagesziel und Meilensteine.</li>
             <li><strong class="lead-in">Gewöhnliche Entitäten</strong>Sie funktionieren genauso mit Tile, Entities, Mushroom oder ApexCharts.</li>
             <li><strong class="lead-in">Deutsch, Englisch, Französisch und Italienisch</strong>Helles und dunkles Design, dein Zahlenformat.</li>
           </ul>
@@ -280,8 +305,12 @@ show_target_vs_actual: true
 show_remaining: true
 show_required_average: true
 show_catch_up: true
-show_buttons: true</code></pre>
-          <p>Nach dem Enddatum zeigt die Karte die Summe im Vergleich zum Endziel.</p>
+show_buttons: true
+show_stats: true
+show_heatmap: true
+heatmap_range: year     # year, 6months oder 3months
+show_celebration: true</code></pre>
+          <p>Nach dem Enddatum zeigt die Karte die Summe im Vergleich zum Endziel. Die Übersichtskarte <code>custom:<wbr>daily-challenge-overview-card</code> zeigt alle Challenges auf einen Blick.</p>
         </div>
         <figure class="ring-figure">
           <div class="ring-box">
@@ -352,7 +381,19 @@ show_buttons: true</code></pre>
           </details>
           <details>
             <summary><h3>Kann ich einen vergangenen Tag korrigieren?</h3></summary>
-            <div class="answer"><p>Ja. Die Aktionen <code>daily_challenge.set</code> und <code>daily_challenge.add</code> haben ein optionales Datum, damit korrigierst du jeden Tag zwischen dem Startdatum und heute – zum Beispiel in den Entwicklerwerkzeugen oder in einer Automation.</p></div>
+            <div class="answer"><p>Ja. Tippe in der Karte im Kalender auf den Tag, ändere den Wert und wähle <strong>Speichern</strong>; <strong>Rückgängig</strong> nimmt es zurück. Auch die Aktionen <code>daily_challenge.set</code> und <code>daily_challenge.add</code> haben ein optionales Datum, damit korrigierst du jeden Tag zwischen dem Startdatum und heute – zum Beispiel in den Entwicklerwerkzeugen oder in einer Automation.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ein Sensor für mich zählen, etwa Schritte oder ein Kilometerzähler?</h3></summary>
+            <div class="answer"><p>Ja. Unter <strong>Automatisch zählen</strong> in den Optionen einer Challenge wählst du einen Sensor, eine Zahl, eine Eingabezahl oder einen Zähler als Quelle. Als <strong>Tageswert</strong> zeigt die Quelle die heutige Menge, etwa Schritte heute, und setzt sie; die Knöpfe gibt es dann nicht. Als <strong>Zähler</strong> steigt die Quelle immer weiter, etwa ein Kilometerzähler, und jeder Anstieg wird addiert; die Knöpfe bleiben.</p></div>
+          </details>
+          <details>
+            <summary><h3>Feiert Daily Challenge Meilensteine?</h3></summary>
+            <div class="answer"><p>Ja. Das Ereignis <strong>Meilenstein</strong> einer Challenge meldet sich, wenn der Streak 7, 14, 30 … Tage erreicht, bei einem neuen besten Streak oder Tag und wenn die Gesamtmenge 100, 250, 500 … erreicht; welche Arten zählen, wählst du in den Optionen. Die Karte zeigt Konfetti mit einem kurzen Text wie <em>7 Tage in Folge!</em>, der <a href="https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2FSkylolerr%2Fha-daily-challenge%2Fblob%2Fmain%2Fblueprints%2Fautomation%2Fdaily_challenge%2Fmilestone.yaml">Blueprint für Meilensteine</a> gratuliert dir, und im Automations-Editor gibt es Geräte-Auslöser wie <strong>Meilenstein erreicht</strong> und <strong>Tagesziel heute erreicht</strong>.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich eine Challenge per Sprache mit Assist nachführen?</h3></summary>
+            <div class="answer"><p>Ja. Mit einem KI-Assistenten als Konversationsagent gibst du die Entität <strong>Heute</strong> der Challenge für Assist frei; der Assistent kann deine Challenges dann erhöhen, setzen und abfragen, etwa nach <em>Ich habe gerade 20 Liegestütze gemacht</em>. Für das eingebaute Assist fügt der <a href="https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2FSkylolerr%2Fha-daily-challenge%2Fblob%2Fmain%2Fblueprints%2Fautomation%2Fdaily_challenge%2Fvoice.yaml">Blueprint für Sprachbefehle</a> Sätze hinzu, auf Englisch voreingestellt und leicht auf Deutsch umzustellen, zum Beispiel <em>füge 20 zu Liegestütze hinzu</em>.</p></div>
           </details>
           <details>
             <summary><h3>Kann Home Assistant mich erinnern, wenn das Tagesziel noch offen ist?</h3></summary>
@@ -364,7 +405,7 @@ show_buttons: true</code></pre>
           </details>
           <details>
             <summary><h3>Kann ich mehrere Challenges gleichzeitig verfolgen?</h3></summary>
-            <div class="answer"><p>Ja. Jede Challenge ist ein eigener Eintrag: füge die Integration für die nächste einfach noch einmal hinzu. Jede bekommt ihr eigenes Gerät, ihre Entitäten und ihre Karte.</p></div>
+            <div class="answer"><p>Ja. Jede Challenge ist ein eigener Eintrag: füge die Integration für die nächste einfach noch einmal hinzu. Jede bekommt ihr eigenes Gerät, ihre Entitäten und ihre Karte. Die Übersichtskarte zeigt alle auf einen Blick, jede mit einem Knopf <strong>+</strong>.</p></div>
           </details>
           <details>
             <summary><h3>Wird um Mitternacht etwas zurückgesetzt, und was, wenn Home Assistant aus ist?</h3></summary>
