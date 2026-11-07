@@ -54,7 +54,11 @@
           "Dashboard-Karte zum Anzeigen",
           "Vertikales Diagramm für grosse Bäume",
           "Verbrauch des Zuhauses und nicht erfasster Verbrauch",
-          "Hauszähler zuordnen (Home Assistant 2026.11 oder neuer)"
+          "Hauszähler zuordnen (Home Assistant 2026.11 oder neuer)",
+          "Eigene Energie-Prüfungen von Home Assistant direkt beim Gerät",
+          "Abdeckung des Zuhauses durch die Geräte",
+          "Vorschläge aus den Untergeräten von Home Assistant",
+          "Diagramm als PNG-Bild speichern, auf Wunsch ohne Namen"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -88,6 +92,16 @@
             "@type": "Question",
             "name": "Wie lege ich im Energie-Dashboard den Hauszähler fest?",
             "acceptedAnswer": { "@type": "Answer", "text": "Home Assistant 2026.11 kennt einen Hauszähler für das ganze Zuhause. In Energy Flow Mapper ziehst du einen freien Sensor auf «+ Hauszähler» beim Zuhause, oder du tippst auf «+ Hauszähler» und wählst einen aus. Ist eines deiner Geräte schon dein Hauptzähler, ziehst du es auf «+ Hauszähler» oder wählst im Menü ⋮ «Als Hauszähler verwenden»: Seine Untergeräte rücken eine Ebene nach oben, und sein Name bleibt. Das Zuhause zeigt dann, was das Haus verbraucht hat, und «Nicht erfasster Verbrauch» darunter zeigt, was noch kein Gerät abdeckt. Mit Home Assistant 2026.10 berechnet das Zuhause den Verbrauch eines Zeitraums stattdessen aus Netz, Solar und Batterie. Ein Zähler, dessen Daten Stunden hinterherhinken, zum Beispiel aus einem Portal des Energieversorgers, gibt keinen Wert für das Zuhause statt eines irreführenden." }
+          },
+          {
+            "@type": "Question",
+            "name": "Was bedeuten die Warnungen bei einem Gerät?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Es gibt zwei Arten. Die eigenen Energie-Prüfungen von Home Assistant, etwa Sensor nicht verfügbar, Entität entfernt, falsche Einheit oder Zustandsklasse, negativer Zustand oder vom Recorder ausgeschlossen, werden beim Gerät, bei der Quelle oder beim Hauszähler markiert, mit den Worten von Home Assistant, auch auf der Dashboard-Karte. Dazu kommen die Plausibilitätswarnungen von Energy Flow Mapper, wenn Untergeräte deutlich mehr verbraucht haben als ihr vorgelagertes Gerät oder die Geräte mehr als das Zuhause; meist ist dann etwas falsch zugeordnet." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich mein Energie-Setup als Bild teilen, etwa in einem Forum?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. «Als Bild speichern» im Panel speichert das ganze Diagramm des Tabs als PNG, mit Zeitraum und Datum. Mit «Namen ausblenden» heissen die Geräte Gerät 1, 2, …, und Bereiche und Sensornamen fehlen. Das Bild entsteht in deinem Browser und wird nirgends hingeschickt." }
           },
           {
             "@type": "Question",
@@ -263,8 +277,9 @@
             <h3 class="feature-head head-solar">Alles im Blick</h3>
             <ul class="feature-list">
               <li><strong class="lead-in">Diagramm deines Energie-Dashboards</strong>Quellen, Zuhause und Geräte, automatisch angeordnet, mit den Namen und Begriffen von Home Assistant; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
-              <li><strong class="lead-in">Das ganze Zuhause</strong>Das Zuhause zeigt, was das Haus verbraucht hat, gemessen vom Hauszähler oder berechnet aus Netz, Solar und Batterie. Darunter der nicht erfasste Verbrauch, den noch kein Gerät abdeckt.</li>
+              <li><strong class="lead-in">Das ganze Zuhause</strong>Das Zuhause zeigt, was das Haus verbraucht hat, gemessen vom Hauszähler oder berechnet aus Netz, Solar und Batterie. Darunter der nicht erfasste Verbrauch, den noch kein Gerät abdeckt, und wie viel die Geräte abdecken, etwa 72 % von Geräten erfasst.</li>
               <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, auch der nicht erfasste Verbrauch.</li>
+              <li><strong class="lead-in">Prüfungen von Home Assistant</strong>Sensor nicht verfügbar, falsche Einheit, negativer Zustand …: markiert beim Gerät, bei der Quelle oder beim Hauszähler, mit den Worten von Home Assistant.</li>
               <li><strong class="lead-in">Plausibilitätswarnungen</strong>Wenn Untergeräte deutlich mehr verbraucht haben als ihr vorgelagertes Gerät oder die Geräte mehr als das Zuhause, meist eine falsche Zuordnung.</li>
               <li><strong class="lead-in">Gerät suchen</strong>In grossen Diagrammen.</li>
               <li><strong class="lead-in">Vertikales Diagramm für grosse Bäume</strong>Läuft von links nach rechts statt von oben nach unten, im Panel und in der Karte.</li>
@@ -277,6 +292,7 @@
               <li><strong class="lead-in">Quellen</strong>Einen Sensor auf Netzbezug, Netzeinspeisung, Solar, Batterie oder Wasser ziehen. Preise bleiben, wie sie sind.</li>
               <li><strong class="lead-in">Freie Sensoren</strong>Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt.</li>
               <li><strong class="lead-in">Hauszähler</strong>Ab Home Assistant 2026.11: beim Zuhause zuordnen, ersetzen oder entfernen, oder dein Gerät mit dem Hauptzähler dazu machen.</li>
+              <li><strong class="lead-in">Vorschläge aus Untergeräten</strong>Meldet eine Integration ein Gerät als Teil eines anderen, schlägt das Panel vor, es dort einzuordnen: Übernehmen oder Ignorieren. Von selbst ändert sich nichts.</li>
               <li><strong class="lead-in">Zähler anlegen</strong>Macht aus einem Leistungs- oder Durchflusssensor einen gewöhnlichen Integral-Helfer.</li>
               <li><strong class="lead-in">Entwurf, Prüfung, Speichern</strong>Mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben.</li>
             </ul>
@@ -284,7 +300,8 @@
           <div>
             <h3 class="feature-head head-export">Überall</h3>
             <ul class="feature-list">
-              <li><strong class="lead-in">Dashboard-Karte</strong>Derselbe Baum mit dem Verbrauch des Zuhauses, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
+              <li><strong class="lead-in">Dashboard-Karte</strong>Derselbe Baum mit dem Verbrauch des Zuhauses und den Prüfungen von Home Assistant, nur zum Anzeigen, auf jedem Dashboard und für alle.</li>
+              <li><strong class="lead-in">Als Bild speichern</strong>Das ganze Diagramm als PNG; <em>Namen ausblenden</em> macht aus den Geräten Gerät 1, 2, …. Entsteht in deinem Browser, wird nirgends hingeschickt.</li>
               <li><strong class="lead-in">Tab Wasser</strong>Liter und m³, mit US-Einheiten Gallonen.</li>
               <li><strong class="lead-in">Sicherungen, Export und Import</strong>Jeden früheren Stand wiederherstellen oder eine Kopie anderswo aufbewahren.</li>
               <li><strong class="lead-in">Deutsch, Englisch, Französisch und Italienisch</strong>Helles und dunkles Design, Handy-Layout.</li>
@@ -312,7 +329,8 @@ root: sensor.kitchen_energy   # optional: nur dieses Gerät und alles darunter
 title: Küche           # optional; ein leerer Titel blendet die Kopfzeile aus
 orientation: vertical  # horizontal (Standard) oder vertical (von links nach rechts)
 show_sources: true     # Quellen vor dem Zuhause (nicht mit root)
-show_untracked: true   # Blöcke für den nicht erfassten Verbrauch</code></pre>
+show_untracked: true   # Blöcke für den nicht erfassten Verbrauch
+show_coverage: true    # «72 % von Geräten erfasst» beim Zuhause (Standard: aus)</code></pre>
         </div>
       </div>
     </section>
@@ -409,6 +427,14 @@ show_untracked: true   # Blöcke für den nicht erfassten Verbrauch</code></pre>
           <details>
             <summary><h3>Wie lege ich im Energie-Dashboard den Hauszähler fest?</h3></summary>
             <div class="answer"><p>Home Assistant 2026.11 kennt einen Hauszähler für das ganze Zuhause. In Energy Flow Mapper ziehst du einen freien Sensor auf <strong>+ Hauszähler</strong> beim Zuhause, oder du tippst auf <strong>+ Hauszähler</strong> und wählst einen aus. Ist eines deiner Geräte schon dein Hauptzähler, ziehst du es auf <strong>+ Hauszähler</strong> oder wählst <strong>⋮</strong> → <strong>Als Hauszähler verwenden</strong>: Seine Untergeräte rücken eine Ebene nach oben, und sein Name bleibt. Das Zuhause zeigt dann, was das Haus verbraucht hat, und <strong>Nicht erfasster Verbrauch</strong> darunter zeigt, was noch kein Gerät abdeckt. Mit Home Assistant 2026.10 berechnet das Zuhause den Verbrauch eines Zeitraums stattdessen aus Netz, Solar und Batterie. Ein Zähler, dessen Daten Stunden hinterherhinken, zum Beispiel aus einem Portal des Energieversorgers, gibt keinen Wert für das Zuhause statt eines irreführenden.</p></div>
+          </details>
+          <details>
+            <summary><h3>Was bedeuten die Warnungen bei einem Gerät?</h3></summary>
+            <div class="answer"><p>Es gibt zwei Arten. Die eigenen Energie-Prüfungen von Home Assistant, etwa Sensor nicht verfügbar, Entität entfernt, falsche Einheit oder Zustandsklasse, negativer Zustand oder vom Recorder ausgeschlossen, werden beim Gerät, bei der Quelle oder beim Hauszähler markiert, mit den Worten von Home Assistant, auch auf der Dashboard-Karte. Dazu kommen die Plausibilitätswarnungen von Energy Flow Mapper, wenn Untergeräte deutlich mehr verbraucht haben als ihr vorgelagertes Gerät oder die Geräte mehr als das Zuhause; meist ist dann etwas falsch zugeordnet.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich mein Energie-Setup als Bild teilen, etwa in einem Forum?</h3></summary>
+            <div class="answer"><p>Ja. <strong>Als Bild speichern</strong> im Panel speichert das ganze Diagramm des Tabs als PNG, mit Zeitraum und Datum. Mit <strong>Namen ausblenden</strong> heissen die Geräte <em>Gerät 1, 2, …</em>, und Bereiche und Sensornamen fehlen. Das Bild entsteht in deinem Browser und wird nirgends hingeschickt.</p></div>
           </details>
           <details>
             <summary><h3>Ist Energy Flow Mapper einfach noch eine Energie-Karte?</h3></summary>
