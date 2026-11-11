@@ -32,7 +32,7 @@ EFM_ICON = (134, 128, 344)
 DC_ICON = (113, 124, 352)
 
 # Crop boxes inside the built 1600 px screenshots: (left, top, right, bottom).
-EFM_FLOW = (339, 122, 1261, 704)  # the "Energy flow" card
+EFM_FLOW = (339, 280, 1261, 862)  # the diagram of the "Energy flow" card, with both groups
 DC_CARD_ONE = (26, 26, 523, 543)  # the push-ups card
 
 # Frames that show the action the alt text of each animation describes.
@@ -40,6 +40,7 @@ STILLS = (
     ("efm", "periods", (69, 73, 77)),  # 30 days selected
     ("efm", "drag", (31,)),  # the coffee machine on its way to Office, targets lit
     ("efm", "tabs", (21, 26, 30)),  # the water tab
+    ("efm", "groups", (138, 144, 150)),  # both groups collapsed, Basement with its sum
     ("dc", "buttons", (25, 27, 32)),  # +5 reached today's goal, with Undo in the message
     ("dc", "input", (26,)),  # the input with 32 typed
     ("dc", "catch-up", (38, 42, 46)),  # Deficit made up
@@ -102,7 +103,7 @@ def still_webp(src: Path, dst: Path, frames: tuple[int, ...]) -> None:
 def derived() -> None:
     """Crops and stills, made from the files already in assets/img/."""
     for theme in ("light", "dark"):
-        crop_webp(IMG / "efm" / f"diagram-{theme}.webp", IMG / "efm" / f"flow-{theme}.webp", EFM_FLOW)
+        crop_webp(IMG / "efm" / f"groups-{theme}.webp", IMG / "efm" / f"flow-{theme}.webp", EFM_FLOW)
         crop_webp(IMG / "dc" / f"hero-{theme}.webp", IMG / "dc" / f"card-one-{theme}.webp", DC_CARD_ONE)
     for folder, name, frames in STILLS:
         still_webp(IMG / folder / f"{name}.webp", IMG / folder / f"{name}-still.webp", frames)
@@ -174,6 +175,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--efm", type=Path, default=PROJECTS / "HA Energy Hierarchy" / "docs" / "images")
     parser.add_argument("--dc", type=Path, default=PROJECTS / "Hacs integrationen" / "docs" / "images")
+    # Screenshots made for the site that are not in the README (local only, on the maintainer's machine)
+    parser.add_argument("--efm-site", type=Path, default=PROJECTS / "HA Energy Hierarchy" / ".superpowers" / "website-090")
     parser.add_argument("--derived", action="store_true", help="only rebuild the crops and stills")
     args = parser.parse_args()
     if args.derived:
@@ -186,16 +189,22 @@ def main() -> None:
     # Energy Flow Mapper
     for name in ("banner-light", "banner-dark"):
         webp(efm / f"{name}.png", IMG / "efm" / f"{name}.webp", 1200)
-    for name in ("diagram-light", "diagram-dark", "card-light", "card-dark"):
-        webp(efm / f"{name}.png", IMG / "efm" / f"{name}.webp", 1600)
-        webp(efm / f"{name}.png", IMG / "efm" / f"{name}-800.webp", 800)
-    for name in ("period", "save", "backups", "water-dark"):
+    for src, name in (
+        (args.efm_site / "groups-light.png", "groups-light"),
+        (args.efm_site / "groups-dark.png", "groups-dark"),
+        (efm / "card-groups.png", "card-groups"),
+    ):
+        webp(src, IMG / "efm" / f"{name}.webp", 1600)
+        webp(src, IMG / "efm" / f"{name}-800.webp", 800)
+    for name in ("period", "save", "backups", "water-dark", "sum-meter", "gas"):
         webp(efm / f"{name}.png", IMG / "efm" / f"{name}.webp", 1200)
     webp(efm / "vertical-light.png", IMG / "efm" / "vertical.webp", 1200)
     for name in ("phone-light", "phone-dark"):
         webp(efm / f"{name}.png", IMG / "efm" / f"{name}.webp", 412)
+    webp(args.efm_site / "phone-groups-dark.png", IMG / "efm" / "phone-groups.webp", 412)
     for name in ("periods", "drag", "tabs"):
         animated_webp(efm / f"{name}.gif", IMG / "efm" / f"{name}.webp")
+    animated_webp(efm / "groups.gif", IMG / "efm" / "groups.webp")  # full size: scaling blurs the text and makes the file bigger
 
     # Daily Challenge
     for name in ("banner-light", "banner-dark"):
