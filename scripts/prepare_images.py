@@ -37,9 +37,9 @@ DC_CARD_ONE = (26, 26, 523, 543)  # the push-ups card
 
 # Frames that show the action the alt text of each animation describes.
 STILLS = (
-    ("efm", "periods", (69, 73, 77)),  # 30 days selected
+    ("efm", "periods", (62, 68, 74)),  # 30 days selected
     ("efm", "drag", (31,)),  # the coffee machine on its way to Office, targets lit
-    ("efm", "tabs", (21, 26, 30)),  # the water tab
+    ("efm", "tabs", (18, 24, 29)),  # the water tab
     ("efm", "groups", (138, 144, 150)),  # both groups collapsed, Basement with its sum
     ("dc", "buttons", (25, 27, 32)),  # +5 reached today's goal, with Undo in the message
     ("dc", "input", (26,)),  # the input with 32 typed
