@@ -177,6 +177,7 @@ def main() -> None:
     parser.add_argument("--dc", type=Path, default=PROJECTS / "Hacs integrationen" / "docs" / "images")
     # Screenshots made for the site that are not in the README (local only, on the maintainer's machine)
     parser.add_argument("--efm-site", type=Path, default=PROJECTS / "HA Energy Hierarchy" / ".superpowers" / "website-090")
+    parser.add_argument("--efm-sources", type=Path, default=PROJECTS / "HA Energy Hierarchy" / ".superpowers" / "website-092")
     parser.add_argument("--derived", action="store_true", help="only rebuild the crops and stills")
     args = parser.parse_args()
     if args.derived:
@@ -202,6 +203,9 @@ def main() -> None:
     for name in ("phone-light", "phone-dark"):
         webp(efm / f"{name}.png", IMG / "efm" / f"{name}.webp", 412)
     webp(args.efm_site / "phone-groups-dark.png", IMG / "efm" / "phone-groups.webp", 412)
+    for theme in ("light", "dark"):
+        webp(args.efm_sources / f"sources-{theme}.png", IMG / "efm" / f"sources-{theme}.webp", 1200)
+    webp(args.efm_sources / "phone-sources-dark.png", IMG / "efm" / "phone-sources.webp", 412)
     for name in ("periods", "drag", "tabs"):
         animated_webp(efm / f"{name}.gif", IMG / "efm" / f"{name}.webp")
     animated_webp(efm / "groups.gif", IMG / "efm" / "groups.webp")  # full size: scaling blurs the text and makes the file bigger

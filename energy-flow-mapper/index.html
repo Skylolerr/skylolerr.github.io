@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Energy Flow Mapper – Home Assistant energy dashboard editor</title>
-  <meta name="description" content="Edit Home Assistant's energy dashboard visually: drag and drop devices, grid, solar, battery and water, with backups. Free in the Marketplace and HACS.">
+  <meta name="description" content="Edit Home Assistant's energy dashboard visually: drag and drop devices, fold them into groups, create sum meters, with backups. Free in Marketplace and HACS.">
   <link rel="canonical" href="https://skylolerr.com/energy-flow-mapper/">
   <link rel="alternate" hreflang="en" href="https://skylolerr.com/energy-flow-mapper/">
   <link rel="alternate" hreflang="de" href="https://skylolerr.com/de/energy-flow-mapper/">
@@ -18,7 +18,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Skylolerr">
   <meta property="og:title" content="Energy Flow Mapper – a visual editor for the Home Assistant energy dashboard">
-  <meta property="og:description" content="Map grid, solar, battery, water meters, devices and child devices by drag and drop. Backups before every save, a dashboard card for everyone. Free in the Marketplace and HACS.">
+  <meta property="og:description" content="Map grid, solar, battery, water and gas meters, devices and groups by drag and drop, with values on every source. Backups before every save, a dashboard card for everyone. Free in the Marketplace and HACS.">
   <meta property="og:url" content="https://skylolerr.com/energy-flow-mapper/">
   <meta property="og:image" content="https://skylolerr.com/assets/img/og-energy-flow-mapper.png">
   <meta property="og:image:width" content="1200">
@@ -61,7 +61,9 @@
           "Groups of devices that fold into one block with their sum",
           "Create sum meters from a group or chosen sensors",
           "Gas tab with the gas meters",
-          "Unsaved draft kept when you leave the panel"
+          "Unsaved draft kept when you leave the panel",
+          "Power now and energy per period on every source",
+          "Made for phones: the diagram fills the screen"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -98,6 +100,16 @@
           },
           {
             "@type": "Question",
+            "name": "Why does a source show no power?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The power now comes from the power sensor that Home Assistant's energy settings have for that source. If a grid, solar or battery source has none there, it shows no value now; that is not an error. Add the power sensor in Home Assistant's energy settings and the value appears. Today, 7 days and 30 days show the energy anyway." }
+          },
+          {
+            "@type": "Question",
+            "name": "Does Energy Flow Mapper work on a phone?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes, also in the Home Assistant app. On a phone the diagram fills the screen below the tabs and the search; the tools sit behind Tools and the help behind ?. A tap opens a group, its actions are behind ⋮, and the bar at the bottom stays clear of Android's on-screen navigation buttons. The dashboard card works on phones as well." }
+          },
+          {
+            "@type": "Question",
             "name": "What do the warnings at a device mean?",
             "acceptedAnswer": { "@type": "Answer", "text": "There are two kinds. Home Assistant's own energy checks, such as sensor unavailable, entity gone, wrong unit or state class, negative state or excluded from the recorder, are marked at the device, source or home meter in Home Assistant's own words, also on the dashboard card. Energy Flow Mapper adds plausibility warnings when child devices used clearly more than their upstream device, or the devices more than the home, which usually means a wrong assignment." }
           },
@@ -109,12 +121,12 @@
           {
             "@type": "Question",
             "name": "How do I group devices in the energy dashboard?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Select the devices with Ctrl or Cmd and a click (on a phone: Select, then tap them), choose Group and give it a name. Folded, a group is one block with the sum of its members; open, it is a labelled frame. Groups can be nested, everything in a group has the same upstream device, and Suggest groups from areas makes a start. Groups exist only in Energy Flow Mapper: they change nothing in Home Assistant's energy settings, and they are kept in the draft, the backups and the export." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Select the devices with Ctrl or Cmd and a click (on a phone: Select, then tap them), choose Group and give it a name. Folded, a group is one block with the sum of its members; open, it is a labelled frame. A tap opens or folds a group, and ⋮ holds its actions (rename, dissolve, sum meter). Groups can be nested, everything in a group has the same upstream device, and Suggest groups from areas makes a start. Groups exist only in Energy Flow Mapper: they change nothing in Home Assistant's energy settings, and they are kept in the draft, the backups and the export." }
           },
           {
             "@type": "Question",
             "name": "How do I add up several meters into one sum meter?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Tap a group and choose Create sum meter, or use the ⋮ menu of a device to pick sensors freely. Energy Flow Mapper creates an ordinary Home Assistant sum helper with ignore non-numeric off, so a member that is briefly unavailable makes the sum unavailable instead of letting it drop. When every device in the sum has a power or flow sensor, a power or flow sum is created too. This also helps with a sub panel that measures net of its own solar: the gross meter is sub panel plus solar." }
+            "acceptedAnswer": { "@type": "Answer", "text": "In the ⋮ menu of a group, choose Create sum meter, or use the ⋮ menu of a device to pick sensors freely. Energy Flow Mapper creates an ordinary Home Assistant sum helper with ignore non-numeric off, so a member that is briefly unavailable makes the sum unavailable instead of letting it drop. When every device in the sum has a power or flow sensor, a power or flow sum is created too. This also helps with a sub panel that measures net of its own solar: the gross meter is sub panel plus solar." }
           },
           {
             "@type": "Question",
@@ -301,11 +313,12 @@
               <li><strong class="lead-in">Diagram of your energy dashboard</strong>Sources, Home and devices, arranged automatically, with the names and terms of Home Assistant; zoom and pan with mouse, touch or trackpad.</li>
               <li><strong class="lead-in">The whole home</strong>Home shows what the house used, measured by the home meter or calculated from grid, solar and battery. Below it, the untracked consumption that no device covers yet, and how much the devices cover, such as 72% covered by devices.</li>
               <li><strong class="lead-in">Live power and energy per period</strong>Now, today, 7 or 30 days, including untracked consumption.</li>
+              <li><strong class="lead-in">Values on the sources</strong>Grid, solar, battery and the home meter show their power now or their energy in the period, water its flow or volume. As on the devices, the value comes first, then the sensor name.</li>
               <li><strong class="lead-in">Home Assistant's own checks</strong>Sensor unavailable, wrong unit, negative state …: marked at the device, source or home meter, in Home Assistant's own words.</li>
               <li><strong class="lead-in">Plausibility warnings</strong>When child devices used clearly more than their upstream device, or the devices more than the home, usually a wrong assignment.</li>
               <li><strong class="lead-in">Find a device</strong>In big diagrams.</li>
               <li><strong class="lead-in">Vertical diagram for large trees</strong>Runs from left to right instead of top-down, in the panel and the card.</li>
-              <li><strong class="lead-in">Groups</strong>Bundle devices into named groups, nested as deep as you like. Folded, a group is one block with the sum of its members; open, a labelled frame. <em>Suggest groups from areas</em> makes a start.</li>
+              <li><strong class="lead-in">Groups</strong>Bundle devices into named groups, nested as deep as you like. Folded, a group is one block with the sum of its members; open, a labelled frame. <em>Suggest groups from areas</em> makes a start. A tap opens or folds a group; ⋮ holds its actions.</li>
             </ul>
           </div>
           <div>
@@ -328,7 +341,8 @@
               <li><strong class="lead-in">Save as image</strong>The whole diagram as a PNG; <em>Hide names</em> turns devices into Device 1, 2, …. Made in your browser, sent nowhere.</li>
               <li><strong class="lead-in">Water and gas tabs</strong>Water in litres and m³, or gallons with US units; gas meters in m³, ft³ or kWh.</li>
               <li><strong class="lead-in">Backups, export and import</strong>Restore any earlier state or keep a copy elsewhere.</li>
-              <li><strong class="lead-in">English, German, French and Italian</strong>Light and dark theme, phone layout.</li>
+              <li><strong class="lead-in">Made for phones</strong>Also in the Home Assistant app: the diagram fills the screen, the tools sit behind <em>Tools</em>, and a tap opens a group.</li>
+              <li><strong class="lead-in">English, German, French and Italian</strong>Light and dark theme.</li>
             </ul>
           </div>
         </div>
@@ -365,6 +379,13 @@ show_coverage: true    # "72% covered by devices" at Home (off by default)</code
       </div>
       <div class="strip" role="region" tabindex="0" aria-label="Screenshots, scroll sideways">
           <figure class="shot">
+            <picture>
+              <source media="(prefers-color-scheme: dark)" srcset="/assets/img/efm/sources-dark.webp">
+              <img src="/assets/img/efm/sources-light.webp" alt="Energy Flow Mapper with values on the sources: grid import 1.86 kW, solar 4.32 kW, battery discharge 1.06 kW and the home meter 7.24 kW flow into Home" width="1200" height="625" loading="lazy">
+            </picture>
+            <figcaption><b>Values on the sources:</b> power now or energy in the period, as on the devices.</figcaption>
+          </figure>
+          <figure class="shot">
             <img src="/assets/img/efm/vertical.webp" alt="The vertical diagram: sources on the left, then Home and the devices of each level stacked below each other, with the buttons Horizontal and Vertical above it" width="1200" height="585" loading="lazy">
             <figcaption><b>Vertical diagram:</b> runs from left to right, for large trees.</figcaption>
           </figure>
@@ -391,6 +412,9 @@ show_coverage: true    # "72% covered by devices" at Home (off by default)</code
           <figure class="shot">
             <img src="/assets/img/efm/water-dark.webp" alt="The water tab over 30 days in litres and cubic metres" width="1200" height="480" loading="lazy">
             <figcaption><b>Water, 30 days:</b> litres and m³ per device.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="/assets/img/efm/phone-sources.webp" alt="The panel on a phone, dark theme: the diagram fills the screen, the tools are folded behind Tools, and the sources show their power" width="412" height="915" loading="lazy">
           </figure>
           <figure class="shot">
             <img src="/assets/img/efm/phone-groups.webp" alt="The panel on a phone, dark theme, with the group Basement open and the Select button for touch" width="412" height="850" loading="lazy">
@@ -464,6 +488,14 @@ show_coverage: true    # "72% covered by devices" at Home (off by default)</code
             <div class="answer"><p>Home Assistant 2026.11 added a home meter for the whole home. In Energy Flow Mapper, drop a free sensor on <strong>+ Home meter</strong> at Home, or tap <strong>+ Home meter</strong> and choose one. If one of your devices already is your main meter, drag it onto <strong>+ Home meter</strong> or choose <strong>⋮</strong> → <strong>Use as home meter</strong>: its child devices move up a level and it keeps its name. Home then shows what the house used, and <strong>Untracked consumption</strong> below Home shows what no device covers yet. On Home Assistant 2026.10, Home calculates the consumption of a period from grid, solar and battery instead. A meter whose data is hours behind, for example from a utility portal, gives no home value instead of a misleading one.</p></div>
           </details>
           <details>
+            <summary><h3>Why does a source show no power?</h3></summary>
+            <div class="answer"><p>The power now comes from the power sensor that Home Assistant's energy settings have for that source. If a grid, solar or battery source has none there, it shows no value now; that is not an error. Add the power sensor in Home Assistant's energy settings and the value appears. <strong>Today</strong>, <strong>7 days</strong> and <strong>30 days</strong> show the energy anyway.</p></div>
+          </details>
+          <details>
+            <summary><h3>Does Energy Flow Mapper work on a phone?</h3></summary>
+            <div class="answer"><p>Yes, also in the Home Assistant app. On a phone the diagram fills the screen below the tabs and the search; the tools sit behind <strong>Tools</strong> and the help behind <strong>?</strong>. A tap opens a group, its actions are behind <strong>⋮</strong>, and the bar at the bottom stays clear of Android's on-screen navigation buttons. The dashboard card works on phones as well.</p></div>
+          </details>
+          <details>
             <summary><h3>What do the warnings at a device mean?</h3></summary>
             <div class="answer"><p>There are two kinds. Home Assistant's own energy checks, such as sensor unavailable, entity gone, wrong unit or state class, negative state or excluded from the recorder, are marked at the device, source or home meter in Home Assistant's own words, also on the dashboard card. Energy Flow Mapper adds plausibility warnings when child devices used clearly more than their upstream device, or the devices more than the home, which usually means a wrong assignment.</p></div>
           </details>
@@ -473,11 +505,11 @@ show_coverage: true    # "72% covered by devices" at Home (off by default)</code
           </details>
           <details>
             <summary><h3>How do I group devices in the energy dashboard?</h3></summary>
-            <div class="answer"><p>Select the devices with <kbd>Ctrl</kbd> or <kbd>Cmd</kbd> and a click (on a phone: <strong>Select</strong>, then tap them), choose <strong>Group</strong> and give it a name. Folded, a group is one block with the sum of its members; open, it is a labelled frame. Groups can be nested, everything in a group has the same upstream device, and <strong>Suggest groups from areas</strong> makes a start. Groups exist only in Energy Flow Mapper: they change nothing in Home Assistant's energy settings, and they are kept in the draft, the backups and the export.</p></div>
+            <div class="answer"><p>Select the devices with <kbd>Ctrl</kbd> or <kbd>Cmd</kbd> and a click (on a phone: <strong>Select</strong>, then tap them), choose <strong>Group</strong> and give it a name. Folded, a group is one block with the sum of its members; open, it is a labelled frame. A tap opens or folds a group, and ⋮ holds its actions (rename, dissolve, sum meter). Groups can be nested, everything in a group has the same upstream device, and <strong>Suggest groups from areas</strong> makes a start. Groups exist only in Energy Flow Mapper: they change nothing in Home Assistant's energy settings, and they are kept in the draft, the backups and the export.</p></div>
           </details>
           <details>
             <summary><h3>How do I add up several meters into one sum meter?</h3></summary>
-            <div class="answer"><p>Tap a group and choose <strong>Create sum meter</strong>, or use the <strong>⋮</strong> menu of a device to pick sensors freely. Energy Flow Mapper creates an ordinary Home Assistant sum helper with <em>ignore non-numeric</em> off, so a member that is briefly unavailable makes the sum unavailable instead of letting it drop. When every device in the sum has a power or flow sensor, a power or flow sum is created too. This also helps with a sub panel that measures net of its own solar: the gross meter is sub panel plus solar.</p></div>
+            <div class="answer"><p>In the <strong>⋮</strong> menu of a group, choose <strong>Create sum meter</strong>, or use the <strong>⋮</strong> menu of a device to pick sensors freely. Energy Flow Mapper creates an ordinary Home Assistant sum helper with <em>ignore non-numeric</em> off, so a member that is briefly unavailable makes the sum unavailable instead of letting it drop. When every device in the sum has a power or flow sensor, a power or flow sum is created too. This also helps with a sub panel that measures net of its own solar: the gross meter is sub panel plus solar.</p></div>
           </details>
           <details>
             <summary><h3>Is Energy Flow Mapper just another energy card?</h3></summary>
