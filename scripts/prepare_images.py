@@ -178,6 +178,7 @@ def main() -> None:
     # Screenshots made for the site that are not in the README (local only, on the maintainer's machine)
     parser.add_argument("--efm-site", type=Path, default=PROJECTS / "HA Energy Hierarchy" / ".superpowers" / "website-090")
     parser.add_argument("--efm-sources", type=Path, default=PROJECTS / "HA Energy Hierarchy" / ".superpowers" / "website-092")
+    parser.add_argument("--efm-0100", type=Path, default=PROJECTS / "HA Energy Hierarchy" / ".superpowers" / "website-0100")
     parser.add_argument("--derived", action="store_true", help="only rebuild the crops and stills")
     args = parser.parse_args()
     if args.derived:
@@ -205,6 +206,8 @@ def main() -> None:
     webp(args.efm_site / "phone-groups-dark.png", IMG / "efm" / "phone-groups.webp", 412)
     for theme in ("light", "dark"):
         webp(args.efm_sources / f"sources-{theme}.png", IMG / "efm" / f"sources-{theme}.webp", 1200)
+        for name in ("mark-helpers", "fold"):
+            webp(args.efm_0100 / f"{name}-{theme}.png", IMG / "efm" / f"{name}-{theme}.webp", 1200)
     webp(args.efm_sources / "phone-sources-dark.png", IMG / "efm" / "phone-sources.webp", 412)
     for name in ("periods", "drag", "tabs"):
         animated_webp(efm / f"{name}.gif", IMG / "efm" / f"{name}.webp")
