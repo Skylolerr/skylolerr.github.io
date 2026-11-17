@@ -64,7 +64,9 @@
           "Tab Gas mit den Gaszählern",
           "Ungespeicherter Entwurf bleibt beim Verlassen des Panels erhalten",
           "Leistung jetzt und Energie pro Zeitraum bei jeder Quelle",
-          "Fürs Handy gemacht: das Diagramm füllt den Bildschirm"
+          "Fürs Handy gemacht: das Diagramm füllt den Bildschirm",
+          "Helfer und externe Statistiken markieren (optional)",
+          "Freie Sensoren einklappen für mehr Platz"
         ],
         "license": "https://opensource.org/license/mit",
         "isAccessibleForFree": true,
@@ -127,7 +129,7 @@
           {
             "@type": "Question",
             "name": "Wie fasse ich mehrere Zähler zu einem Summen-Zähler zusammen?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Wähle im Menü ⋮ einer Gruppe «Summen-Zähler erstellen», oder wähle im Menü ⋮ eines Geräts die Sensoren frei. Energy Flow Mapper legt einen gewöhnlichen Summen-Helfer von Home Assistant an, der nicht-numerische Werte nicht ignoriert: Ist ein Mitglied kurz nicht verfügbar, ist die Summe nicht verfügbar, statt einzubrechen. Hat jedes Gerät in der Summe einen Leistungs- oder Durchflusssensor, entsteht auch eine Leistungs- oder Durchflusssumme. Das hilft auch bei einer Unterverteilung, die netto mit ihrer eigenen Solaranlage misst: Der Bruttozähler ist Unterverteilung plus Solar." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Wähle im Menü ⋮ einer Gruppe «Summen-Zähler erstellen», oder wähle im Menü ⋮ eines Geräts die Sensoren frei. Energy Flow Mapper legt einen gewöhnlichen Summen-Helfer von Home Assistant an, der nicht-numerische Werte nicht ignoriert: Ist ein Mitglied kurz nicht verfügbar, ist die Summe nicht verfügbar, statt einzubrechen. Hat jedes Gerät in der Summe einen Leistungs- oder Durchflusssensor, entsteht auch eine Leistungs- oder Durchflusssumme. Das hilft auch bei einer Unterverteilung mit eigener Solaranlage: Zählt ihr Zähler in beide Richtungen, ist der Bruttozähler Unterverteilung plus Solar; zählt er nur, was sie bezieht (wie viele Shelly-Zähler), ist der Bruttowert Bezug minus Rücklieferung plus Solar, und dafür braucht es einen Template-Helfer." }
           },
           {
             "@type": "Question",
@@ -136,8 +138,18 @@
           },
           {
             "@type": "Question",
+            "name": "Was bedeutet «ohne …» beim nicht erfassten Verbrauch?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ein Gerät darunter hat gerade keinen Wert, zum Beispiel eine Steckdose, die nicht verfügbar ist. Sein Anteil zählt dann als nicht erfasster Verbrauch, und der Block nennt es: 44 W · ohne TV Backlight, oder ohne 2 Geräte mit den Namen im Tooltip. Dasselbe steht in den Details, auf der Dashboard-Karte, unter dem Zuhause und in «Als Bild speichern»; mit ausgeblendeten Namen fällt der Hinweis weg." }
+          },
+          {
+            "@type": "Question",
+            "name": "Kann ich speichern, wenn meine Energie-Einstellungen schon ein Problem haben?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Ja. Probleme, die schon vorher in deinen Energie-Einstellungen waren, etwa ein Zähler, der zugleich Quelle und Gerät ist, bleiben, wie sie sind, und die Prüfung vor dem Speichern listet sie separat auf. Nur Probleme, die deine Änderungen hinzufügen, verhindern das Speichern, und ein Problem, das schlimmer wird, zählt als neu. Dasselbe gilt für Import und Wiederherstellen." }
+          },
+          {
+            "@type": "Question",
             "name": "Kann Energy Flow Mapper meine Energie-Einstellungen kaputt machen?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt, standardmässig 20, bis zu 100. «Letztes Speichern rückgängig machen» oder «Sicherungen», «Wiederherstellen» holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende vorgelagerte Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind." }
+            "acceptedAnswer": { "@type": "Answer", "text": "Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt, standardmässig 20, bis zu 100. «Letztes Speichern rückgängig machen» oder «Sicherungen», «Wiederherstellen» holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende vorgelagerte Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Probleme, die schon vorher in deinen Einstellungen waren, werden separat aufgelistet und verhindern das Speichern nicht; das tun nur Probleme, die eine Änderung hinzufügt. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind." }
           },
           {
             "@type": "Question",
@@ -313,8 +325,9 @@
             <ul class="feature-list">
               <li><strong class="lead-in">Diagramm deines Energie-Dashboards</strong>Quellen, Zuhause und Geräte, automatisch angeordnet, mit den Namen und Begriffen von Home Assistant; zoomen und verschieben mit Maus, Touch oder Trackpad.</li>
               <li><strong class="lead-in">Das ganze Zuhause</strong>Das Zuhause zeigt, was das Haus verbraucht hat, gemessen vom Hauszähler oder berechnet aus Netz, Solar und Batterie. Darunter der nicht erfasste Verbrauch, den noch kein Gerät abdeckt, und wie viel die Geräte abdecken, etwa 72 % von Geräten erfasst.</li>
-              <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, auch der nicht erfasste Verbrauch.</li>
+              <li><strong class="lead-in">Leistung live und Energie pro Zeitraum</strong>Jetzt, heute, 7 oder 30 Tage, auch der nicht erfasste Verbrauch. Ein Untergerät ohne Wert zählt als nichts, und der Block nennt es: 44 W · ohne TV Backlight.</li>
               <li><strong class="lead-in">Werte bei den Quellen</strong>Netz, Solar, Batterie und der Hauszähler zeigen ihre Leistung jetzt oder ihre Energie im Zeitraum, Wasser seinen Durchfluss oder seine Menge. Wie bei den Geräten steht der Wert vor dem Sensornamen.</li>
+              <li><strong class="lead-in">Helfer markieren</strong>Auf Wunsch ein kleines Zeichen bei Zählern, die Helfer sind (∫ Integral, Σ Gruppe, { } Template, Verbrauchszähler) oder externe Statistiken, im Panel und auf der Karte.</li>
               <li><strong class="lead-in">Prüfungen von Home Assistant</strong>Sensor nicht verfügbar, falsche Einheit, negativer Zustand …: markiert beim Gerät, bei der Quelle oder beim Hauszähler, mit den Worten von Home Assistant.</li>
               <li><strong class="lead-in">Plausibilitätswarnungen</strong>Wenn Untergeräte deutlich mehr verbraucht haben als ihr vorgelagertes Gerät oder die Geräte mehr als das Zuhause, meist eine falsche Zuordnung.</li>
               <li><strong class="lead-in">Gerät suchen</strong>In grossen Diagrammen.</li>
@@ -327,12 +340,12 @@
             <ul class="feature-list">
               <li><strong class="lead-in">Drag and drop (oder das Menü ⋮ auf dem Handy)</strong>Ein Gerät in ein anderes einordnen, umbenennen oder entfernen.</li>
               <li><strong class="lead-in">Quellen</strong>Einen Sensor auf Netzbezug, Netzeinspeisung, Solar, Batterie, Wasser oder Gas ziehen. Preise bleiben, wie sie sind.</li>
-              <li><strong class="lead-in">Freie Sensoren</strong>Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt.</li>
+              <li><strong class="lead-in">Freie Sensoren</strong>Zähler und externe Statistiken, die noch nicht im Dashboard sind, mit einem Zug hinzugefügt. Die Spalte lässt sich für mehr Platz zu einem schmalen Streifen einklappen.</li>
               <li><strong class="lead-in">Hauszähler</strong>Ab Home Assistant 2026.11: beim Zuhause zuordnen, ersetzen oder entfernen, oder dein Gerät mit dem Hauptzähler dazu machen.</li>
               <li><strong class="lead-in">Vorschläge aus Untergeräten</strong>Meldet eine Integration ein Gerät als Teil eines anderen, schlägt das Panel vor, es dort einzuordnen: Übernehmen oder Ignorieren. Von selbst ändert sich nichts.</li>
               <li><strong class="lead-in">Zähler anlegen</strong>Macht aus einem Leistungs- oder Durchflusssensor einen gewöhnlichen Integral-Helfer.</li>
               <li><strong class="lead-in">Summen-Zähler</strong>Aus einer Gruppe oder aus Sensoren deiner Wahl wird ein echter Zähler: ein gewöhnlicher Summen-Helfer von Home Assistant. Die Gruppen selbst ändern nichts an den Energie-Einstellungen.</li>
-              <li><strong class="lead-in">Entwurf, Prüfung, Speichern</strong>Mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben. Ein ungespeicherter Entwurf bleibt erhalten, wenn du das Panel verlässt, und <em>Zeigen</em> führt dich zu dem, was das Speichern verhindert.</li>
+              <li><strong class="lead-in">Entwurf, Prüfung, Speichern</strong>Mit Rückgängig, Liste der Änderungen und einer Sicherung vor jedem Schreiben. Ein ungespeicherter Entwurf bleibt erhalten, wenn du das Panel verlässt, und <em>Zeigen</em> führt dich zu dem, was das Speichern verhindert. Probleme, die schon vorher in deinen Einstellungen waren, verhindern es nicht mehr.</li>
             </ul>
           </div>
           <div>
@@ -369,7 +382,8 @@ title: Küche           # optional; ein leerer Titel blendet die Kopfzeile aus
 orientation: vertical  # horizontal (Standard) oder vertical (von links nach rechts)
 show_sources: true     # Quellen vor dem Zuhause (nicht mit root)
 show_untracked: true   # Blöcke für den nicht erfassten Verbrauch
-show_coverage: true    # «72 % von Geräten erfasst» beim Zuhause (Standard: aus)</code></pre>
+show_coverage: true    # «72 % von Geräten erfasst» beim Zuhause (Standard: aus)
+show_types: true       # Zeichen bei Helfern und externen Statistiken (Standard: aus)</code></pre>
         </div>
       </div>
     </section>
@@ -510,15 +524,23 @@ show_coverage: true    # «72 % von Geräten erfasst» beim Zuhause (Standard: a
           </details>
           <details>
             <summary><h3>Wie fasse ich mehrere Zähler zu einem Summen-Zähler zusammen?</h3></summary>
-            <div class="answer"><p>Wähle im Menü <strong>⋮</strong> einer Gruppe <strong>Summen-Zähler erstellen</strong>, oder wähle im Menü <strong>⋮</strong> eines Geräts die Sensoren frei. Energy Flow Mapper legt einen gewöhnlichen Summen-Helfer von Home Assistant an, der nicht-numerische Werte nicht ignoriert: Ist ein Mitglied kurz nicht verfügbar, ist die Summe nicht verfügbar, statt einzubrechen. Hat jedes Gerät in der Summe einen Leistungs- oder Durchflusssensor, entsteht auch eine Leistungs- oder Durchflusssumme. Das hilft auch bei einer Unterverteilung, die netto mit ihrer eigenen Solaranlage misst: Der Bruttozähler ist Unterverteilung plus Solar.</p></div>
+            <div class="answer"><p>Wähle im Menü <strong>⋮</strong> einer Gruppe <strong>Summen-Zähler erstellen</strong>, oder wähle im Menü <strong>⋮</strong> eines Geräts die Sensoren frei. Energy Flow Mapper legt einen gewöhnlichen Summen-Helfer von Home Assistant an, der nicht-numerische Werte nicht ignoriert: Ist ein Mitglied kurz nicht verfügbar, ist die Summe nicht verfügbar, statt einzubrechen. Hat jedes Gerät in der Summe einen Leistungs- oder Durchflusssensor, entsteht auch eine Leistungs- oder Durchflusssumme. Das hilft auch bei einer Unterverteilung mit eigener Solaranlage: Zählt ihr Zähler in beide Richtungen, ist der Bruttozähler Unterverteilung plus Solar; zählt er nur, was sie bezieht (wie viele Shelly-Zähler), ist der Bruttowert Bezug minus Rücklieferung plus Solar, und dafür braucht es einen Template-Helfer.</p></div>
           </details>
           <details>
             <summary><h3>Ist Energy Flow Mapper einfach noch eine Energie-Karte?</h3></summary>
             <div class="answer"><p>Nein. Energie-Karten und Sankey-Diagramme <em>zeigen</em> das Energie-Dashboard an; Energy Flow Mapper <em>bearbeitet</em> es. Er ändert die Energie-Einstellungen von Home Assistant selbst, die dann das Energie-Dashboard und jede Energie-Karte verwenden. Dazu kommt eine eigene <a href="#card-title">Dashboard-Karte</a>, die nur anzeigt.</p></div>
           </details>
           <details>
+            <summary><h3>Was bedeutet «ohne …» beim nicht erfassten Verbrauch?</h3></summary>
+            <div class="answer"><p>Ein Gerät darunter hat gerade keinen Wert, zum Beispiel eine Steckdose, die nicht verfügbar ist. Sein Anteil zählt dann als nicht erfasster Verbrauch, und der Block nennt es: <em>44 W · ohne TV Backlight</em>, oder <em>ohne 2 Geräte</em> mit den Namen im Tooltip. Dasselbe steht in den Details, auf der Dashboard-Karte, unter dem Zuhause und in <strong>Als Bild speichern</strong>; mit ausgeblendeten Namen fällt der Hinweis weg.</p></div>
+          </details>
+          <details>
+            <summary><h3>Kann ich speichern, wenn meine Energie-Einstellungen schon ein Problem haben?</h3></summary>
+            <div class="answer"><p>Ja. Probleme, die schon vorher in deinen Energie-Einstellungen waren, etwa ein Zähler, der zugleich Quelle und Gerät ist, bleiben, wie sie sind, und die Prüfung vor dem Speichern listet sie separat auf. Nur Probleme, die deine Änderungen hinzufügen, verhindern das Speichern, und ein Problem, das schlimmer wird, zählt als neu. Dasselbe gilt für Import und Wiederherstellen.</p></div>
+          </details>
+          <details>
             <summary><h3>Kann Energy Flow Mapper meine Energie-Einstellungen kaputt machen?</h3></summary>
-            <div class="answer"><p>Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt – standardmässig 20, bis zu 100. <strong>Letztes Speichern rückgängig machen</strong> oder <strong>Sicherungen → Wiederherstellen</strong> holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende vorgelagerte Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind.</p></div>
+            <div class="answer"><p>Vor jedem Speichern, Wiederherstellen und Importieren wird zuerst eine Sicherung der bisherigen Einstellungen angelegt – standardmässig 20, bis zu 100. <strong>Letztes Speichern rückgängig machen</strong> oder <strong>Sicherungen → Wiederherstellen</strong> holt sie zurück, und du kannst die Einstellungen als JSON-Datei exportieren. Vor dem Speichern wird der Entwurf auf Schleifen, fehlende vorgelagerte Geräte, Duplikate und doppelt verwendete Sensoren geprüft, und auch die Prüfungen von Home Assistant laufen. Probleme, die schon vorher in deinen Einstellungen waren, werden separat aufgelistet und verhindern das Speichern nicht; das tun nur Probleme, die eine Änderung hinzufügt. Preise und andere Felder, die Energy Flow Mapper nicht bearbeitet, bleiben, wie sie sind.</p></div>
           </details>
           <details>
             <summary><h3>Wie bringe ich einen Leistungssensor (W) ins Energie-Dashboard?</h3></summary>
